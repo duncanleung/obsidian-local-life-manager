@@ -40,27 +40,44 @@ PRs may appear in multiple queries. Deduplicate by `{org/repo}#{number}`.
 
 ## Output Format
 
-Every entry MUST include a clickable web link:
+Every entry MUST include a clickable web link. Use tables with H3 headers and summary counts (mirroring the JIRA Releases pattern).
 
 ```markdown
 ## ![[github-logo.png|18]] GitHub Activity
 
-### Commits
-- **{org/repo}**
-  - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
+### Commits — {N} commits across {M} repos
 
-### Pull Requests
-- 🟣 Merged — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-- 🟢 Opened — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
+| Repo | Commit | Message |
+|------|--------|---------|
+| {org/repo} | [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) | {commit message title} |
 
-### Reviews & Comments
-- 💬 Commented on [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-- 👀 Review requested — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
+### Pull Requests — {N} PRs ({X} Merged, {Y} Opened)
+
+| PR | Title | Status |
+|----|-------|--------|
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | <span style="color: green">Merged</span> |
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | <span style="color: blue">Opened</span> |
+
+### Reviews & Comments — {N} items
+
+| PR | Title | Activity |
+|----|-------|----------|
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | 💬 Commented |
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | 👀 Review Requested |
 ```
 
 ## Formatting Rules
 
-- Group commits by repo
+- **H3 headers with summary counts**: Each subsection header includes a count summary
+  - Commits: `### Commits — {N} commits across {M} repos`
+  - Pull Requests: `### Pull Requests — {N} PRs ({X} Merged, {Y} Opened)` (omit zero-count statuses)
+  - Reviews & Comments: `### Reviews & Comments — {N} items`
+- **Title column**: Truncate to 50 characters if longer
+- **Status column (PRs)**: Colored `<span>` tags:
+  - **Green**: Merged → `<span style="color: green">Merged</span>`
+  - **Blue**: Open → `<span style="color: blue">Opened</span>`
+  - **Red**: Closed (not merged) → `<span style="color: red">Closed</span>`
+- **Activity column (Reviews)**: Emoji prefix + activity type (e.g., `💬 Commented`, `👀 Review Requested`, `✅ Approved`)
 - Omit any subsection (Commits, Pull Requests, Reviews & Comments) that has zero items
 - If NO GitHub activity at all: write `_No GitHub activity._` under the heading
 

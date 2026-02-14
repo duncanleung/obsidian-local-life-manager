@@ -49,23 +49,31 @@ SORT file.mtime DESC
 
 The `## ![[github-logo.png|18]] GitHub Activity` section is auto-populated by the daily review skill (Step 4). It pulls commits, PRs, reviews, and comments from GitHub for the target date. The section is placed after `## 🔨 What Did I Work On?` and before `## 📚 What Did I Study?`.
 
+Uses tables with H3 headers and summary counts (matching JIRA Releases pattern):
+
 ```markdown
 ## ![[github-logo.png|18]] GitHub Activity
 
-### Commits
-- **{org/repo}**
-  - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
+### Commits — {N} commits across {M} repos
 
-### Pull Requests
-- 🟣 Merged — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-- 🟢 Opened — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
+| Repo | Commit | Message |
+|------|--------|---------|
+| {org/repo} | [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) | {commit message title} |
 
-### Reviews & Comments
-- 💬 Commented on [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-- 👀 Review requested — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
+### Pull Requests — {N} PRs ({X} Merged, {Y} Opened)
+
+| PR | Title | Status |
+|----|-------|--------|
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | <span style="color: green">Merged</span> |
+
+### Reviews & Comments — {N} items
+
+| PR | Title | Activity |
+|----|-------|----------|
+| [{org/repo}#{number}](https://github.com/{org}/{repo}/pull/{number}) | {title} | 💬 Commented |
 ```
 
-Subsections with zero items are omitted. If no GitHub activity at all, shows `_No GitHub activity._`.
+Subsections with zero items are omitted. If no GitHub activity at all, shows `_No GitHub activity._`. PR statuses use colored `<span>` tags (green=Merged, blue=Opened, red=Closed).
 
 ### Day Summary Section
 
