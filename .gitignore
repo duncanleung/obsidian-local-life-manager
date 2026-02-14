@@ -1,13 +1,15 @@
 # Personal directories (create these locally)
-.claude/memories/
+.claude/obsidian-memories/
 .claude/learning-sessions/
-my-vault/
-
-# Ignore real projects, but keep example-project/
-ideas/*
-!ideas/example-project/
-spaces/*
-!spaces/example-project/
+01 Inbox/
+02 Calendar/
+03 TaskNotes/
+04 Meetings/
+05 Personal/
+06 Projects/*
+!06 Projects/example-project/
+07 Knowledge Base/
+08 System/
 
 # OS
 .DS_Store
