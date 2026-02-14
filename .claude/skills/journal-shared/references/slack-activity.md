@@ -23,6 +23,13 @@ Group messages into conversations by thread:
 - Same `channel_id` + parent `message_ts` = same conversation
 - Standalone messages (no thread) = individual conversations
 
+## Channel Grouping
+
+After thread grouping, further group conversations by `channel_id`:
+- Resolve channel names via the search results or `slack_read_channel`
+- Sort channels by number of conversations DESC (most active channel first)
+- Within each channel, keep conversations in chronological order
+
 ## Thread Context
 
 For each unique thread, call `slack_read_thread` (concise format).
@@ -44,20 +51,29 @@ For each unique thread, call `slack_read_thread` (concise format).
 ```markdown
 ## ![[slack-logo.png|18]] Slack Conversations
 
-### [Descriptive Topic Title]
-- **Channel:** #channel-name
-- **Participants:** Name1, Name2, Name3
-- **Summary:** 1-3 sentences describing the substance and outcome of the discussion.
-- **Action Items:**
-  - Person: Action description
-- **Thread:** [View thread](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot})
+### #channel-name — 3 conversations
+
+| Topic | Summary | Action Items |
+|-------|---------|--------------|
+| [Descriptive Topic Title](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot}) | • Key point one<br>• Key point two<br>• Outcome or resolution | • Person: Action description |
+| [Another Topic](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot}) | • Summary bullet one<br>• Summary bullet two | — |
+
+### #another-channel — 1 conversation
+
+| Topic | Summary | Action Items |
+|-------|---------|--------------|
+| [Topic Title](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot}) | • Key point one<br>• Key point two | • Person: Action description |
 ```
 
 ## Formatting Rules
 
-- Omit **Action Items** line if none exist
+- **Channel header**: `### #{channel-name} — {N} conversation(s)` — sort channels by conversation count DESC
+- **Table columns**: `Topic | Summary | Action Items`
+  - **Topic**: `[Descriptive Title](thread-link)` — the topic title itself is the clickable thread link
+  - **Summary**: 2-4 bullet points using `•` separated by `<br>`. Capture key substance, decisions, and outcomes
+  - **Action Items**: Bullet points using `•` separated by `<br>`. Format: `• Person: Action description`. If no actions exist, use `—`
+- **Thread link format**: remove the dot from message_ts (e.g., `1234567890.123456` -> `p1234567890123456`)
 - If no meaningful conversations: write `_No significant work conversations today._`
-- Thread link format: remove the dot from message_ts (e.g., `1234567890.123456` -> `p1234567890123456`)
 
 ## Placement Rules
 
