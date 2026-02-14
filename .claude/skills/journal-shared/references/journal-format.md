@@ -1,10 +1,23 @@
 # Journal Creation Format
 
-Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD.md`). Referenced by skills that may need to create a journal as a side effect (e.g., `journal-github-activity`, `journal-slack-activity`, `journal-work-log`).
+Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD.md`). Referenced by all journal skills that may need to create a journal as a side effect.
 
-**Note:** `journal-good-morning` uses the richer `08 System/Templates/Daily Template.md` which includes Dataview queries, Open Tasks, and Inbox sections. This is the minimal fallback for when a skill needs to create a journal and the full template is not available.
+## Source of Truth
 
-## Canonical Frontmatter
+**`08 System/Templates/Daily Template.md`** is the single source of truth for the daily journal section structure, ordering, and default content (including Dataview queries).
+
+When creating a new journal, read that template and resolve Templater syntax as described below.
+
+## Templater Resolution
+
+Replace Templater expressions with actual values:
+
+| Template Expression | Resolves To | Example |
+|---|---|---|
+| `<% tp.date.now("YYYY-MM-DD") %>` | Target date in ISO format | `2026-02-14` |
+| `<% tp.date.now("MMMM DD, YYYY - dddd") %>` | Full date with day of week | `February 14, 2026 - Saturday` |
+
+## Frontmatter Requirements
 
 ```yaml
 ---
@@ -17,43 +30,8 @@ status: in-progress
 
 Both `tags` and `status` are required.
 
-## Section Order
-
-```markdown
-# {Month} {Day}, {Year} - {DayOfWeek}
-
-## ⭐ Highlight
-
-
-## 📋 What Did I Do?
-
-
-## 🔨 What Did I Work On?
-
-| Status | Project | Work Item | Description | Links |
-|--------|---------|-----------|-------------|-------|
-
-## ![[github-logo.png|18]] GitHub Activity
-
-
-## ![[slack-logo.png|18]] Slack Conversations
-
-
-## ![[jira-logo.png|18]] JIRA Tickets
-
-
-## ![[jira-logo.png|18]] WEB Releases
-
-
-## 📚 What Did I Study?
-
-
-## 📝 Notes
-
-```
-
 ## Heading Format
 
-- H1: `# February 13, 2026 - Friday` (full date with day of week)
-- H2 sections use emoji prefixes or Obsidian image embeds as shown above
-- All sections are empty by default — users fill them in manually or via skills
+- H1: `# February 14, 2026 - Saturday` (full date with day of week)
+- H2 sections use emoji prefixes or Obsidian image embeds as defined in the Daily Template
+- All sections are empty by default — populated manually or via skills
