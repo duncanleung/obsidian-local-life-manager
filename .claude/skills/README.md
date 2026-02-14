@@ -10,7 +10,7 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 | `/plan-quick-task` | Create a new task note in 03 TaskNotes/ |
 | `/plan-work-log` | Quick work log entry to today's journal |
 | `/plan-task-done` | Mark a task as complete |
-| `/plan-whats-next` | Quick prioritization of what to work on |
+| `/plan-whats-next` | Personal triage — overdue tasks, due-today, unfrozen journals, inbox backlog, meeting follow-ups |
 | `/plan-github-activity` | Pull GitHub activity (commits, PRs, reviews) into today's journal |
 | `/plan-slack-activity` | Pull Slack work conversations into today's journal |
 | `/plan-meeting-notes` | Capture meeting notes with attendees, decisions, and auto-created tasks |

@@ -209,7 +209,7 @@ All skills fit into a daily rhythm. The six groups form parallel tracks wrapped 
 │  │  └─ Quality ────── /project-validate-* at checkpoints         │  │
 │  ├─ Learning ──────── /learn-start → work → /learn-end   │  │
 │  ├─ Research ──────── /research-* → /research-synthesize  │  │
-│  ├─ Quick tasks ───── /plan-quick-task, /plan-whats-next  │  │
+│  ├─ Triage + tasks ── /plan-whats-next, /plan-quick-task  │  │
 │  └─ Maintenance ───── /ops-*                              │  │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
@@ -261,7 +261,7 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 |            | `/plan-quick-task`        | Create task in 03 TaskNotes/                  | `"title" [--due DATE]`           |
 |            | `/plan-work-log`          | Quick work log entry                          | `"entry"`                        |
 |            | `/plan-task-done`         | Mark a task as complete                       | `"task name"`                    |
-|            | `/plan-whats-next`        | Quick prioritization                          |                                  |
+|            | `/plan-whats-next`        | Personal triage (overdue, due today, inbox, journals) |                                  |
 |            | `/plan-github-activity`   | Pull GitHub activity into journal             | `[YYYY-MM-DD \| path]`          |
 |            | `/plan-slack-activity`    | Pull Slack work conversations into journal    | `[YYYY-MM-DD \| path]`          |
 |            | `/plan-meeting-notes`     | Capture meeting notes, auto-create tasks      | `[meeting details]`              |
@@ -322,15 +322,15 @@ Finds task by name or partial match, sets `status: complete` and adds `completed
 
 #### 📕 `/plan-whats-next`
 
-**Quick prioritization of what to work on**
+**Personal triage — what needs attention right now**
 
-Checks learning reviews due, today's highlight, project status. Gives a quick recommendation based on prioritization framework.
+Scans overdue tasks, tasks due today, unfrozen past journals, unprocessed inbox items, meetings with open action items, and learning reviews due. Produces a quick triage report with counts and a single prioritized recommendation. Does not scan projects — use `/project-status` for that.
 
 ```bash
-/plan-whats-next  # Get quick recommendation
+/plan-whats-next  # Quick personal triage
 ```
 
-**Triggers on:** "what's next", "what should I do", "prioritize", "what now"
+**Triggers on:** "what's next", "what should I do", "prioritize", "what now", "triage"
 
 #### 📕 `/plan-daily-review`
 
