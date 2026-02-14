@@ -5,15 +5,15 @@ Cross-project standards, templates, and documentation.
 ## Structure
 
 ```
-shared/
-├── docs/           # Cross-project standards and guides
-├── templates/
-│   ├── pm/         # Issue templates (TASK, BUG, SPIKE, PLAN, WORKLOG, SPEC)
-│   ├── docs/       # Documentation templates (API, architecture, etc.)
-│   └── idea-minimal/  # New project scaffolding
+SHARED/
+├── DOCS/           # Cross-project standards and guides
+├── TEMPLATES/
+│   ├── PM/         # Issue templates (TASK, BUG, SPIKE, PLAN, WORKLOG, SPEC)
+│   ├── DOCS/       # Documentation templates (API, architecture, etc.)
+│   └── IDEA-MINIMAL/  # New project scaffolding
 ```
 
-## docs/
+## DOCS/
 
 Standards that apply across all projects:
 
@@ -23,24 +23,24 @@ Standards that apply across all projects:
 - **tech-stack-decisions.md** - Common technology choices
 - **pricing-philosophy.md** - Pricing approach for products
 
-## templates/
+## TEMPLATES/
 
-### pm/ - Project Management
+### PM/ - Project Management
 
 Issue and planning templates:
 
 | Template | Purpose |
 |----------|---------|
-| `TASK-template.md` | Feature implementation work |
-| `BUG-template.md` | Bug fixes |
-| `SPIKE-template.md` | Research/exploration |
-| `PLAN-template.md` | Phase breakdown for issues |
-| `WORKLOG-template.md` | Progress tracking |
-| `SPEC-template.md` | Protocol specification |
+| `TASK-TEMPLATE.md` | Feature implementation work |
+| `BUG-TEMPLATE.md` | Bug fixes |
+| `SPIKE-TEMPLATE.md` | Research/exploration |
+| `PLAN-TEMPLATE.md` | Phase breakdown for issues |
+| `WORKLOG-TEMPLATE.md` | Progress tracking |
+| `SPEC-TEMPLATE.md` | Protocol specification |
 
-### docs/ - Documentation
+### DOCS/ - Documentation
 
-Templates for project documentation in `spaces/[project]/docs/`:
+Templates for project documentation in `06 Projects/[project]/docs/`:
 
 - API overview
 - Architecture overview
@@ -50,14 +50,14 @@ Templates for project documentation in `spaces/[project]/docs/`:
 - Testing overview
 - UI guide
 
-### idea-minimal/ - New Project
+### IDEA-MINIMAL/ - New Project
 
 Minimal scaffolding for new project ideas:
 
 ```bash
-cp -r shared/templates/idea-minimal ideas/my-new-project
+cp -r SHARED/TEMPLATES/IDEA-MINIMAL "06 Projects/my-new-project"
 ```
 
 Creates:
 - `README.md` - Project status overview
-- `project-brief.md` - Vision, problem, solution
+- `PROJECT-BRIEF.md` - Vision, problem, solution

@@ -12,11 +12,11 @@ Use this when:
 ## Quick Start
 
 ```bash
-cp -r shared/templates/idea-minimal ideas/your-idea-name
-cd ideas/your-idea-name
+cp -r SHARED/TEMPLATES/IDEA-MINIMAL "06 Projects/your-idea-name"
+cd "06 Projects/your-idea-name"
 ```
 
-Then fill in `README.md` and `project-brief.md`. Search for `TODO:` to find placeholders.
+Then fill in `README.md` and `PROJECT-BRIEF.md`. Search for `TODO:` to find placeholders.
 
 ## What's Included
 
@@ -27,7 +27,7 @@ Lightweight overview with:
 - Simple status checklist
 - Next steps
 
-### project-brief.md
+### PROJECT-BRIEF.md
 Minimal brief with just the essentials:
 - The problem
 - The solution
@@ -55,7 +55,7 @@ This allows tracking even at the concept stage.
 
 1. **Copy the template** and rename
 2. **Fill in README.md** (5 minutes)
-3. **Fill in project-brief.md** (15-30 minutes)
+3. **Fill in PROJECT-BRIEF.md** (15-30 minutes)
 4. **Let it simmer** - Come back in a few days
 5. **Decide**: Build it, shelve it, or expand to full template
 
@@ -65,18 +65,18 @@ When ready for deeper planning:
 
 ```bash
 # From your idea directory
-cp shared/templates/idea/* .
+cp SHARED/TEMPLATES/IDEA/* .
 
 # Or selectively copy specific files
-cp shared/templates/idea/competitive-analysis.md .
-cp shared/templates/idea/elevator-pitch.md .
+cp SHARED/TEMPLATES/IDEA/competitive-analysis.md .
+cp SHARED/TEMPLATES/IDEA/elevator-pitch.md .
 ```
 
 You can also copy entire subdirectories:
 
 ```bash
-cp -r shared/templates/idea/features .
-cp -r shared/templates/idea/notes .
+cp -r SHARED/TEMPLATES/IDEA/features .
+cp -r SHARED/TEMPLATES/IDEA/notes .
 ```
 
 ## Tips

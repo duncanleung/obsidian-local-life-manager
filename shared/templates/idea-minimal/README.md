@@ -42,5 +42,5 @@ related_ideas: []
 
 **Ready to expand?** Copy the full template:
 ```bash
-cp -r shared/templates/idea/* ideas/[your-idea]/
+cp -r SHARED/TEMPLATES/IDEA/* "06 Projects/[your-idea]/"
 ```

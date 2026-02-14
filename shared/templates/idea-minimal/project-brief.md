@@ -76,5 +76,5 @@ next_review: "TODO: YYYY-MM-DD"
 
 **Ready for deeper planning?** Expand to the full template:
 ```bash
-cp shared/templates/idea/project-brief.md ideas/[your-idea]/
+cp SHARED/TEMPLATES/IDEA/PROJECT-BRIEF.md "06 Projects/[your-idea]/"
 ```

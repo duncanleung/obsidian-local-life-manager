@@ -27,7 +27,7 @@ DO: "User registration endpoint" (one requirement)
 
 **Spec Requirement:** `[requirement text from spec]`
 
-**Location:** [docs/specs/file.md#section](../../../spaces/[project]/docs/specs/file.md#section)
+**Location:** [docs/specs/file.md#section](docs/specs/file.md#section)
 
 ## Acceptance Criteria
 

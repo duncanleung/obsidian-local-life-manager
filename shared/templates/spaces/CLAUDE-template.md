@@ -41,7 +41,7 @@
 └── [other directories]
 ```
 
-**Planning docs in meta-repo**: `ideas/[project]/`
+**Planning docs in meta-repo**: `06 Projects/[project]/`
 
 ## Development Setup
 
@@ -204,7 +204,7 @@ When implementing features:
 2. **Check ADRs** (`docs/adrs/`) for architecture decisions
 3. **Follow existing patterns** - grep codebase for similar implementations
 4. **Update docs** - Keep `data-model.md` and `architecture-overview.md` current
-5. **Reference specs** - Planning docs live in `ideas/[project]/`
+5. **Reference specs** - Planning docs live in `06 Projects/[project]/`
 
 **Project-specific constraints:**
 - [Constraint 1 - e.g., "No Docker, use venv"]
