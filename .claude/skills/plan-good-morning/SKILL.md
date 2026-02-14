@@ -21,60 +21,76 @@ Good morning! Run the morning check-in.
      - "Yesterday's Slack conversations weren't captured. Want me to pull those?"
      - If yes: use same search/filter strategy as `/plan-daily-review` Step 5 with yesterday's date
 
-3. **Check Dataview plugin** (`.obsidian/plugins/dataview/`)
+3. **Build Open Tasks todo list**
+   - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD.md`
+   - Extract the `## ✅ Open Tasks` section from the previous journal. Handle both formats during transition:
+     - **Todo list** (new format): extract `- [ ] [[name]]...` lines — keep only unchecked items, drop `- [x]` lines
+     - **Frozen table** (old format): extract `[[name]]` wikilinks from table rows (e.g., `| [[task-name]] | open | | |`)
+     - **Dataview block** (live query): skip — cannot extract items from a code block
+   - Scan `03 TaskNotes/*.md` — read each file's YAML frontmatter, collect all tasks where `status != "done" AND status != "cancelled"`
+   - Reconcile previous day's list with current TaskNotes:
+     - Items from previous day's list that are still open in TaskNotes → **keep in same order**
+     - New open tasks in TaskNotes not in previous day's list → **append at bottom**
+     - Tasks now done/cancelled in TaskNotes → **remove from list**
+   - Build each todo item as: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if the task has a due date set)
+   - The title comes from the `# H1 heading` in the task file (not the filename)
+
+4. **Check Dataview plugin** (`.obsidian/plugins/dataview/`)
    - Check if directory exists
-   - If missing: warn "⚠️ Dataview plugin not found. Install from Obsidian Community Plugins for live task queries."
+   - If missing: warn "⚠️ Dataview plugin not found. Install from Obsidian Community Plugins for live Inbox and Meetings queries."
    - Don't block execution — journal still useful without live queries
 
-4. **Setup today's journal**
+5. **Setup today's journal**
    - Check if today's entry exists at `02 Calendar/YYYY-MM-DD.md`
    - **If not**: create from template at `08 System/Templates/Daily Template.md`
      - Note: Template uses Templater syntax - resolve `<% tp.date... %>` to actual dates
      - Set `created` and `modified` to today's date
-   - **If exists**: check if Dataview sections are present (search for ` ```dataview `)
-     - If Dataview sections **missing**: inject them while preserving ALL existing content
-       - Insert these 3 sections between `## ⭐ Highlight` and `## 📋 What Did I Do?`:
-         - `## ✅ Open Tasks` (dataview query)
-         - `## 📎 Clipped (Unsummarized)` (dataview query)
+   - **If exists**: check if Dataview sections are present for Inbox and Meetings (search for ` ```dataview `)
+     - If Dataview sections for Inbox/Meetings **missing**: inject them while preserving ALL existing content
+       - Insert between `## ✅ Open Tasks` and `## 📋 What Did I Do?`:
+         - `## 📥 Inbox (Unsummarized)` (dataview query)
          - `## 🤝 Meetings` (dataview query)
        - Copy exact query blocks from `08 System/Templates/Daily Template.md`
        - NEVER overwrite or remove existing content — only add missing sections
-     - If Dataview sections **present**: do nothing, journal is already up to date
+   - **Populate `## ✅ Open Tasks`**: Write the todo list built in step 3 into this section
+     - If section has a `dataview` code block (migration): replace the entire code block with the todo list
+     - If section already has `- [ ]` todo items: preserve existing items and their order, only append new tasks not already listed
+     - If section is empty: write the full todo list
    - Show today's highlight or ask: "What's your main focus today?"
+   - **Update DASHBOARD**: Write `![[YYYY-MM-DD]]` (today's date) to `_DASHBOARD.md` in the vault root, replacing the entire file contents. This keeps the dashboard always pointing to the current day's journal.
 
-5. **Check learning plan** (`.claude/learning-sessions/learning-plan.json`)
+6. **Check learning plan** (`.claude/learning-sessions/learning-plan.json`)
    - Find topics where `last_covered` + interval < today
    - If any due: "You have [topic] due for review"
    - Show next item in queue
 
-6. **Scan tasks** (`03 TaskNotes/*.md`)
-   - Read each file's YAML frontmatter
-   - Skip tasks where status is `complete` or `cancelled`
+7. **Scan tasks** (`03 TaskNotes/*.md`)
+   - Already scanned in step 3 — reuse that data
    - Categorize:
      - **Open**: `due` is null/missing OR `due` >= today
    - For date comparison on macOS, use `date -v` for arithmetic
 
-7. **Scan meetings** (`04 Meetings/*.md`)
+8. **Scan meetings** (`04 Meetings/*.md`)
    - Read each file's YAML frontmatter
    - Count meetings where `created` = today's date
    - Count meetings where `created` = yesterday's date
 
-8. **Scan in-progress ideas** (`06 Projects/*/README.md`)
+9. **Scan in-progress ideas** (`06 Projects/*/README.md`)
    - Read each README's YAML frontmatter
    - Include projects where `status: active`
 
-9. **Quick status report**
-   - Count unread clips by scanning `01 Inbox/`:
-     - Match: `status: Clipped`
-   - Yesterday: Complete/Incomplete
-   - Today's highlight: [highlight or "not set"]
-   - Open tasks: [count]
-   - Meetings today: [count]
-   - Unread clips: [count]
-   - In-progress ideas: [count]
-   - Reviews due: [list or "none"]
-   - Next in learning queue: [topic]
-   - Journal: `02 Calendar/YYYY-MM-DD.md` (with live Dataview queries)
+10. **Quick status report**
+    - Count unprocessed inbox items by scanning `01 Inbox/`:
+      - Match: `status: Clipped`
+    - Yesterday: Complete/Incomplete
+    - Today's highlight: [highlight or "not set"]
+    - Open tasks: [count from todo list built in step 3]
+    - Meetings today: [count]
+    - Inbox (unprocessed): [count]
+    - In-progress ideas: [count]
+    - Reviews due: [list or "none"]
+    - Next in learning queue: [topic]
+    - Journal: `02 Calendar/YYYY-MM-DD.md` (Open Tasks as todo list, Inbox/Meetings as live Dataview)
 
 Keep it brief - quick morning orientation, not a deep dive.
 
@@ -82,3 +98,4 @@ Keep it brief - quick morning orientation, not a deep dive.
 
 - **No trailing slashes in FROM paths**: `FROM "03 TaskNotes"` works, `FROM "03 TaskNotes/"` silently returns empty.
 - **YAML null for unset fields**: Use `due:` (null), never `due: ""` (empty string). Dataview treats `""` as truthy, breaking `!due` checks.
+- **Open Tasks uses todo list format** — not Dataview. Only Inbox and Meetings sections use Dataview queries.

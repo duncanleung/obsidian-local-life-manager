@@ -79,7 +79,14 @@ $ARGUMENTS
    - Always set `completed:` (YAML null — populated later by /plan-task-done)
    - IMPORTANT: Use YAML null (bare key with no value) for unset fields, NOT empty strings `""`. Empty strings break Dataview queries.
 
-5. **Confirm creation**
+5. **Add to today's journal**
+   - Find today's journal: `02 Calendar/YYYY-MM-DD.md`
+   - If journal exists and has `## ✅ Open Tasks`:
+     - Find the section (between `## ✅ Open Tasks` and the next `##` heading)
+     - Append a new line: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if due date is set)
+   - If journal doesn't exist: skip (will be populated by `/plan-good-morning`)
+
+6. **Confirm creation**
    ```
    Created: 03 TaskNotes/review-pr-from-sarah.md
    Due: 2026-02-13 (Thursday)

@@ -169,7 +169,7 @@ Structured post-meeting capture. Use when:
 
 6. **Ensure `## 🤝 Meetings` section exists in journal** — read the meeting date's journal (`02 Calendar/{meeting-date}.md`):
    - If journal doesn't exist: skip steps 6-7 entirely (don't create a journal for this)
-   - If `## 🤝 Meetings` section is **missing**: inject it between `## 📎 Clipped (Unsummarized)` and `## 📋 What Did I Do?`
+   - If `## 🤝 Meetings` section is **missing**: inject it between `## 📥 Inbox (Unsummarized)` and `## 📋 What Did I Do?`
      - If the journal is **frozen** (no dataview blocks, or `status: done`): insert a static table with the meeting data
        ```markdown
        ## 🤝 Meetings

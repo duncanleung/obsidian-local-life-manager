@@ -35,15 +35,9 @@ FROM "03 TaskNotes/"
 WHERE status != "done" AND status != "cancelled" AND due = date(today)
 ```
 
-**✅ Open Tasks**
-```dataview
-TABLE status AS "Status", due AS "Due", source_type AS "Source"
-FROM "03 TaskNotes/"
-WHERE status != "done" AND status != "cancelled" AND (due > date(today) OR !due)
-SORT choice(due, due, date("9999-12-31")) ASC
-```
+**✅ Open Tasks** — Uses a plain markdown todo list (not Dataview). Items are `- [ ] [[filename]] Title` checkboxes that the user reorders by priority in Obsidian. This section is NOT frozen during daily review — it stays as-is. The Day Summary counts `- [ ]` lines to get "Tasks still open".
 
-**📎 Clipped (Unsummarized)**
+**📥 Inbox (Unsummarized)**
 ```dataview
 TABLE class AS "Class", url AS "URL"
 FROM "01 Inbox/"
@@ -81,7 +75,7 @@ The freeze process automatically appends a Day Summary section:
 ## 📊 Day Summary
 - Tasks completed today: [count]
 - Tasks still open: [count]
-- Knowledge clips saved: [count]
+- Inbox items (unprocessed): [count]
 - Journal frozen at: HH:MM
 ```
 

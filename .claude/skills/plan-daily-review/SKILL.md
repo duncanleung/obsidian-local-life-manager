@@ -146,8 +146,8 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
      ```markdown
      ## 📊 Day Summary
      - Tasks completed today: [count from completed field = today's date]
-     - Tasks still open: [count from frozen ✅ Open Tasks table]
-     - Knowledge clips saved: [count from frozen 📎 Clipped table, or 0]
+     - Tasks still open: [count `- [ ]` lines under ## ✅ Open Tasks heading]
+     - Inbox items (unprocessed): [count from frozen 📥 Inbox table, or 0]
      - Journal frozen at: HH:MM
      ```
 
