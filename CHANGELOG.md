@@ -6,15 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Task template now tracks source links and priority levels for all tasks
+- `/research-clip` skill - Quick-capture articles, videos, and resources to Knowledge Base. Fetches pages and extracts key insights automatically with status "Clipped"
+- `/research-clip-read` skill - Process clipped items by extracting insights and marking as "Read" without full summarization
+
+### Enhanced
+- `/plan-quick-task` now supports `--source`, `--source-type`, and `--priority` flags with auto-detection for GitHub/Slack/JIRA/Email URLs
+- `/plan-task-done` now sets `completed` date and uses `status: done` for Dataview consistency (metadata-only updates, no file moves)
+
 ## [0.2.0] - 2026-01-20
 
 ### Added
-- `/debrief` skill - End-of-session reflection for extracting memories and suggesting updates to about-me.md and CLAUDE.md
+- `/session-debrief` skill - End-of-session reflection for extracting memories and suggesting updates to about-me.md and CLAUDE.md
 - `/git-sync` skill - Renamed from spaces-sync for clarity
 
 ### Changed
-- `/refresh` now reads about-taylor.md (profile) and last 3 days of memories for better context loading
-- `/good-morning` updated to use vault template at `my-vault/09 System/Templates/Daily Template.md`
+- `/session-refresh` now reads about-taylor.md (profile) and last 3 days of memories for better context loading
+- `/good-morning` updated to use vault template at `08 System/Templates/Daily Template.md`
 - `/youtube-catchup` and `/rss-catchup` now deduplicate by checking for existing URLs before creating notes
 - Content capture skills now write to `07 Knowledge Base/Capture/` (was 06)
 
@@ -32,7 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Initial framework release
 - 49 custom Claude Code skills
 - 26 specialized agent definitions
-- Project planning templates (ideas/)
+- Project planning templates (06 Projects/, formerly ideas/)
 - Code workspace structure (spaces/)
 - Example project scaffolding
 
