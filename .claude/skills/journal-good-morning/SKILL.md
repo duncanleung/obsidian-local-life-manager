@@ -15,7 +15,7 @@ Good morning! Run the morning check-in.
    - DO NOT assume the date - always verify
 
 2. **Check yesterday's journal** (`02 Calendar/YYYY-MM-DD.md`)
-   - If "🔨 What Did I Work On?" empty: offer to backfill from GitHub
+   - If "🔨 What Did I Work On?" empty (no content or only table header with no data rows): offer to backfill from GitHub
      - "Yesterday's GitHub activity wasn't captured. Want me to pull that?"
      - If yes: Read `.claude/skills/journal-shared/references/github-activity.md` and follow the complete procedure using **yesterday's date** as the target date
    - If "📋 What Did I Do?" empty: just note it

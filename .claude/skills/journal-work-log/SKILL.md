@@ -10,9 +10,24 @@ Add this to today's journal (`02 Calendar/YYYY-MM-DD.md`):
 
 $ARGUMENTS
 
-## Status Verbs
+## Work Log Table Format
 
-Every work log bullet MUST start with an emoji verb. Pick the best match:
+Read `.claude/skills/journal-shared/references/work-log-format.md` for the complete format reference.
+
+The "🔨 What Did I Work On?" section uses a 5-column table:
+
+```markdown
+| Status | Project | Work Item | Description | Links |
+|--------|---------|-----------|-------------|-------|
+| ✅ | obsidian-skills | TASK-001 | Enhanced Task System — all phases complete | [[TASK]] \| [[PLAN]] |
+| 🚧 | care-portal | Auth module | Login flow working, still need token refresh | — |
+| 🐛 | care-portal | WEB-1234 | Fixed date parsing bug in daily review | [WEB-1234](https://airvet.atlassian.net/browse/WEB-1234) |
+| 🔨 | obsidian-skills | `/research-clip` | New skill for quick-capturing articles | [[SKILL]] |
+```
+
+### Status Verbs
+
+Pick the best emoji match for the work:
 
 | Emoji | Verb | Use when… |
 |-------|------|-----------|
@@ -33,16 +48,6 @@ Every work log bullet MUST start with an emoji verb. Pick the best match:
 | ⏸️ | Paused | Put work on hold, context-switched away |
 | 🔄 | Reviewed | Code review, PR review, or feedback |
 
-**Format:** `- {emoji} {Verb} {description} — {optional links}`
-
-Example:
-```markdown
-- ✅ Completed TASK-001 (Enhanced Task System) — [[06 Projects/obsidian-skills/issues/001-enhanced-task-system/TASK.md|TASK-001]] | [[06 Projects/obsidian-skills/issues/001-enhanced-task-system/PLAN.md|PLAN]]
-- 🚧 Progressed on auth module — login flow working, still need token refresh
-- 🐛 Fixed date parsing bug in daily review skill
-- 🔨 Built `/research-clip` skill for quick-capturing articles
-```
-
 ## Steps
 
 1. **Get current date** — run `date +%Y-%m-%d` to confirm today's date
@@ -51,31 +56,35 @@ Example:
    - Search for related files using Glob (e.g., `06 Projects/*/issues/*/PLAN.md`, `06 Projects/*/issues/*/TASK.md`)
    - Use Obsidian wikilinks `[[filename]]` to link to them
    - For files in subdirectories, use the full relative path: `[[06 Projects/project/issues/001-name/PLAN.md|TASK-001 Plan]]`
-4. **Choose the right emoji verb** from the Status Verbs table above that best describes the work
-5. **Add as bullet** under the appropriate section:
-   - "📋 What Did I Do?" for personal activities
-   - "🔨 What Did I Work On?" for technical/coding work
-   - "📚 What Did I Study?" for learning sessions, courses
-   - Every bullet MUST start with an emoji verb from the table
-6. If journal doesn't exist: create it with the format shown below, then add the entry
+4. **Resolve project name** — match work to a project from the Projects Index in CLAUDE.md:
+   - Known project reference → use project name (e.g., `obsidian-skills`, `care-portal`)
+   - JIRA ticket prefix (WEB-, BE-, AP-) → map to relevant project
+   - Skill file reference (.claude/skills/*) → use `obsidian-skills` or relevant project
+   - No project context → use `—`
+5. **Choose the right emoji verb** from the Status Verbs table
+6. **Add as table row** under the appropriate section:
+   - "📋 What Did I Do?" for personal activities (keep as bullet list)
+   - "🔨 What Did I Work On?" for technical/coding work (table format)
+   - "📚 What Did I Study?" for learning sessions, courses (keep as bullet list)
+   - **If table already exists** (has `| Status |` header) → append new row after the last `|...|` row
+   - **If section is empty** → create table header + separator + first data row
+7. If journal doesn't exist: create it with the format from `.claude/skills/journal-shared/references/journal-format.md`, then add the entry
 
 ## Linking Guidelines
 
-**Always link to related docs when logging work on tasks, issues, or projects:**
+**Always link to related docs when logging work on tasks, issues, or projects.**
 
-```markdown
-# Good — emoji verb + links to source docs
-- ✅ Completed TASK-001 (Enhanced Task System) — [[06 Projects/obsidian-skills/issues/001-enhanced-task-system/PLAN.md|PLAN]] | [[06 Projects/obsidian-skills/issues/001-enhanced-task-system/TASK.md|TASK]]
+| Work Type | Link Format |
+|-----------|------------|
+| Task/issue | `[[06 Projects/{project}/issues/{id}/TASK.md\|TASK-{id}]]` |
+| Plan file | `[[06 Projects/{project}/issues/{id}/PLAN.md\|PLAN]]` |
+| Skill file | `[[.claude/skills/{skill-name}/SKILL.md\|/skill-name]]` |
+| Project README | `[[06 Projects/{project}/README.md\|{project}]]` |
+| Meeting note | `[[04 Meetings/{filename}\|{title}]]` |
+| GitHub PR | `[PR#{num}](https://github.com/{org}/{repo}/pull/{num})` |
+| JIRA ticket | `[{KEY}](https://airvet.atlassian.net/browse/{KEY})` |
 
-# Bad — no emoji, no links, can't scan or navigate
-- Completed TASK-001 (Enhanced Task System)
-```
-
-**Link types to include:**
-- Task/issue file: `[[06 Projects/{project}/issues/{id}/TASK.md|TASK-{id}]]`
-- Plan file: `[[06 Projects/{project}/issues/{id}/PLAN.md|PLAN]]`
-- Skill files: `[[.claude/skills/{skill-name}/SKILL.md|/skill-name]]`
-- Project README: `[[06 Projects/{project}/README.md|{project}]]`
+Use `—` in the Links column when there are no relevant links.
 
 ## Journal Format
 

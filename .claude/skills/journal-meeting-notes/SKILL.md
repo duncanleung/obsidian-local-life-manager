@@ -192,8 +192,14 @@ Structured post-meeting capture. Use when:
    - If `## 🤝 Meetings` section **already exists** and is a Dataview query: do nothing (query auto-includes new meetings)
 
 7. **Add work log entry** — in the same journal (`02 Calendar/{meeting-date}.md`):
-   - Add under `## 🔨 What Did I Work On?`:
-   - `- 🗣️ Discussed {title} — [[04 Meetings/{filename}|{title}]]`
+   - Add a table row under `## 🔨 What Did I Work On?` (see `.claude/skills/journal-shared/references/work-log-format.md`):
+   - `| 🗣️ | — | {title} | Discussed {brief summary} | [[04 Meetings/{filename}|meeting]] |`
+   - If the table doesn't exist yet (section is empty), create the header first:
+     ```
+     | Status | Project | Work Item | Description | Links |
+     |--------|---------|-----------|-------------|-------|
+     ```
+   - Then append the data row
 
 8. **Summary** — show what was created:
    - Meeting note path

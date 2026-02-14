@@ -29,7 +29,8 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
    - Create from template if not (see `references/template.md`)
 
 3. **🔨 What Did I Work On?** (only if section is empty)
-   - If already has entries: skip (work-log entries are added during the day via `/journal-work-log`)
+   - If already has table rows: skip (work-log entries are added during the day via `/journal-work-log` in table format — see `.claude/skills/journal-shared/references/work-log-format.md`)
+   - A section with only the table header + separator (no data rows) counts as empty
    - If empty: leave empty — user fills this in manually
 
 4. **GitHub Activity** (ALWAYS runs — never skip this step)

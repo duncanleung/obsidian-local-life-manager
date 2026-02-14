@@ -30,6 +30,8 @@ Both `tags` and `status` are required.
 
 ## 🔨 What Did I Work On?
 
+| Status | Project | Work Item | Description | Links |
+|--------|---------|-----------|-------------|-------|
 
 ## ![[github-logo.png|18]] GitHub Activity
 
