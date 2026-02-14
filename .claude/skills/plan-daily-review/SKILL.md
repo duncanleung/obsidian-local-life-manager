@@ -33,96 +33,12 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
    - If empty: leave empty — user fills this in manually
 
 4. **GitHub Activity** (ALWAYS runs — never skip this step)
-   - This is a dedicated section for all GitHub activity on the target date
-   - **Always populate this section**, regardless of whether other sections have content
-   - Run ALL of these `gh` queries for the **target date**:
-
-   ```bash
-   # 1. Commits authored (extract: org/repo, full SHA, commit title)
-   gh search commits --author=duncanleung --committer-date={target-date} --limit=50
-
-   # 2. PRs merged (extract: org/repo, PR number, title)
-   gh search prs --author=duncanleung --merged-at={target-date} --limit=20
-
-   # 3. PRs created/opened (extract: org/repo, PR number, title)
-   gh search prs --author=duncanleung --created={target-date} --limit=20
-
-   # 4. PRs commented on (extract: org/repo, PR number, title)
-   gh api search/issues --method GET -f q="commenter:duncanleung type:pr updated:{target-date}" --jq '.items[] | "\(.repository_url | split("/")[-2:] | join("/")) #\(.number) \(.title) \(.state) \(.html_url)"'
-
-   # 5. PRs involved in (reviews requested, approvals, etc.)
-   gh api search/issues --method GET -f q="involves:duncanleung type:pr updated:{target-date}" --jq '.items[] | "\(.repository_url | split("/")[-2:] | join("/")) #\(.number) \(.title) \(.state) \(.html_url)"'
-   ```
-
-   - **Deduplicate** PRs that appear in multiple queries (by repo/number)
-   - **Build URLs** for every entry:
-     - **Commits:** `https://github.com/{org}/{repo}/commit/{full-sha}`
-     - **Pull Requests:** `https://github.com/{org}/{repo}/pull/{number}`
-     - **Reviews & Comments:** `https://github.com/{org}/{repo}/pull/{number}`
-   - **Place the section** in the journal:
-     - If `## ![[github-logo.png|18]] GitHub Activity` already exists: **replace it entirely** (from `## ![[github-logo.png|18]] GitHub Activity` to the next `##` heading or end of file)
-     - If it doesn't exist: insert after `## 🔨 What Did I Work On?`, before `## 📚 What Did I Study?`
-     - If neither anchor section exists: append before `## 📝 Notes` or at the end of file
-   - Every entry MUST include a clickable web link. Format the section as:
-
-   ```markdown
-   ## ![[github-logo.png|18]] GitHub Activity
-
-   ### Commits
-   - **{org/repo}**
-     - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
-   - **{org/repo}**
-     - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
-
-   ### Pull Requests
-   - 🟣 Merged — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-   - 🟢 Opened — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-
-   ### Reviews & Comments
-   - 💬 Commented on [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-   - 👀 Review requested — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-   ```
-
-   - Group commits by repo
-   - Omit any subsection (Commits, Pull Requests, Reviews & Comments) that has zero items
-   - If NO GitHub activity at all: write `_No GitHub activity._` under the `## ![[github-logo.png|18]] GitHub Activity` heading
+   - Read `.claude/skills/plan-shared/references/github-activity.md` for the complete procedure
+   - Follow ALL steps (queries, deduplication, URL construction, formatting, and placement) using the target date from Step 1
 
 5. **Slack Conversations** (ALWAYS runs — never skip this step)
-   - Search for target date's Slack messages (run both queries):
-     - `from:<@U0163GG5831> on:{target-date}` (messages sent)
-     - `to:<@U0163GG5831> on:{target-date}` (messages received)
-     - Use `slack_search_public_and_private`, sort by timestamp ascending, limit 20
-     - If cursor returned, paginate up to 3 pages total
-   - Group messages into conversations by thread:
-     - Same channel_id + parent message_ts = same conversation
-     - Standalone messages (no thread) = individual conversations
-   - For each unique thread, read full context with `slack_read_thread` (concise format)
-   - Resolve user IDs to display names:
-     - Batch unique user IDs from all conversations
-     - Call `slack_read_user_profile` for each (skip U0163GG5831 = Duncan Leung)
-     - Cache results to avoid duplicate lookups
-   - **Filter: ONLY include work conversations**
-     - INCLUDE: technical discussions, project planning, decisions, PR reviews, incidents, status updates, meeting follow-ups, debugging, architecture discussions
-     - EXCLUDE: social banter, single emoji/thanks messages, bot notifications without discussion, personal DM chatter, GIFs/memes only
-   - **Place the section** in the journal:
-     - If `## ![[slack-logo.png|18]] Slack Conversations` exists: replace it entirely (from heading to next `##` or EOF)
-     - If doesn't exist: insert after `## ![[github-logo.png|18]] GitHub Activity`, before `## 📚 What Did I Study?`
-     - If neither anchor exists: append before `## 📝 Notes` or at EOF
-   - Write each meaningful conversation:
-     ```markdown
-     ## ![[slack-logo.png|18]] Slack Conversations
-
-     ### [Descriptive Topic Title]
-     - **Channel:** #channel-name
-     - **Participants:** Name1, Name2, Name3
-     - **Summary:** 1-3 sentences describing the substance and outcome of the discussion.
-     - **Action Items:**
-       - Person: Action description
-     - **Thread:** [View thread](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot})
-     ```
-   - Omit **Action Items** line if none exist
-   - If no meaningful conversations: write `_No significant work conversations today._`
-   - Thread link format: remove the dot from message_ts (e.g., `1234567890.123456` → `p1234567890123456`)
+   - Read `.claude/skills/plan-shared/references/slack-activity.md` for the complete procedure
+   - Follow ALL steps (search, thread grouping, user resolution, filtering, formatting, and placement) using the target date from Step 1
 
 6. **Memory Capture Check** (silent)
    - Review the conversation for anything memory-worthy

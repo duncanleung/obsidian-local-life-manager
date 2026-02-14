@@ -66,6 +66,7 @@ Non-skill directories containing shared reference files:
 | Directory | Purpose |
 |-----------|---------|
 | `learn-shared/references/` | Shared schemas for learning skills (session-schema, entry-types, proficiency, flashcard-syntax) |
+| `plan-shared/references/` | Shared procedures for planning skills (github-activity, slack-activity, journal-format) |
 
 ## Skill File Structure
 

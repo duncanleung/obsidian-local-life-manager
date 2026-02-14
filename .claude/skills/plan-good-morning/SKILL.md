@@ -16,10 +16,12 @@ Good morning! Run the morning check-in.
 
 2. **Check yesterday's journal** (`02 Calendar/YYYY-MM-DD.md`)
    - If "🔨 What Did I Work On?" empty: offer to backfill from GitHub
+     - "Yesterday's GitHub activity wasn't captured. Want me to pull that?"
+     - If yes: Read `.claude/skills/plan-shared/references/github-activity.md` and follow the complete procedure using **yesterday's date** as the target date
    - If "📋 What Did I Do?" empty: just note it
    - If "![[slack-logo.png|18]] Slack Conversations" empty or missing: offer to backfill from Slack
      - "Yesterday's Slack conversations weren't captured. Want me to pull those?"
-     - If yes: use same search/filter strategy as `/plan-daily-review` Step 5 with yesterday's date
+     - If yes: Read `.claude/skills/plan-shared/references/slack-activity.md` and follow the complete procedure using **yesterday's date** as the target date
 
 3. **Build Open Tasks todo list**
    - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD.md`

@@ -21,62 +21,9 @@ $ARGUMENTS
    - If it doesn't exist: create it with the standard format (see bottom of this file)
    - Note whether a `## ![[github-logo.png|18]] GitHub Activity` section already exists (it will be replaced)
 
-3. **Pull GitHub data** — run ALL of these queries for the target date:
-
-   ```bash
-   # 1. Commits authored (extract: org/repo, full SHA, commit title)
-   gh search commits --author=duncanleung --committer-date={target-date} --limit=50
-
-   # 2. PRs merged (extract: org/repo, PR number, title)
-   gh search prs --author=duncanleung --merged-at={target-date} --limit=20
-
-   # 3. PRs created/opened (extract: org/repo, PR number, title)
-   gh search prs --author=duncanleung --created={target-date} --limit=20
-
-   # 4. PRs commented on (extract: org/repo, PR number, title)
-   gh api search/issues --method GET -f q="commenter:duncanleung type:pr updated:{target-date}" --jq '.items[] | "\(.repository_url | split("/")[-2:] | join("/")) #\(.number) \(.title) \(.state) \(.html_url)"'
-
-   # 5. PRs involved in (reviews requested, approvals, etc.)
-   gh api search/issues --method GET -f q="involves:duncanleung type:pr updated:{target-date}" --jq '.items[] | "\(.repository_url | split("/")[-2:] | join("/")) #\(.number) \(.title) \(.state) \(.html_url)"'
-   ```
-
-4. **Deduplicate** — PRs may appear in multiple queries. Dedupe by repo/number.
-
-5. **Build URLs** for every entry:
-   - **Commits:** `https://github.com/{org}/{repo}/commit/{full-sha}`
-   - **Pull Requests:** `https://github.com/{org}/{repo}/pull/{number}`
-   - **Reviews & Comments:** `https://github.com/{org}/{repo}/pull/{number}` (links to the PR)
-
-6. **Format and insert** the `## ![[github-logo.png|18]] GitHub Activity` section:
-
-   Every entry MUST include a clickable web link. Use markdown link syntax.
-
-   ```markdown
-   ## ![[github-logo.png|18]] GitHub Activity
-
-   ### Commits
-   - **{org/repo}**
-     - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
-   - **{org/repo}**
-     - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
-
-   ### Pull Requests
-   - 🟣 Merged — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-   - 🟢 Opened — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
-
-   ### Reviews & Comments
-   - 💬 Commented on [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-   - 👀 Review requested — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
-   ```
-
-   - Group commits by repo
-   - Omit any subsection (Commits, Pull Requests, Reviews & Comments) that has zero items
-   - If NO GitHub activity at all: write `_No GitHub activity._` under the `## ![[github-logo.png|18]] GitHub Activity` heading
-
-7. **Place the section** in the journal:
-   - If `## ![[github-logo.png|18]] GitHub Activity` already exists: **replace it entirely** (from `## ![[github-logo.png|18]] GitHub Activity` to the next `##` heading or end of file)
-   - If it doesn't exist: insert after `## 🔨 What Did I Work On?`, before `## 📚 What Did I Study?`
-   - If neither anchor section exists: append before `## 📝 Notes` or at the end
+3. **Pull, format, and place GitHub Activity**
+   - Read `.claude/skills/plan-shared/references/github-activity.md` for the complete procedure
+   - Follow ALL steps (queries, deduplication, URL construction, formatting, and placement) using the target date from Step 1
 
 ## Important
 
@@ -87,32 +34,4 @@ $ARGUMENTS
 
 ## Journal Format
 
-If creating a new journal:
-
-```markdown
----
-created: YYYY-MM-DD
-modified: YYYY-MM-DD
-status: in-progress
----
-
-# {Month} {Day}, {Year} - {DayOfWeek}
-
-## ⭐ Highlight
-
-
-## 📋 What Did I Do?
-
-
-## 🔨 What Did I Work On?
-
-
-## ![[github-logo.png|18]] GitHub Activity
-
-
-## 📚 What Did I Study?
-
-
-## 📝 Notes
-
-```
+If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.

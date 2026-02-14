@@ -79,32 +79,7 @@ Example:
 
 ## Journal Format
 
-If creating a new journal:
-
-```markdown
----
-created: YYYY-MM-DD
-modified: YYYY-MM-DD
-status: in-progress
----
-
-# {Month} {Day}, {Year} - {DayOfWeek}
-
-## ⭐ Highlight
-
-
-## 📋 What Did I Do?
-
-
-## 🔨 What Did I Work On?
-
-
-## 📚 What Did I Study?
-
-
-## 📝 Notes
-
-```
+If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.
 
 Keep entries brief but always include links to related docs.
 

@@ -21,50 +21,9 @@ $ARGUMENTS
    - If it doesn't exist: create it with the standard format (see bottom of this file)
    - Note whether a `## ![[slack-logo.png|18]] Slack Conversations` section already exists (it will be replaced)
 
-3. **Search Slack** — run both queries for the target date:
-
-   - `from:<@U0163GG5831> on:{target-date}` (messages sent)
-   - `to:<@U0163GG5831> on:{target-date}` (messages received)
-   - Use `slack_search_public_and_private`, sort by timestamp ascending, limit 20
-   - If cursor returned, paginate up to 3 pages total
-
-4. **Group messages into conversations** by thread:
-   - Same channel_id + parent message_ts = same conversation
-   - Standalone messages (no thread) = individual conversations
-
-5. **Read full thread context** — for each unique thread, call `slack_read_thread` (concise format)
-
-6. **Resolve user IDs to display names**:
-   - Batch unique user IDs from all conversations
-   - Call `slack_read_user_profile` for each (skip U0163GG5831 = Duncan Leung)
-   - Cache results to avoid duplicate lookups
-
-7. **Filter: ONLY include work conversations**
-   - INCLUDE: technical discussions, project planning, decisions, PR reviews, incidents, status updates, meeting follow-ups, debugging, architecture discussions
-   - EXCLUDE: social banter, single emoji/thanks messages, bot notifications without discussion, personal DM chatter, GIFs/memes only
-
-8. **Format and insert** the `## ![[slack-logo.png|18]] Slack Conversations` section:
-
-   ```markdown
-   ## ![[slack-logo.png|18]] Slack Conversations
-
-   ### [Descriptive Topic Title]
-   - **Channel:** #channel-name
-   - **Participants:** Name1, Name2, Name3
-   - **Summary:** 1-3 sentences describing the substance and outcome of the discussion.
-   - **Action Items:**
-     - Person: Action description
-   - **Thread:** [View thread](https://airvet.slack.com/archives/{channel_id}/p{message_ts_no_dot})
-   ```
-
-   - Omit **Action Items** line if none exist
-   - If no meaningful conversations: write `_No significant work conversations today._`
-   - Thread link format: remove the dot from message_ts (e.g., `1234567890.123456` → `p1234567890123456`)
-
-9. **Place the section** in the journal:
-   - If `## ![[slack-logo.png|18]] Slack Conversations` already exists: **replace it entirely** (from `## ![[slack-logo.png|18]] Slack Conversations` to the next `##` heading or end of file)
-   - If it doesn't exist: insert after `## ![[github-logo.png|18]] GitHub Activity`, before `## 📚 What Did I Study?`
-   - If neither anchor section exists: append before `## 📝 Notes` or at the end
+3. **Pull, format, and place Slack Conversations**
+   - Read `.claude/skills/plan-shared/references/slack-activity.md` for the complete procedure
+   - Follow ALL steps (search, thread grouping, user resolution, filtering, formatting, and placement) using the target date from Step 1
 
 ## Important
 
@@ -75,35 +34,4 @@ $ARGUMENTS
 
 ## Journal Format
 
-If creating a new journal:
-
-```markdown
----
-created: YYYY-MM-DD
-modified: YYYY-MM-DD
-tags: [daily-note]
----
-
-# {Month} {Day}, {Year} - {DayOfWeek}
-
-## ⭐ Highlight
-
-
-## 📋 What Did I Do?
-
-
-## 🔨 What Did I Work On?
-
-
-## ![[github-logo.png|18]] GitHub Activity
-
-
-## ![[slack-logo.png|18]] Slack Conversations
-
-
-## 📚 What Did I Study?
-
-
-## 📝 Notes
-
-```
+If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.
