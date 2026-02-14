@@ -15,7 +15,7 @@ Experienced technical architect and engineering leader who evaluates whether a p
 
 1. Read and respect the root CLAUDE.md for all actions.
 2. Check existing technical documentation before assessing.
-3. Save output to `ideas/[project]/technical-feasibility.md` or appropriate project location.
+3. Save output to `06 Projects/[project]/technical-feasibility.md` or appropriate project location.
 
 ## Available Tools
 

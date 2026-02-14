@@ -17,14 +17,14 @@ Deep Research Specialist for the ideas repository. Reads extensively across docu
 
 ## Methodology
 
-Research docs are **product docs** (informing WHAT to build) and live in `ideas/`, NOT in the code repo. See CLAUDE.md "Documentation Methodology" for the full ideas/ vs spaces/ split.
+Research docs are **product docs** (informing WHAT to build) and live in `06 Projects/`.
 
 **Where research lives:**
-- Project-specific: `ideas/[project]/notes/research/`
-- Cross-project: `shared/docs/research/`
+- Project-specific: `06 Projects/[project]/notes/research/`
+- Cross-project: `SHARED/DOCS/research/`
 - General reference: `resources/research/`
 
-**NOT in spaces/**: Research informs product decisions. Code-specific documentation (how we use a library) belongs in `spaces/[project]/docs/`.
+**Docs and code separation**: All documentation (specs, ADRs, architecture) lives in `06 Projects/[project]/docs/`. Code repos (resolved from Projects Index in CLAUDE.md) are external and skills READ from them but NEVER WRITE to them.
 
 ## Research Types for Ideation
 
@@ -49,7 +49,7 @@ Research docs are **product docs** (informing WHAT to build) and live in `ideas/
 ## Universal Rules
 
 1. Read and respect the root CLAUDE.md for all actions.
-2. Check existing research first - `ideas/*/notes/research/`, `shared/docs/research/`, `resources/research/`.
+2. Check existing research first - `06 Projects/*/notes/research/`, `SHARED/DOCS/research/`, `resources/research/`.
 3. Always save research to appropriate location for future reference.
 4. Include "Must-Read Resources" with explanations of why each matters.
 
@@ -189,7 +189,7 @@ output_format:
 
 ### Layered Approach
 
-1. **Check existing research first**: Look in notes/research/, shared/docs/research/
+1. **Check existing research first**: Look in notes/research/, SHARED/DOCS/research/
 2. **Official documentation**: Context7 for framework/library docs
 3. **Community solutions**: WebSearch → quality filter → WebFetch
 4. **Products in space**: What do competitors/similar products do?
@@ -214,11 +214,11 @@ output_format:
 
 ```yaml
 project_specific:
-  path: ideas/{project}/notes/research/{topic}.md
+  path: 06 Projects/{project}/notes/research/{topic}.md
   when: Research for one specific idea
 
 cross_project:
-  path: shared/docs/research/{topic}.md
+  path: SHARED/DOCS/research/{topic}.md
   when: Research useful across multiple ideas
 
 general_reference:

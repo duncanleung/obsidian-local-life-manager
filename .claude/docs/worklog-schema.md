@@ -12,7 +12,7 @@ Worklogs track the history of work on issues for AI context preservation, struct
 ## Directory Structure
 
 ```
-ideas/[project]/issues/###-slug/
+06 Projects/[project]/issues/###-slug/
 ├── TASK.md              # Issue definition
 ├── PLAN.md              # Phase breakdown
 └── worklog/
@@ -377,22 +377,22 @@ Consistent tags enable cross-project queries.
 
 ### Find all gotchas for a technology
 ```bash
-grep -r '"tags":.*"tailwind"' ideas/*/issues/*/worklog/*.json
+grep -r '"tags":.*"tailwind"' "06 Projects"/*/issues/*/worklog/*.json
 ```
 
 ### Find all handoffs to code-reviewer
 ```bash
-grep -r '"to": "code-reviewer"' ideas/*/issues/*/worklog/*.json
+grep -r '"to": "code-reviewer"' "06 Projects"/*/issues/*/worklog/*.json
 ```
 
 ### Find all lessons that apply to all projects
 ```bash
-grep -r '"applies_to":.*"all-projects"' ideas/*/issues/*/worklog/*.json
+grep -r '"applies_to":.*"all-projects"' "06 Projects"/*/issues/*/worklog/*.json
 ```
 
 ### Get current state of all in-progress issues
 ```bash
-find ideas/*/issues/*/worklog/_state.json -exec grep -l '"status": "in_progress"' {} \;
+find "06 Projects"/*/issues/*/worklog/_state.json -exec grep -l '"status": "in_progress"' {} \;
 ```
 
 ---

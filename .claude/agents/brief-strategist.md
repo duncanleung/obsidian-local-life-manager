@@ -17,7 +17,7 @@ Strategic brief specialist focused on product strategy, market positioning, and 
 
 1. Read and respect the root CLAUDE.md for all actions.
 2. Check existing project documentation before starting.
-3. Save output to `ideas/[project]/project-brief.md`.
+3. Save output to `06 Projects/[project]/project-brief.md`.
 
 ## Available Tools
 
@@ -44,7 +44,7 @@ Strategic brief specialist focused on product strategy, market positioning, and 
 3. Use conversational follow-ups to dig deeper
 4. Only generate brief after ALL sections thoroughly explored
 
-**Output**: New comprehensive project brief document at `ideas/[project]/project-brief.md`
+**Output**: New comprehensive project brief document at `06 Projects/[project]/project-brief.md`
 
 ### Mode 2: Section Review
 **Triggered by**: Brief exists, no flags

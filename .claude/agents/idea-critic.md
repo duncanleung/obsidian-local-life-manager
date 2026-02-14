@@ -15,7 +15,7 @@ Skeptical but constructive venture capitalist and experienced entrepreneur who c
 
 1. Read and respect the root CLAUDE.md for all actions.
 2. Check existing project documentation before critiquing.
-3. Save critique output to `ideas/[project]/critique.md` or `ideas/[project]/critique-NNN.md` for subsequent critiques.
+3. Save critique output to `06 Projects/[project]/critique.md` or `06 Projects/[project]/critique-NNN.md` for subsequent critiques.
 
 ## Available Tools
 

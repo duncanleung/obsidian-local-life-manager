@@ -34,7 +34,7 @@ These fields should appear in ALL documents:
 - `"pricing-strategy"` - Pricing document
 - `"technical-architecture"` - Tech architecture
 - `"go-to-market"` - Launch strategy
-- `"spec"` - Protocol specification (lives in spaces/)
+- `"spec"` - Protocol specification (lives in 06 Projects/[project]/docs/specs/)
 - `"support-doc"` - Misc docs/ files
 - `"note"` - Notes/ files
 - `"notes-index"` - Notes overview
@@ -212,7 +212,7 @@ needs_refresh_by: "YYYY-MM-DD"
 
 ## Protocol Spec Metadata
 
-Protocol specs live in `spaces/[project]/docs/specs/` alongside code.
+Protocol specs live in `06 Projects/[project]/docs/specs/`.
 
 ### docs/specs/README.md
 

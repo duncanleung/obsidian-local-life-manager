@@ -19,18 +19,20 @@ Ideation Orchestrator for the ideas repository. Coordinates complex exploration 
 
 ## Methodology
 
-This agent works across both `ideas/` and `spaces/` following the documentation split in CLAUDE.md:
+This agent works with planning in `06 Projects/` and reads from external code repos following CLAUDE.md conventions:
 
-**Product docs (WHAT)** → `ideas/[project]/`
-- Project briefs, specs, issues, research, features, notes
+**All planning and documentation** → `06 Projects/[project]/`
+- Project briefs, specs, ADRs, architecture docs, issues, research, notes
 
-**Code docs (HOW)** → `spaces/[project]/docs/`
-- Architecture, data models, ADRs, conventions
+**Code repos (external)** → Resolved from Projects Index `code:` field
+- Skills READ from code repos for context
+- Skills NEVER WRITE to code repos
+- Code paths typically: `/Users/duncanleung/Develop/[project]/`
 
 When orchestrating work:
-- Planning artifacts always go in `ideas/`
-- Code implementation happens in `spaces/`
-- Issues in `ideas/` reference code paths in `spaces/`
+- All planning artifacts go in `06 Projects/[project]/`
+- All docs (specs, ADRs, architecture) go in `06 Projects/[project]/docs/`
+- Issues in `06 Projects/` reference code paths from Projects Index
 
 ## When to Invoke
 
@@ -97,7 +99,7 @@ When orchestrating work:
    - Identify trade-offs
 
 3. Documentation
-   - Create research doc in shared/docs/research/
+   - Create research doc in SHARED/DOCS/research/
    - Update affected project briefs
    - Link to decision rationale
 
@@ -117,7 +119,7 @@ When orchestrating work:
 2. Coordination
    - Create shared spec or issue
    - Reference from each project
-   - Document in shared/
+   - Document in SHARED/
 
 3. Execution
    - Work on shared artifact
@@ -196,7 +198,7 @@ When orchestrating work:
 When orchestrating, always consider:
 - **Project status** from CLAUDE.md (Active Planning, Concept, etc.)
 - **Dependencies** between ideas
-- **Shared infrastructure** in shared/
+- **Shared infrastructure** in SHARED/
 - **Resource constraints** (which ideas are priority?)
 
 ### Quality Considerations
@@ -215,7 +217,7 @@ User: "I have an idea for a tool that helps developers manage
        their learning - courses, books, tutorials. Want to explore it."
 
 → ideation-orchestrator coordinates:
-  1. Create folder: ideas/learning-tracker/
+  1. Create folder: 06 Projects/learning-tracker/
   2. research-specialist → Learning platform landscape
   3. market-researcher → Developer learning market
   4. Draft project-brief.md with findings
@@ -232,7 +234,7 @@ User: "I need to decide on an auth solution that works across
 → ideation-orchestrator coordinates:
   1. Gather requirements from each project
   2. research-specialist → Auth solutions (Better Auth, Auth.js, etc.)
-  3. Create shared/docs/research/unified-auth-strategy.md
+  3. Create SHARED/DOCS/research/unified-auth-strategy.md
   4. Create decision matrix
   5. Document recommendation
   6. Create issues in each project for implementation research

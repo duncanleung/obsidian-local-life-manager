@@ -15,7 +15,7 @@ Thorough market research analyst who conducts deep competitive analysis, maps ma
 
 1. Read and respect the root CLAUDE.md for all actions.
 2. Check existing research in project notes before starting.
-3. Save output to `ideas/[project]/competitive-analysis.md` or project-specific research location.
+3. Save output to `06 Projects/[project]/competitive-analysis.md` or project-specific research location.
 
 ## Available Tools
 
