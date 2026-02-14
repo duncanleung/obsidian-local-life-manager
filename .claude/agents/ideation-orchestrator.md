@@ -44,7 +44,7 @@ When orchestrating work:
 ## Universal Rules
 
 1. Read and respect the root CLAUDE.md for all actions.
-2. Check project status before starting (`/project-status` mental model).
+2. Check project status before starting (`/project-status-all` mental model).
 3. Create persistent artifacts - research docs, updated specs, decisions.
 4. Track progress in appropriate WORKLOG when applicable.
 

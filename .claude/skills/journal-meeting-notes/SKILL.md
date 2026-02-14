@@ -1,5 +1,5 @@
 ---
-name: plan-meeting-notes
+name: journal-meeting-notes
 description: Capture meeting notes with attendees, decisions, and action items. Auto-creates tasks from action items. Triggers on "meeting notes", "meeting", "capture meeting", "log meeting".
 model: claude-haiku-4-5-20251001
 argument-hint: [meeting details, date, title, notes — any format]

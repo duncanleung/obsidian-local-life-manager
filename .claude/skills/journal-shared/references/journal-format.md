@@ -1,8 +1,8 @@
 # Journal Creation Format
 
-Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD.md`). Referenced by skills that may need to create a journal as a side effect (e.g., `plan-github-activity`, `plan-slack-activity`, `plan-work-log`).
+Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD.md`). Referenced by skills that may need to create a journal as a side effect (e.g., `journal-github-activity`, `journal-slack-activity`, `journal-work-log`).
 
-**Note:** `plan-good-morning` uses the richer `08 System/Templates/Daily Template.md` which includes Dataview queries, Open Tasks, and Inbox sections. This is the minimal fallback for when a skill needs to create a journal and the full template is not available.
+**Note:** `journal-good-morning` uses the richer `08 System/Templates/Daily Template.md` which includes Dataview queries, Open Tasks, and Inbox sections. This is the minimal fallback for when a skill needs to create a journal and the full template is not available.
 
 ## Canonical Frontmatter
 

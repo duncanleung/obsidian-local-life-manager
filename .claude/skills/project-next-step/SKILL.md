@@ -1,19 +1,19 @@
 ---
-name: project-validate
-description: "Validate idea/project structure, documentation completeness, and readiness for next phase"
+name: project-next-step
+description: "Assess project readiness and recommend the next skill to run. Use when unsure what to do next on a specific project."
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Glob, Grep
 ---
 
-# /project-validate
+# /project-next-step
 
-Comprehensive validation of a project's documentation structure and readiness.
+Assess project readiness and recommend the next skill to run.
 
 ## Usage
 
 ```bash
-/project-validate coordinatr       # Validate specific project
-/project-validate yourbench        # Check another project
+/project-next-step coordinatr       # What's next for this project?
+/project-next-step yourbench        # Check another project
 ```
 
 ## Validation Checklist
@@ -134,5 +134,5 @@ Based on project phase in README.
 ## Integration
 
 ```
-/project-validate → Fix issues → /project-validate again → /spec or /plan
+/project-next-step → Fix issues → /project-next-step again → /spec or /plan
 ```

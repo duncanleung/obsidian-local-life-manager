@@ -1,6 +1,6 @@
 # GitHub Activity Procedure
 
-Single source of truth for pulling GitHub activity into a daily journal. Referenced by `plan-github-activity`, `plan-daily-review`, and `plan-good-morning`.
+Single source of truth for pulling GitHub activity into a daily journal. Referenced by `journal-github-activity`, `journal-daily-review`, and `journal-good-morning`.
 
 ## Configuration
 

@@ -85,7 +85,7 @@ Six skill categories, organized by purpose. Full catalog with every skill: `.cla
 
 | Prefix | Category | What it covers |
 |--------|----------|----------------|
-| `plan-*` | Personal/Planning | Daily/weekly journal rhythm, task management, activity pulls (GitHub, Slack), meeting capture, personal triage |
+| `journal-*` | Personal/Journal | Daily/weekly journal rhythm, task management, activity pulls (GitHub, Slack), meeting capture, personal triage |
 | `session-*` | Session Management | AI context refresh, context handoff, end-of-session debrief, process improvement |
 | `project-*` | Project Workflow | Full pipeline: brief -> critique -> spec -> issue -> plan -> implement -> validate -> commit -> complete |
 | `learn-*` | Learning | Session lifecycle (start -> log -> end), review sessions, study notes, flashcards |

@@ -336,7 +336,7 @@ Always use ISO 8601 format: `YYYY-MM-DD`
 
 With standardized metadata, we can build:
 
-1. **Dashboard generator**: `/project-status` shows all ideas and status
+1. **Dashboard generator**: `/project-status-all` shows all ideas and status
 2. **Staleness checker**: `/docs --stale` finds outdated docs
 3. **Validation tracker**: `/validate-idea` checks documentation completeness
 4. **Critique tracker**: `/critique` generates and tracks critiques

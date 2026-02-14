@@ -1,20 +1,20 @@
 ---
-name: project-status
+name: project-status-all
 description: "Project status dashboard — quick glance table of all projects plus detailed analysis. Use for session start context, weekly reviews, or seeing what needs attention."
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Glob, Grep, Task
 ---
 
-# /project-status
+# /project-status-all
 
 Status dashboard across all projects. Default mode shows a quick scannable table from README files. Use `--project` or `--detailed` for deeper analysis including specs, issues, dependencies, blockers, and git branches.
 
 ## Usage
 
 ```bash
-/project-status                       # Quick glance table of all projects
-/project-status --project coordinatr  # Deep dive on one project
-/project-status --detailed            # Comprehensive analysis of all projects
+/project-status-all                       # Quick glance table of all projects
+/project-status-all --project coordinatr  # Deep dive on one project
+/project-status-all --detailed            # Comprehensive analysis of all projects
 ```
 
 ## Data Sources

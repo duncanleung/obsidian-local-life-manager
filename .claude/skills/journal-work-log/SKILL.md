@@ -1,5 +1,5 @@
 ---
-name: plan-work-log
+name: journal-work-log
 description: Quick work log entry to today's journal without full review. Use when user wants to quickly log something they did, add a journal entry, or note an activity. Triggers on "log this", "add to journal", "I just did", "quick note", "work log".
 model: claude-haiku-4-5-20251001
 argument-hint: [what you did]
@@ -79,7 +79,7 @@ Example:
 
 ## Journal Format
 
-If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.
+If creating a new journal, follow `.claude/skills/journal-shared/references/journal-format.md`.
 
 Keep entries brief but always include links to related docs.
 

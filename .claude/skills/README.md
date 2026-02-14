@@ -6,16 +6,16 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 
 | Skill | Description |
 |-------|-------------|
-| `/plan-good-morning` | Morning routine check-in + task dashboard |
-| `/plan-quick-task` | Create a new task note in 03 TaskNotes/ |
-| `/plan-work-log` | Quick work log entry to today's journal |
-| `/plan-task-done` | Mark a task as complete |
-| `/plan-whats-next` | Personal triage — overdue tasks, due-today, unfrozen journals, inbox backlog, meeting follow-ups |
-| `/plan-github-activity` | Pull GitHub activity (commits, PRs, reviews) into today's journal |
-| `/plan-slack-activity` | Pull Slack work conversations into today's journal |
-| `/plan-meeting-notes` | Capture meeting notes with attendees, decisions, and auto-created tasks |
-| `/plan-daily-review` | Complete daily journal review |
-| `/plan-weekly-review` | Weekly review and planning session |
+| `/journal-good-morning` | Morning routine check-in + task dashboard |
+| `/journal-quick-task` | Create a new task note in 03 TaskNotes/ |
+| `/journal-work-log` | Quick work log entry to today's journal |
+| `/journal-task-done` | Mark a task as complete |
+| `/journal-whats-next` | Personal triage — overdue tasks, due-today, unfrozen journals, inbox backlog, meeting follow-ups |
+| `/journal-github-activity` | Pull GitHub activity (commits, PRs, reviews) into today's journal |
+| `/journal-slack-activity` | Pull Slack work conversations into today's journal |
+| `/journal-meeting-notes` | Capture meeting notes with attendees, decisions, and auto-created tasks |
+| `/journal-daily-review` | Complete daily journal review |
+| `/journal-weekly-review` | Weekly review and planning session |
 | `/session-refresh` | Silently refresh AI context |
 | `/session-save-context` | Save session context handoff for continuation |
 | `/session-debrief` | End-of-session reflection and memory extraction |
@@ -34,8 +34,8 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 | `/project-worklog` | Add timestamped work log entries |
 | `/project-commit` | Create git commits with conventional message format |
 | `/project-complete` | Validate, document, review, commit, and merge to develop |
-| `/project-status` | Project status dashboard — quick glance table + detailed analysis |
-| `/project-validate` | Validate project structure and suggest next skill to run |
+| `/project-status-all` | Project status dashboard — quick glance table + detailed analysis |
+| `/project-next-step` | Assess project readiness and recommend the next skill to run |
 | `/project-validate-space` | Validate project space structure and consistency |
 | `/project-validate-sanity-check` | Step back, reflect, validate direction |
 | `/project-validate-troubleshoot` | Systematic debugging with 5-step loop |
@@ -66,7 +66,7 @@ Non-skill directories containing shared reference files:
 | Directory | Purpose |
 |-----------|---------|
 | `learn-shared/references/` | Shared schemas for learning skills (session-schema, entry-types, proficiency, flashcard-syntax) |
-| `plan-shared/references/` | Shared procedures for planning skills (github-activity, slack-activity, journal-format) |
+| `journal-shared/references/` | Shared procedures for planning skills (github-activity, slack-activity, journal-format) |
 
 ## Skill File Structure
 

@@ -1,5 +1,5 @@
 ---
-name: plan-quick-task
+name: journal-quick-task
 description: Create a new task note in 03 TaskNotes/. Use to quickly capture a task with optional due date. Triggers on "new task", "add task", "quick task", "create task", "todo".
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Write, Glob, Bash(date:*)
@@ -76,7 +76,7 @@ $ARGUMENTS
    - If no source provided, set `source:` and `source_type:` (YAML null)
    - If source provided but no explicit source_type, use auto-detection
    - Title in heading uses original case
-   - Always set `completed:` (YAML null — populated later by /plan-task-done)
+   - Always set `completed:` (YAML null — populated later by /journal-task-done)
    - IMPORTANT: Use YAML null (bare key with no value) for unset fields, NOT empty strings `""`. Empty strings break Dataview queries.
 
 5. **Add to today's journal**
@@ -84,7 +84,7 @@ $ARGUMENTS
    - If journal exists and has `## ✅ Open Tasks`:
      - Find the section (between `## ✅ Open Tasks` and the next `##` heading)
      - Append a new line: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if due date is set)
-   - If journal doesn't exist: skip (will be populated by `/plan-good-morning`)
+   - If journal doesn't exist: skip (will be populated by `/journal-good-morning`)
 
 6. **Confirm creation**
    ```
@@ -101,14 +101,14 @@ $ARGUMENTS
 ## Examples
 
 ```
-/plan-quick-task "Buy groceries" --due tomorrow
-/plan-quick-task "Schedule grooming for Loosa" --due 2026-02-14
-/plan-quick-task "Read chapter 5 of DDIA"
-/plan-quick-task "Call with Hope" --due today
-/plan-quick-task "Review PR from Sarah" --source https://github.com/airvet/repo/pull/123
-/plan-quick-task "Reply to Dr. Kim about scheduling" --source-type email --priority high
-/plan-quick-task "Update JIRA ticket" --source https://airvet.atlassian.net/browse/AP-1234
-/plan-quick-task "Urgent bug fix" --source https://airvet.atlassian.net/browse/AP-1234 --priority high --due today
+/journal-quick-task "Buy groceries" --due tomorrow
+/journal-quick-task "Schedule grooming for Loosa" --due 2026-02-14
+/journal-quick-task "Read chapter 5 of DDIA"
+/journal-quick-task "Call with Hope" --due today
+/journal-quick-task "Review PR from Sarah" --source https://github.com/airvet/repo/pull/123
+/journal-quick-task "Reply to Dr. Kim about scheduling" --source-type email --priority high
+/journal-quick-task "Update JIRA ticket" --source https://airvet.atlassian.net/browse/AP-1234
+/journal-quick-task "Urgent bug fix" --source https://airvet.atlassian.net/browse/AP-1234 --priority high --due today
 ```
 
 ## Notes

@@ -17,7 +17,7 @@ All task notes live in `03 TaskNotes/` as individual markdown files.
 status: open           # open | in_progress | done | cancelled
 created: "YYYY-MM-DD"  # date task was created
 due:                   # "YYYY-MM-DD" or null (YAML null = bare key, no value)
-completed:             # "YYYY-MM-DD" or null (set by /plan-task-done)
+completed:             # "YYYY-MM-DD" or null (set by /journal-task-done)
 priority:              # high | medium | low | null
 source:                # URL or description of origin, or null
 source_type:           # slack | email | jira | github | meeting | other | null
@@ -34,7 +34,7 @@ tags: [task]           # always includes "task" for Obsidian queries
 | `status` | enum | yes | `open`, `in_progress`, `done`, `cancelled` | Current task state (note: `done` replaces `complete` for Dataview compatibility) |
 | `created` | date | yes | `YYYY-MM-DD` | When the task was created |
 | `due` | date | no | `YYYY-MM-DD` or null | When the task is due |
-| `completed` | date | no | `YYYY-MM-DD` or null | When the task was completed (added by /plan-task-done) |
+| `completed` | date | no | `YYYY-MM-DD` or null | When the task was completed (added by /journal-task-done) |
 | `priority` | enum | no | `high`, `medium`, `low`, or null | Task priority level |
 | `source` | string | no | URL or description, or null | Where the task came from (Slack message, JIRA ticket, etc.) |
 | `source_type` | enum | no | `slack`, `email`, `jira`, `github`, `meeting`, `other`, or null | Type of source, auto-detected from URL patterns |
@@ -42,7 +42,7 @@ tags: [task]           # always includes "task" for Obsidian queries
 
 ### Source Type Auto-Detection
 
-When using `/plan-quick-task --source <url>`, the `source_type` is automatically detected:
+When using `/journal-quick-task --source <url>`, the `source_type` is automatically detected:
 
 | URL Pattern | Detected Type |
 |-------------|---------------|
@@ -69,7 +69,7 @@ cancelled -> open (reopen)
 Task notes in `03 TaskNotes/` are **personal tasks** -- errands, calls, appointments, chores.
 They are distinct from project issues in `06 Projects/[project]/issues/` which track development work.
 
-The morning dashboard (`/plan-good-morning`) combines both:
+The morning dashboard (`/journal-good-morning`) combines both:
 - Task notes from `03 TaskNotes/` (personal tasks)
 - Active projects from `06 Projects/*/README.md` (project work)
 

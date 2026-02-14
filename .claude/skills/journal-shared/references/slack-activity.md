@@ -1,6 +1,6 @@
 # Slack Activity Procedure
 
-Single source of truth for pulling Slack conversations into a daily journal. Referenced by `plan-slack-activity`, `plan-daily-review`, and `plan-good-morning`.
+Single source of truth for pulling Slack conversations into a daily journal. Referenced by `journal-slack-activity`, `journal-daily-review`, and `journal-good-morning`.
 
 ## Configuration
 

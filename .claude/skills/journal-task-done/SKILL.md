@@ -1,5 +1,5 @@
 ---
-name: plan-task-done
+name: journal-task-done
 description: Mark a task as complete in 03 TaskNotes/. Use when a task is finished. Triggers on "task done", "complete task", "finished task", "done with".
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Edit, Glob, Bash(date:*)
@@ -49,7 +49,7 @@ $ARGUMENTS
 ## Examples
 
 ```
-/plan-task-done buy-groceries
-/plan-task-done "call with hope"
-/plan-task-done groceries          # partial match
+/journal-task-done buy-groceries
+/journal-task-done "call with hope"
+/journal-task-done groceries          # partial match
 ```

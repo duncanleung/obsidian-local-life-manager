@@ -1,5 +1,5 @@
 ---
-name: plan-weekly-review
+name: journal-weekly-review
 description: Weekly review and planning session. Use at end of week or weekend to review progress, plan next week, and set priorities. Triggers on "weekly review", "plan my week", "what did I do this week", "Sunday planning".
 model: claude-opus-4-5-20251101
 allowed-tools: Read, Write, Edit, Glob, Bash(gh:*, date:*)

@@ -1,5 +1,5 @@
 ---
-name: plan-slack-activity
+name: journal-slack-activity
 description: Pull Slack conversations into today's journal. Safe to run anytime — does NOT freeze dataviews. Triggers on "slack activity", "pull slack", "slack conversations", "what did I discuss".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
@@ -22,16 +22,16 @@ $ARGUMENTS
    - Note whether a `## ![[slack-logo.png|18]] Slack Conversations` section already exists (it will be replaced)
 
 3. **Pull, format, and place Slack Conversations**
-   - Read `.claude/skills/plan-shared/references/slack-activity.md` for the complete procedure
+   - Read `.claude/skills/journal-shared/references/slack-activity.md` for the complete procedure
    - Follow ALL steps (search, thread grouping, user resolution, filtering, formatting, and placement) using the target date from Step 1
 
 ## Important
 
-- Do NOT freeze dataview blocks — that's only for `/plan-daily-review`
+- Do NOT freeze dataview blocks — that's only for `/journal-daily-review`
 - Do NOT touch any other sections (📋 What Did I Do?, ⭐ Highlight, ![[github-logo.png|18]] GitHub Activity, etc.)
 - Do NOT commit to git
 - Stop after updating the Slack Conversations section
 
 ## Journal Format
 
-If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.
+If creating a new journal, follow `.claude/skills/journal-shared/references/journal-format.md`.

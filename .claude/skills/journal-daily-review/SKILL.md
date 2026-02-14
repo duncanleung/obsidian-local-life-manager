@@ -1,5 +1,5 @@
 ---
-name: plan-daily-review
+name: journal-daily-review
 description: Complete daily journal review. Use at end of day or next morning to fill in journal sections, review highlights, and plan tomorrow. Triggers on "daily review", "end of day", "journal review", "what did I do today".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
@@ -29,15 +29,15 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
    - Create from template if not (see `references/template.md`)
 
 3. **🔨 What Did I Work On?** (only if section is empty)
-   - If already has entries: skip (work-log entries are added during the day via `/plan-work-log`)
+   - If already has entries: skip (work-log entries are added during the day via `/journal-work-log`)
    - If empty: leave empty — user fills this in manually
 
 4. **GitHub Activity** (ALWAYS runs — never skip this step)
-   - Read `.claude/skills/plan-shared/references/github-activity.md` for the complete procedure
+   - Read `.claude/skills/journal-shared/references/github-activity.md` for the complete procedure
    - Follow ALL steps (queries, deduplication, URL construction, formatting, and placement) using the target date from Step 1
 
 5. **Slack Conversations** (ALWAYS runs — never skip this step)
-   - Read `.claude/skills/plan-shared/references/slack-activity.md` for the complete procedure
+   - Read `.claude/skills/journal-shared/references/slack-activity.md` for the complete procedure
    - Follow ALL steps (search, thread grouping, user resolution, filtering, formatting, and placement) using the target date from Step 1
 
 6. **Memory Capture Check** (silent)

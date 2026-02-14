@@ -18,26 +18,21 @@ Deep research creating persistent documentation for future reference. Uses Ultra
 /research "WebSocket vs SSE trade-offs"
 ```
 
-## Output Locations
+## Output Location
+
+All research documents go to:
 
 ```
-06 Projects/
-├── [project]/notes/research/     # Project-specific
-├── SHARED/DOCS/research/         # Cross-project
-└── resources/research/           # General reference
+07 Knowledge Base/
 ```
 
-**Location rules:**
-- Project-specific: `06 Projects/{project}/notes/research/`
-- Cross-project: `SHARED/DOCS/research/`
-- General reference: `resources/research/`
+**Naming**: lowercase kebab-case (e.g., `auth-patterns-saas.md`, `sse-vs-websocket.md`)
 
 ## Process
 
 ### 1. Check Existing Research
 ```bash
-grep -r "authentication" "06 Projects"/*/notes/research/
-grep -r "authentication" SHARED/DOCS/research/
+grep -r "authentication" "07 Knowledge Base/"
 ```
 
 If found, ask: "Research exists. Update, view, or create new?"
@@ -145,7 +140,7 @@ Research documents are discovered by:
 - Future sessions - Research persists for reference
 
 ```
-/research "topic" → 06 Projects/{project}/notes/research/topic.md
+/research "topic" → 07 Knowledge Base/topic.md
                            ↓
               Future work automatically references this
 ```

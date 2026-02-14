@@ -199,7 +199,7 @@ All skills fit into a daily rhythm. The six groups form parallel tracks wrapped 
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  MORNING                                                    │
-│  /plan-good-morning                                         │
+│  /journal-good-morning                                         │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -209,18 +209,18 @@ All skills fit into a daily rhythm. The six groups form parallel tracks wrapped 
 │  │  └─ Quality ────── /project-validate-* at checkpoints         │  │
 │  ├─ Learning ──────── /learn-start → work → /learn-end   │  │
 │  ├─ Research ──────── /research-* → /research-synthesize  │  │
-│  ├─ Triage + tasks ── /plan-whats-next, /plan-quick-task  │  │
+│  ├─ Triage + tasks ── /journal-whats-next, /journal-quick-task  │  │
 │  └─ Maintenance ───── /ops-*                              │  │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  EVENING                                                    │
-│  /plan-daily-review                                         │
+│  /journal-daily-review                                         │
 │  /session-debrief                                           │
 │  /session-save-context  (if switching topics)               │
 └─────────────────────────────────────────────────────────────┘
 
-Periodic:  /plan-weekly-review (weekly)
+Periodic:  /journal-weekly-review (weekly)
            /ops-docs, /ops-git-sync (maintenance)
 ```
 
@@ -233,168 +233,171 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  MORNING                                                    │
-│  /plan-good-morning  (creates journal + task dashboard)     │
+│  /journal-good-morning  (creates journal + task dashboard)     │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  DURING DAY (any order, use as needed)                      │
 │                                                             │
-│  /plan-quick-task       · /plan-work-log                    │
-│  /plan-task-done        · /plan-whats-next                  │
-│  /plan-github-activity  · /plan-slack-activity              │
-│  /plan-meeting-notes                                        │
+│  /journal-whats-next       (triage — what needs attention?)    │
+│                                                             │
+│  /journal-quick-task      · /journal-task-done                    │
+│  /journal-work-log        · /journal-meeting-notes                │
+│                                                             │
+│  /journal-github-activity · /journal-slack-activity               │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  EVENING                                                    │
-│  /plan-daily-review  (completes journal, captures memories) │
+│  /journal-daily-review  (completes journal, captures memories) │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  WEEKLY      /plan-weekly-review  (reviews 7 days)          │
+│  WEEKLY      /journal-weekly-review  (reviews 7 days)          │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-| Stage      | Skill                 | Purpose                          | Args                   |
-| ---------- | --------------------- | -------------------------------- | ---------------------- |
-| Morning    | `/plan-good-morning`      | Morning routine + task dashboard              |                                  |
-|            | `/plan-quick-task`        | Create task in 03 TaskNotes/                  | `"title" [--due DATE]`           |
-|            | `/plan-work-log`          | Quick work log entry                          | `"entry"`                        |
-|            | `/plan-task-done`         | Mark a task as complete                       | `"task name"`                    |
-|            | `/plan-whats-next`        | Personal triage (overdue, due today, inbox, journals) |                                  |
-|            | `/plan-github-activity`   | Pull GitHub activity into journal             | `[YYYY-MM-DD \| path]`          |
-|            | `/plan-slack-activity`    | Pull Slack work conversations into journal    | `[YYYY-MM-DD \| path]`          |
-|            | `/plan-meeting-notes`     | Capture meeting notes, auto-create tasks      | `[meeting details]`              |
-| Evening    | `/plan-daily-review`      | End of day journal completion                 |                                  |
-| Weekly     | `/plan-weekly-review`     | Weekly planning                               |                                  |
+| Stage    | Skill                   | Purpose                                               | Args                   |
+| -------- | ----------------------- | ----------------------------------------------------- | ---------------------- |
+| Morning  | `/journal-good-morning`    | Morning routine + task dashboard                      |                        |
+| Triage   | `/journal-whats-next`      | Personal triage (overdue, due today, inbox, journals) |                        |
+|          |                         |                                                       |                        |
+| Tasks    | `/journal-quick-task`      | Create task in 03 TaskNotes/                          | `"title" [--due DATE]` |
+|          | `/journal-task-done`       | Mark a task as complete                               | `"task name"`          |
+| Activity | `/journal-work-log`        | Quick work log entry                                  | `"entry"`              |
+|          | `/journal-meeting-notes`   | Capture meeting notes, auto-create tasks              | `[meeting details]`    |
+| Fetch    | `/journal-github-activity` | Pull GitHub activity into journal                     | `[YYYY-MM-DD \| path]` |
+|          | `/journal-slack-activity`  | Pull Slack work conversations into journal            | `[YYYY-MM-DD \| path]` |
+| Evening  | `/journal-daily-review`    | End of day journal completion                         |                        |
+| Weekly   | `/journal-weekly-review`   | Weekly planning                                       |                        |
 
-#### 📕 `/plan-good-morning`
+#### 📕 `/journal-good-morning`
 
 **Morning routine check-in + task dashboard generation**
 
 Checks yesterday's journal completeness, creates today's journal from template if missing, carries over Notes from yesterday, shows learning reviews due, generates task dashboard from open tasks and active projects.
 
 ```bash
-/plan-good-morning  # Morning check-in
+/journal-good-morning  # Morning check-in
 ```
 
 **Creates:** `02 Calendar/YYYY-MM-DD.md` (today's journal), `02 Calendar/tasks-YYYY-MM-DD.md` (task dashboard).
 **Triggers on:** "good morning", "morning", "start my day"
 
 
-#### 📕 `/plan-quick-task`
+#### 📕 `/journal-quick-task`
 
 **Create a new task note in 03 TaskNotes/**
 
 Creates a task file with YAML frontmatter (status, created, due, tags). Checks for duplicate filenames.
 
 ```bash
-/plan-quick-task "Review PR for auth module"
-/plan-quick-task "Submit expense report" --due 2026-02-14
+/journal-quick-task "Review PR for auth module"
+/journal-quick-task "Submit expense report" --due 2026-02-14
 ```
 
 **Creates:** `03 TaskNotes/{kebab-case-title}.md`
 **Triggers on:** "new task", "add task", "create task"
 
-#### 📕 `/plan-work-log`
+#### 📕 `/journal-work-log`
 
 **Quick work log entry to today's journal without full review**
 
 Adds a bullet point to the appropriate section of today's journal. Creates journal from template if missing.
 
 ```bash
-/plan-work-log "finished AWS EFS module"
+/journal-work-log "finished AWS EFS module"
 ```
 
 **Triggers on:** "log this", "add to journal", "I just did", "work log"
 
-#### 📕 `/plan-task-done`
+#### 📕 `/journal-task-done`
 
 **Mark a task as complete**
 
 Finds task by name or partial match, sets `status: complete` and adds `completed` date.
 
 ```bash
-/plan-task-done "expense report"
+/journal-task-done "expense report"
 ```
 
 **Triggers on:** "task done", "complete task", "finished task"
 
-#### 📕 `/plan-whats-next`
+#### 📕 `/journal-whats-next`
 
 **Personal triage — what needs attention right now**
 
-Scans overdue tasks, tasks due today, unfrozen past journals, unprocessed inbox items, meetings with open action items, and learning reviews due. Produces a quick triage report with counts and a single prioritized recommendation. Does not scan projects — use `/project-status` for that.
+Scans overdue tasks, tasks due today, unfrozen past journals, unprocessed inbox items, meetings with open action items, and learning reviews due. Produces a quick triage report with counts and a single prioritized recommendation. Does not scan projects — use `/project-status-all` for that.
 
 ```bash
-/plan-whats-next  # Quick personal triage
+/journal-whats-next  # Quick personal triage
 ```
 
 **Triggers on:** "what's next", "what should I do", "prioritize", "what now", "triage"
 
-#### 📕 `/plan-daily-review`
+#### 📕 `/journal-daily-review`
 
 **Complete daily journal review**
 
 Fills in journal sections (Work, Personal, Study). Pulls GitHub commits. Reviews highlight. Captures memories. Can set tomorrow's highlight.
 
 ```bash
-/plan-daily-review  # Evening review
+/journal-daily-review  # Evening review
 ```
 
 **Triggers on:** "daily review", "end of day", "journal review"
 
-#### 📕 `/plan-weekly-review`
+#### 📕 `/journal-weekly-review`
 
 **Weekly review and planning session**
 
 Reviews past week: checks all 7 daily journals for completeness, pulls GitHub activity, reviews learning progress and project worklogs. Plans next week with focus areas.
 
 ```bash
-/plan-weekly-review  # Weekly review and planning
+/journal-weekly-review  # Weekly review and planning
 ```
 
 **Creates:** `02 Calendar/YYYY-Www.md` (weekly note from template).
 **Triggers on:** "weekly review", "plan my week", "Sunday planning"
 
-#### 📕 `/plan-github-activity`
+#### 📕 `/journal-github-activity`
 
 **Pull GitHub activity (commits, PRs, reviews, comments) into today's journal**
 
 Queries GitHub for commits authored, PRs merged/opened, and reviews/comments. Deduplicates across queries, builds clickable links, groups commits by repo. Only touches the `## GitHub Activity` section — safe to run anytime without affecting other journal sections or dataview blocks.
 
 ```bash
-/plan-github-activity                       # Pull today's activity
-/plan-github-activity 2026-02-12            # Pull for specific date
-/plan-github-activity 02 Calendar/2026-02-12.md  # Target specific journal file
+/journal-github-activity                       # Pull today's activity
+/journal-github-activity 2026-02-12            # Pull for specific date
+/journal-github-activity 02 Calendar/2026-02-12.md  # Target specific journal file
 ```
 
 **Triggers on:** "github activity", "pull github", "git activity", "what did I push"
 
-#### 📕 `/plan-slack-activity`
+#### 📕 `/journal-slack-activity`
 
 **Pull Slack work conversations into today's journal**
 
 Searches Slack for messages sent and received on the target date. Groups by thread, resolves user names, filters to work-relevant conversations only (excludes social banter, bot noise). Only touches the `## Slack Conversations` section — safe to run anytime.
 
 ```bash
-/plan-slack-activity                        # Pull today's conversations
-/plan-slack-activity 2026-02-12             # Pull for specific date
-/plan-slack-activity 02 Calendar/2026-02-12.md  # Target specific journal file
+/journal-slack-activity                        # Pull today's conversations
+/journal-slack-activity 2026-02-12             # Pull for specific date
+/journal-slack-activity 02 Calendar/2026-02-12.md  # Target specific journal file
 ```
 
 **Triggers on:** "slack activity", "pull slack", "slack conversations", "what did I discuss"
 
-#### 📕 `/plan-meeting-notes`
+#### 📕 `/journal-meeting-notes`
 
 **Capture meeting notes with attendees, decisions, and action items**
 
 Two modes: Quick Capture (just a title) creates a skeleton note; Detailed mode (empty args or rich content) prompts for attendees, decisions, and action items. Auto-creates task notes in `03 TaskNotes/` from action items and links them back. Adds a work log entry to the meeting date's journal.
 
 ```bash
-/plan-meeting-notes "Team standup"          # Quick capture
-/plan-meeting-notes                         # Detailed: prompts for all info
-/plan-meeting-notes "Sprint planning 02/12/2026 with Alice, Bob — decided on React, action: set up repo"
+/journal-meeting-notes "Team standup"          # Quick capture
+/journal-meeting-notes                         # Detailed: prompts for all info
+/journal-meeting-notes "Sprint planning 02/12/2026 with Alice, Bob — decided on React, action: set up repo"
 ```
 
 **Creates:** `04 Meetings/YYYY-MM-DD-{title}.md`, `03 TaskNotes/` (from action items).
@@ -495,14 +498,13 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 ┌─────────────────────────────────────────────────────────────┐
 │  OVERVIEW (use anytime)                                     │
 │                                                             │
-│  /project-status         (quick table + detailed dashboard) │
+│  /project-status-all     (quick table + detailed dashboard) │
+│  /project-next-step      ("what should I do next?")         │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
 │  FOUNDATION (sequential)                                    │
 │                                                             │
-│  /project-validate       ← "what should I do next?"        │
-│       ↓                                                     │
 │  /project-brief                                             │
 │       ↓                                                     │
 │  /project-critique       ← requires project-brief.md       │
@@ -556,9 +558,9 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 
 | Stage      | Skill                              | Purpose                                           | Requires                  | Args                                                         |
 | ---------- | ---------------------------------- | ------------------------------------------------- | ------------------------- | ------------------------------------------------------------ |
-| Overview   | `/project-status`                  | Project status dashboard (quick table + detailed) | —                         | `[--project name] [--detailed]`                              |
-| Foundation | `/project-validate`                | Validate project structure and readiness          | —                         | `<project>`                                                  |
-|            | `/project-brief`                   | Create project briefs through discovery           | —                         | `[--project name] [--review] [--force]`                      |
+| Overview   | `/project-status-all`              | Project status dashboard (quick table + detailed) | —                         | `[--project name] [--detailed]`                              |
+|            | `/project-next-step`               | Assess readiness, recommend next skill            | —                         | `<project>`                                                  |
+| Foundation | `/project-brief`                   | Create project briefs through discovery           | —                         | `[--project name] [--review] [--force]`                      |
 |            | `/project-critique`                | VC-style skeptical evaluation                     | `project-brief.md`        | `[--project name] [--focus market \| technical \| business]` |
 |            | `/project-init-space`              | Initialize project planning structure in 06 Projects/   | —                         | `<project> [--type next \| python]`                          |
 | Planning   | `/project-spec`                    | Write feature specifications                      | —                         | `[--import url] [--init] [--sync]`                           |
@@ -579,16 +581,16 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 | Ship       | `/project-commit`                  | Create quality commits                            | —                         | `<project> ["message"] [--amend]`                            |
 |            | `/project-complete`                | Finalize and merge work                           | `PLAN.md` phases complete | `<project> [issue#]`                                         |
 
-#### 📕 `/project-status`
+#### 📕 `/project-status-all`
 
 **Project status dashboard — quick glance table + detailed analysis**
 
 Default mode shows a quick scannable table from README files. Use `--project` or `--detailed` for deeper analysis including specs, issues, dependencies, blockers, and git branches.
 
 ```bash
-/project-status                       # Quick glance table of all projects
-/project-status --project coordinatr  # Deep dive on one project
-/project-status --detailed            # Comprehensive analysis of all projects
+/project-status-all                       # Quick glance table of all projects
+/project-status-all --project coordinatr  # Deep dive on one project
+/project-status-all --detailed            # Comprehensive analysis of all projects
 ```
 
 **Default output (quick glance):**
@@ -660,23 +662,23 @@ Branch: feature/YB-2 (clean, up to date)
 **Triggers on:** "project status", "show projects", "what projects"
 **Use when:** Quick check on all projects, session start context, weekly reviews, seeing what needs attention.
 
-#### 📕 `/project-validate`
+#### 📕 `/project-next-step`
 
-**Validate project structure, documentation completeness, and readiness**
+**Assess project readiness and recommend the next skill to run**
 
 Phase-aware validation: checks what files should exist based on current project phase. Suggests next skill to run based on current state.
 
 ```bash
-/project-validate coordinatr        # Validate specific project
-/project-validate yourbench         # Check another project
+/project-next-step coordinatr        # What's next for this project?
+/project-next-step yourbench         # Check another project
 ```
 
-**`/project-validate` as bridge to the pipeline:**
+**`/project-next-step` as bridge to the pipeline:**
 
 ```
 "What should I do next with this project?"
                 ↓
-       /project-validate <project>
+       /project-next-step <project>
                 ↓
        Suggests next skill based on current state:
        ├─ Just README?       →  /project-brief
@@ -686,7 +688,7 @@ Phase-aware validation: checks what files should exist based on current project 
        └─ Has specs?         →  /project-issue + /project-plan
 ```
 
-**Use when:** Checking if project documentation is complete, unsure what to do next.
+**Use when:** Unsure what to do next on a project, checking if documentation is complete.
 
 #### 📕 `/project-brief`
 
@@ -1383,7 +1385,7 @@ Skills invoke specialized agents based on task type:
 5. **Document as you go** with `/project-worklog` entries
 6. **Run quality checks** (`/project-validate-quality`, `/project-validate-security-audit`) before completion
 7. **Complete properly** with `/project-complete` to update all documentation
-8. **Review regularly** — `/plan-daily-review`, `/plan-weekly-review` for reflection
+8. **Review regularly** — `/journal-daily-review`, `/journal-weekly-review` for reflection
 9. **Learn actively** — `/learn-start-session` with retrieval warm-ups
 10. **Synthesize knowledge** — use `/research-synthesize` for deep understanding of topics
 

@@ -1,5 +1,5 @@
 ---
-name: plan-good-morning
+name: journal-good-morning
 description: Morning routine check-in. Use at start of day to review yesterday, set up today's journal, check learning reviews, and generate task dashboard. Triggers on "good morning", "morning", "start my day", "what's on for today".
 model: claude-haiku-4-5-20251001
 allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, Grep, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile
@@ -17,11 +17,11 @@ Good morning! Run the morning check-in.
 2. **Check yesterday's journal** (`02 Calendar/YYYY-MM-DD.md`)
    - If "🔨 What Did I Work On?" empty: offer to backfill from GitHub
      - "Yesterday's GitHub activity wasn't captured. Want me to pull that?"
-     - If yes: Read `.claude/skills/plan-shared/references/github-activity.md` and follow the complete procedure using **yesterday's date** as the target date
+     - If yes: Read `.claude/skills/journal-shared/references/github-activity.md` and follow the complete procedure using **yesterday's date** as the target date
    - If "📋 What Did I Do?" empty: just note it
    - If "![[slack-logo.png|18]] Slack Conversations" empty or missing: offer to backfill from Slack
      - "Yesterday's Slack conversations weren't captured. Want me to pull those?"
-     - If yes: Read `.claude/skills/plan-shared/references/slack-activity.md` and follow the complete procedure using **yesterday's date** as the target date
+     - If yes: Read `.claude/skills/journal-shared/references/slack-activity.md` and follow the complete procedure using **yesterday's date** as the target date
    - **Extract Notes for carryover**: Read the `## 📝 Notes` section from yesterday's journal
      - Capture all content between `## 📝 Notes` and the next `## ` heading (or end of file)
      - If the section has content (not just whitespace), save it for step 5

@@ -12,8 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `/research-clip-read` skill - Process clipped items by extracting insights and marking as "Read" without full summarization
 
 ### Enhanced
-- `/plan-quick-task` now supports `--source`, `--source-type`, and `--priority` flags with auto-detection for GitHub/Slack/JIRA/Email URLs
-- `/plan-task-done` now sets `completed` date and uses `status: done` for Dataview consistency (metadata-only updates, no file moves)
+- `/journal-quick-task` now supports `--source`, `--source-type`, and `--priority` flags with auto-detection for GitHub/Slack/JIRA/Email URLs
+- `/journal-task-done` now sets `completed` date and uses `status: done` for Dataview consistency (metadata-only updates, no file moves)
 
 ## [0.2.0] - 2026-01-20
 

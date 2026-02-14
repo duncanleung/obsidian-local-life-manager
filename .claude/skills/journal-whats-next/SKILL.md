@@ -1,5 +1,5 @@
 ---
-name: plan-whats-next
+name: journal-whats-next
 description: "Personal triage — overdue tasks, due-today items, unfrozen journals, inbox backlog, meeting follow-ups, learning reviews. Triggers on \"what's next\", \"what should I do\", \"prioritize\", \"what now\", \"triage\"."
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Glob, Bash(date:*)
@@ -38,7 +38,7 @@ date -v-3d +%Y-%m-%d  # 3 days ago
 
 - Check the past 3 days (yesterday, 2 days ago, 3 days ago — NOT today, since today is in progress)
 - For each date, check if `02 Calendar/YYYY-MM-DD.md` exists
-- If exists, check if the file contains ` ```dataview ` — if yes, the journal is unfrozen and needs `/plan-daily-review`
+- If exists, check if the file contains ` ```dataview ` — if yes, the journal is unfrozen and needs `/journal-daily-review`
 - Also check frontmatter: `status: done` means frozen (skip), anything else means unfrozen
 - Record: list of unfrozen past journal dates
 
@@ -88,7 +88,7 @@ date -v-3d +%Y-%m-%d  # 3 days ago
 - [[task-name]]
 
 📓 **Unfrozen Journals** (N)
-- YYYY-MM-DD — run `/plan-daily-review YYYY-MM-DD`
+- YYYY-MM-DD — run `/journal-daily-review YYYY-MM-DD`
 
 🤝 **Meetings: Open Action Items** (N meetings, M items)
 - [[meeting-name]] — N unchecked items (YYYY-MM-DD)
@@ -131,6 +131,6 @@ The "Recommended Next Action" picks the highest-priority item:
 - If `03 TaskNotes/` has no files, skip task sections silently
 - If `04 Meetings/` has no files, skip meeting section silently
 - If learning plan file is missing, skip with note
-- Do NOT scan `06 Projects/` — project concerns belong in `/project-status` and `/project-validate`
+- Do NOT scan `06 Projects/` — project concerns belong in `/project-status-all` and `/project-next-step`
 - Do NOT recommend project work — this is personal triage only
 - Do NOT commit to git

@@ -241,4 +241,4 @@ This keeps specs simple while git provides the audit trail.
 - `/project-issue` - Create TASKs that implement spec sections
 - `/project-plan` - Break down implementation of a TASK
 - `/project-validate-spec` - Check implementation against spec
-- `/project-status` - See spec compliance overview
+- `/project-status-all` - See spec compliance overview

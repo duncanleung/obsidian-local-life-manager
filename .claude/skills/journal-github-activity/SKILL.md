@@ -1,5 +1,5 @@
 ---
-name: plan-github-activity
+name: journal-github-activity
 description: Pull GitHub activity (commits, PRs, reviews, comments) into today's journal. Safe to run anytime — does NOT freeze dataviews. Triggers on "github activity", "pull github", "git activity", "what did I push".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
@@ -22,16 +22,16 @@ $ARGUMENTS
    - Note whether a `## ![[github-logo.png|18]] GitHub Activity` section already exists (it will be replaced)
 
 3. **Pull, format, and place GitHub Activity**
-   - Read `.claude/skills/plan-shared/references/github-activity.md` for the complete procedure
+   - Read `.claude/skills/journal-shared/references/github-activity.md` for the complete procedure
    - Follow ALL steps (queries, deduplication, URL construction, formatting, and placement) using the target date from Step 1
 
 ## Important
 
-- Do NOT freeze dataview blocks — that's only for `/plan-daily-review`
+- Do NOT freeze dataview blocks — that's only for `/journal-daily-review`
 - Do NOT touch any other sections (📋 What Did I Do?, ⭐ Highlight, etc.)
 - Do NOT commit to git
 - Stop after updating the GitHub Activity section
 
 ## Journal Format
 
-If creating a new journal, follow `.claude/skills/plan-shared/references/journal-format.md`.
+If creating a new journal, follow `.claude/skills/journal-shared/references/journal-format.md`.

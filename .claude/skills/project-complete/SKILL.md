@@ -143,7 +143,7 @@ git branch -d feature/###-slug
 ```
 Next actions:
 1. Start next task: /project-implement project ### --full
-2. View status: /project-status project
+2. View status: /project-status-all project
 3. Merge to main (requires PR): gh pr create --base main --head develop
 ```
 
