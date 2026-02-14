@@ -40,6 +40,9 @@ Both `tags` and `status` are required.
 ## ![[jira-logo.png|18]] JIRA Tickets
 
 
+## ![[jira-logo.png|18]] WEB Releases
+
+
 ## 📚 What Did I Study?
 
 

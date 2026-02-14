@@ -3,7 +3,7 @@ name: journal-daily-review
 description: Complete daily journal review. Use at end of day or next morning to fill in journal sections, review highlights, and plan tomorrow. Triggers on "daily review", "end of day", "journal review", "what did I do today".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
-allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile, mcp__mcp-atlassian__lookupJiraAccountId, mcp__mcp-atlassian__searchJiraIssuesUsingJql, mcp__mcp-atlassian__getJiraIssue
+allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile, mcp__mcp-atlassian__lookupJiraAccountId, mcp__mcp-atlassian__searchJiraIssuesUsingJql, mcp__mcp-atlassian__getJiraIssue, mcp__mcp-atlassian__getAccessibleAtlassianResources
 ---
 
 Run the Daily Review Workflow. Keep it conversational - ask one thing at a time.
@@ -44,12 +44,16 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
    - Read `.claude/skills/journal-shared/references/jira-activity.md` for the complete procedure
    - Follow ALL steps (account ID lookup, JQL search, data extraction, formatting, and placement) using the target date from Step 1
 
-7. **Memory Capture Check** (silent)
+7. **WEB Releases** (ALWAYS runs — never skip this step)
+   - Read `.claude/skills/journal-shared/references/jira-releases.md` for the complete procedure
+   - Follow ALL steps (JQL search, data extraction, grouping by fixVersion, formatting, and placement) using the target date from Step 1
+
+8. **Memory Capture Check** (silent)
    - Review the conversation for anything memory-worthy
    - If anything qualifies, create a memory file in `.claude/obsidian-memories/`
    - Do this silently unless there's something significant to confirm
 
-8. **Freeze Journal (EOD Snapshot)**
+9. **Freeze Journal (EOD Snapshot)**
    - **Active journal guard**: Compare the target date to today's date (`date +%Y-%m-%d`). If they are the **same day**, SKIP the entire freeze step and warn: "⚠️ Skipping freeze — this is today's active journal. Dataview blocks stay live. Run again tomorrow or pass yesterday's date explicitly."
    - Find all `dataview` code blocks in the journal
    - For each block:
