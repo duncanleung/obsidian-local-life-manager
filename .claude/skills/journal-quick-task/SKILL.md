@@ -80,7 +80,7 @@ $ARGUMENTS
    - IMPORTANT: Use YAML null (bare key with no value) for unset fields, NOT empty strings `""`. Empty strings break Dataview queries.
 
 5. **Add to today's journal**
-   - Find today's journal: `02 Calendar/YYYY-MM-DD.md`
+   - Find today's journal: `02 Calendar/YYYY-MM-DD-dayname.md` (compute with `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`)
    - If journal exists and has `## ✅ Open Tasks`:
      - Find the section (between `## ✅ Open Tasks` and the next `##` heading)
      - Append a new line: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if due date is set)

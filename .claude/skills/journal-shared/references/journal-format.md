@@ -1,6 +1,20 @@
 # Journal Creation Format
 
-Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD.md`). Referenced by all journal skills that may need to create a journal as a side effect.
+Canonical format for creating a new daily journal (`02 Calendar/YYYY-MM-DD-dayname.md`, e.g., `2026-02-14-saturday.md`). Referenced by all journal skills that may need to create a journal as a side effect.
+
+## Filename Convention
+
+- **Format**: `YYYY-MM-DD-dayname.md` (lowercase full day name, e.g., `monday`, `tuesday`)
+- **Wikilinks**: `![[2026-02-14-saturday]]` (filename without `.md`)
+
+### Date-to-Filename Commands (macOS)
+
+| Use case | Command |
+|----------|---------|
+| Today | `date +%Y-%m-%d-%A \| tr '[:upper:]' '[:lower:]'` |
+| Yesterday | `date -v-1d +%Y-%m-%d-%A \| tr '[:upper:]' '[:lower:]'` |
+| N days ago | `date -v-Nd +%Y-%m-%d-%A \| tr '[:upper:]' '[:lower:]'` |
+| From date string | `date -j -f %Y-%m-%d "2026-02-12" +%Y-%m-%d-%A \| tr '[:upper:]' '[:lower:]'` |
 
 ## Source of Truth
 

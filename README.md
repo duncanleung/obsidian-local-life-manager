@@ -96,7 +96,7 @@ The numbered directories at the repo root are your Obsidian vault (gitignored). 
 
 ```
 ├── 01 Inbox/           # Capture location for new notes
-├── 02 Calendar/        # Daily notes (YYYY-MM-DD.md), weekly reviews (YYYY-Www.md)
+├── 02 Calendar/        # Daily notes (YYYY-MM-DD-dayname.md), weekly reviews (YYYY-Www.md)
 ├── 03 TaskNotes/       # Tasks (each task = note with #task tag)
 ├── 04 Meetings/        # Meeting notes
 ├── 05 Personal/        # Personal notes, decisions, career, health
@@ -281,7 +281,7 @@ Checks yesterday's journal completeness, creates today's journal from template i
 /journal-good-morning  # Morning check-in
 ```
 
-**Creates:** `02 Calendar/YYYY-MM-DD.md` (today's journal), `02 Calendar/tasks-YYYY-MM-DD.md` (task dashboard).
+**Creates:** `02 Calendar/YYYY-MM-DD-dayname.md` (today's journal, e.g., `2026-02-14-saturday.md`).
 **Triggers on:** "good morning", "morning", "start my day"
 
 

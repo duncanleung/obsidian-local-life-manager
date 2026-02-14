@@ -56,7 +56,7 @@ Resolve the project name from the work description:
 
 ## Adding a Row
 
-1. Read today's journal (`02 Calendar/YYYY-MM-DD.md`)
+1. Read today's journal (`02 Calendar/YYYY-MM-DD-dayname.md`)
 2. Find `## 🔨 What Did I Work On?` section
 3. **If table already exists** (has `| Status |` header row) → append new row after the last `|...|` row in the table
 4. **If section is empty** (no table) → create table header + separator + first row:

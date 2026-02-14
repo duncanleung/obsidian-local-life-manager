@@ -14,10 +14,11 @@ This is READ-ONLY. Never modify any files.
 ### 1. Get today's date
 
 ```bash
-date +%Y-%m-%d   # $TODAY
-date -v-1d +%Y-%m-%d  # yesterday
-date -v-2d +%Y-%m-%d  # 2 days ago
-date -v-3d +%Y-%m-%d  # 3 days ago
+date +%Y-%m-%d   # $TODAY (for date comparisons)
+date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'   # $TODAY_STEM (for filename, e.g., 2026-02-14-saturday)
+date -v-1d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'  # yesterday stem
+date -v-2d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'  # 2 days ago stem
+date -v-3d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'  # 3 days ago stem
 ```
 
 ### 2. Scan overdue tasks (`03 TaskNotes/*.md`)
@@ -37,7 +38,7 @@ date -v-3d +%Y-%m-%d  # 3 days ago
 ### 4. Check incomplete journals (`02 Calendar/`)
 
 - Check the past 3 days (yesterday, 2 days ago, 3 days ago — NOT today, since today is in progress)
-- For each date, check if `02 Calendar/YYYY-MM-DD.md` exists
+- For each date, check if `02 Calendar/YYYY-MM-DD-dayname.md` exists (use the filename stem computed in step 1)
 - If exists, check if the file contains ` ```dataview ` — if yes, the journal is unfrozen and needs `/journal-daily-review`
 - Also check frontmatter: `status: done` means frozen (skip), anything else means unfrozen
 - Record: list of unfrozen past journal dates
@@ -65,7 +66,7 @@ date -v-3d +%Y-%m-%d  # 3 days ago
 - Record: list of overdue topics with days overdue
 - Also note: next topic in queue (if any)
 
-### 8. Check today's highlight (`02 Calendar/$TODAY.md`)
+### 8. Check today's highlight (`02 Calendar/$TODAY_STEM.md`)
 
 - Read today's journal if it exists
 - Find the `## Highlight` section (may have emoji prefix like `## ⭐ Highlight`)

@@ -167,7 +167,7 @@ Structured post-meeting capture. Use when:
 
    - Link each task back in the meeting note's Action Items section
 
-6. **Ensure `## 🤝 Meetings` section exists in journal** — read the meeting date's journal (`02 Calendar/{meeting-date}.md`):
+6. **Ensure `## 🤝 Meetings` section exists in journal** — compute the meeting date's filename stem with `date -j -f %Y-%m-%d "{meeting-date}" +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`, then read `02 Calendar/{meeting-date-dayname}.md`:
    - If journal doesn't exist: skip steps 6-7 entirely (don't create a journal for this)
    - If `## 🤝 Meetings` section is **missing**: inject it between `## 📥 Inbox (Unsummarized)` and `## 📋 What Did I Do?`
      - If the journal is **frozen** (no dataview blocks, or `status: done`): insert a static table with the meeting data
@@ -191,7 +191,7 @@ Structured post-meeting capture. Use when:
    - If `## 🤝 Meetings` section **already exists** and is a frozen table: append the new meeting row to the existing table
    - If `## 🤝 Meetings` section **already exists** and is a Dataview query: do nothing (query auto-includes new meetings)
 
-7. **Add work log entry** — in the same journal (`02 Calendar/{meeting-date}.md`):
+7. **Add work log entry** — in the same journal (`02 Calendar/{meeting-date-dayname}.md`):
    - Add a table row under `## 🔨 What Did I Work On?` (see `.claude/skills/journal-shared/references/work-log-format.md`):
    - `| 🗣️ | — | {title} | Discussed {brief summary} | [[04 Meetings/{filename}|meeting]] |`
    - If the table doesn't exist yet (section is empty), create the header first:

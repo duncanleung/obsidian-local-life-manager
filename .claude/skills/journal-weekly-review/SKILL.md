@@ -29,7 +29,7 @@ date -d "last sunday" +%Y-%m-%d  # Week start (for lookback)
 ```bash
 # List last 7 days' journal files
 for i in {0..6}; do
-  d=$(date -d "$i days ago" +%Y-%m-%d)
+  d=$(date -v-${i}d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]')
   f="02 Calendar/$d.md"
   if [[ -f "$f" ]]; then
     lines=$(wc -l < "$f")

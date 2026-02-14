@@ -13,9 +13,9 @@ $ARGUMENTS
 ## Steps
 
 1. **Determine target journal**
-   - If `$ARGUMENTS` contains a file path (e.g., `02 Calendar/2026-02-12.md`): use that file directly and extract the date from the filename
-   - If `$ARGUMENTS` contains a date (e.g., `2026-02-12`): use `02 Calendar/YYYY-MM-DD.md`
-   - If no arguments: run `date +%Y-%m-%d` to get today's date, use `02 Calendar/YYYY-MM-DD.md`
+   - If `$ARGUMENTS` contains a file path (e.g., `02 Calendar/2026-02-12-thursday.md`): use that file directly and extract the date from the filename
+   - If `$ARGUMENTS` contains a date (e.g., `2026-02-12`): compute the day name with `date -j -f %Y-%m-%d "2026-02-12" +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`, use `02 Calendar/YYYY-MM-DD-dayname.md`
+   - If no arguments: run `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'` to get today's filename stem, use `02 Calendar/YYYY-MM-DD-dayname.md`
 
 2. **Read the journal file**
    - If it doesn't exist: create it with the standard format (see bottom of this file)

@@ -34,7 +34,7 @@ $ARGUMENTS
    - If `completed` field doesn't exist in old tasks, add it after the `due` field
 
 5. **Check off in today's journal**
-   - Find today's journal: `02 Calendar/YYYY-MM-DD.md`
+   - Find today's journal: `02 Calendar/YYYY-MM-DD-dayname.md` (compute with `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`)
    - If journal exists: search for `- [ ] [[task-name]]` in the `## ✅ Open Tasks` section
    - If found: replace `- [ ]` with `- [x]` on that line
    - If not found: skip silently (task may not be in today's list)

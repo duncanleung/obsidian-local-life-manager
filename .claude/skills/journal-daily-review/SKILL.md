@@ -17,15 +17,15 @@ Do NOT ask the user to fill in empty sections (📋 What Did I Do?, ⭐ Highligh
 ## Steps
 
 1. **Determine target journal**
-   - If `$ARGUMENTS` contains a file path (e.g., `02 Calendar/2026-02-12.md`): use that file directly and extract the date from the filename
-   - If `$ARGUMENTS` contains a date (e.g., `2026-02-12`): use `02 Calendar/YYYY-MM-DD.md`
-   - If no arguments: run `date +%Y-%m-%d` AND `date +%H` to get today's date and current hour
-     - **After-midnight guard**: If current hour < 5 (midnight–4:59AM), default to **yesterday's** date (`date -v-1d +%Y-%m-%d`) — a "daily review" at 2AM almost certainly means reviewing the day that just ended, not the brand-new day
+   - If `$ARGUMENTS` contains a file path (e.g., `02 Calendar/2026-02-12-thursday.md`): use that file directly and extract the date from the filename
+   - If `$ARGUMENTS` contains a date (e.g., `2026-02-12`): compute the day name with `date -j -f %Y-%m-%d "2026-02-12" +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`, use `02 Calendar/YYYY-MM-DD-dayname.md`
+   - If no arguments: run `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'` AND `date +%H` to get today's filename stem and current hour
+     - **After-midnight guard**: If current hour < 5 (midnight–4:59AM), default to **yesterday's** date (`date -v-1d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`) — a "daily review" at 2AM almost certainly means reviewing the day that just ended, not the brand-new day
    - The **target date** is the date being reviewed (from the filename or argument)
    - Always run `date +%Y-%m-%d` to know what today's date is (needed for "tomorrow" references)
 
 2. **Journal Entry Setup**
-   - Check if the target journal entry exists (`02 Calendar/YYYY-MM-DD.md`)
+   - Check if the target journal entry exists (`02 Calendar/YYYY-MM-DD-dayname.md`)
    - Create from template if not (see `references/template.md`)
 
 3. **🔨 What Did I Work On?** (only if section is empty)

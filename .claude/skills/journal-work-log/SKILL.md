@@ -6,7 +6,7 @@ argument-hint: [what you did]
 allowed-tools: Read, Write, Edit, Glob, Bash(date:*)
 ---
 
-Add this to today's journal (`02 Calendar/YYYY-MM-DD.md`):
+Add this to today's journal (`02 Calendar/YYYY-MM-DD-dayname.md`):
 
 $ARGUMENTS
 
@@ -50,8 +50,8 @@ Pick the best emoji match for the work:
 
 ## Steps
 
-1. **Get current date** — run `date +%Y-%m-%d` to confirm today's date
-2. **Read today's journal** at `02 Calendar/YYYY-MM-DD.md`
+1. **Get current date** — run `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'` to get today's filename stem (e.g., `2026-02-14-saturday`)
+2. **Read today's journal** at `02 Calendar/YYYY-MM-DD-dayname.md`
 3. **Resolve related docs** — if the work references tasks, plans, issues, or projects:
    - Search for related files using Glob (e.g., `06 Projects/*/issues/*/PLAN.md`, `06 Projects/*/issues/*/TASK.md`)
    - Use Obsidian wikilinks `[[filename]]` to link to them

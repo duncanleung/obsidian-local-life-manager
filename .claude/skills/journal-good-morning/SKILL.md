@@ -10,11 +10,11 @@ Good morning! Run the morning check-in.
 ## Steps
 
 1. **Get current date first**
-   - Run `date +%Y-%m-%d` to confirm today's date
-   - Calculate yesterday's date: `date -v-1d +%Y-%m-%d`
+   - Run `date +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'` to get today's filename stem (e.g., `2026-02-14-saturday`)
+   - Calculate yesterday: `date -v-1d +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'` (e.g., `2026-02-13-friday`)
    - DO NOT assume the date - always verify
 
-2. **Check yesterday's journal** (`02 Calendar/YYYY-MM-DD.md`)
+2. **Check yesterday's journal** (`02 Calendar/YYYY-MM-DD-dayname.md`)
    - If "🔨 What Did I Work On?" empty (no content or only table header with no data rows): offer to backfill from GitHub
      - "Yesterday's GitHub activity wasn't captured. Want me to pull that?"
      - If yes: Read `.claude/skills/journal-shared/references/github-activity.md` and follow the complete procedure using **yesterday's date** as the target date
@@ -33,7 +33,7 @@ Good morning! Run the morning check-in.
      - If the section has content (not just whitespace), save it for step 5
 
 3. **Build Open Tasks todo list**
-   - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD.md`
+   - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD-dayname.md` (compute each date's filename stem with `date -v-Nd +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`)
    - Extract the `## ✅ Open Tasks` section from the previous journal. Handle both formats during transition:
      - **Todo list** (new format): extract `- [ ] [[name]]...` lines — keep only unchecked items, drop `- [x]` lines
      - **Frozen table** (old format): extract `[[name]]` wikilinks from table rows (e.g., `| [[task-name]] | open | | |`)
@@ -52,7 +52,7 @@ Good morning! Run the morning check-in.
    - Don't block execution — journal still useful without live queries
 
 5. **Setup today's journal**
-   - Check if today's entry exists at `02 Calendar/YYYY-MM-DD.md`
+   - Check if today's entry exists at `02 Calendar/YYYY-MM-DD-dayname.md`
    - **If not**: create from template at `08 System/Templates/Daily Template.md`
      - Note: Template uses Templater syntax - resolve `<% tp.date... %>` to actual dates
      - Set `created` and `modified` to today's date
@@ -72,7 +72,7 @@ Good morning! Run the morning check-in.
      - If today's Notes section already has content, append yesterday's notes below existing content with a blank line separator
      - Do NOT add any "carried over" labels or attribution — just copy the content as-is
    - Show today's highlight or ask: "What's your main focus today?"
-   - **Update DASHBOARD**: Write `![[YYYY-MM-DD]]` (today's date) to `_DASHBOARD.md` in the vault root, replacing the entire file contents. This keeps the dashboard always pointing to the current day's journal.
+   - **Update DASHBOARD**: Write `![[YYYY-MM-DD-dayname]]` (today's filename stem, e.g., `![[2026-02-14-saturday]]`) to `_DASHBOARD.md` in the vault root, replacing the entire file contents. This keeps the dashboard always pointing to the current day's journal.
 
 6. **Check learning plan** (`.claude/learning-sessions/learning-plan.json`)
    - Find topics where `last_covered` + interval < today
@@ -107,7 +107,7 @@ Good morning! Run the morning check-in.
     - In-progress ideas: [count]
     - Reviews due: [list or "none"]
     - Next in learning queue: [topic]
-    - Journal: `02 Calendar/YYYY-MM-DD.md` (Open Tasks as todo list, Inbox/Meetings as live Dataview)
+    - Journal: `02 Calendar/YYYY-MM-DD-dayname.md` (Open Tasks as todo list, Inbox/Meetings as live Dataview)
 
 Keep it brief - quick morning orientation, not a deep dive.
 
