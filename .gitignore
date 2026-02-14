@@ -11,6 +11,16 @@
 07 Knowledge Base/
 08 System/
 
+# Obsidian
+.obsidian/
+
+# Claude Code local
+.claude/plans/
+.claude/settings.local.json
+
+# Logs
+firebase-debug.log
+
 # OS
 .DS_Store
 
