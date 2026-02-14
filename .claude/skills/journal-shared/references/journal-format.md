@@ -37,6 +37,9 @@ Both `tags` and `status` are required.
 ## ![[slack-logo.png|18]] Slack Conversations
 
 
+## ![[jira-logo.png|18]] JIRA Tickets
+
+
 ## 📚 What Did I Study?
 
 

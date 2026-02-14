@@ -2,7 +2,7 @@
 name: journal-good-morning
 description: Morning routine check-in. Use at start of day to review yesterday, set up today's journal, check learning reviews, and generate task dashboard. Triggers on "good morning", "morning", "start my day", "what's on for today".
 model: claude-haiku-4-5-20251001
-allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, Grep, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile
+allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, Grep, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile, mcp__mcp-atlassian__lookupJiraAccountId, mcp__mcp-atlassian__searchJiraIssuesUsingJql, mcp__mcp-atlassian__getJiraIssue
 ---
 
 Good morning! Run the morning check-in.
@@ -22,6 +22,9 @@ Good morning! Run the morning check-in.
    - If "![[slack-logo.png|18]] Slack Conversations" empty or missing: offer to backfill from Slack
      - "Yesterday's Slack conversations weren't captured. Want me to pull those?"
      - If yes: Read `.claude/skills/journal-shared/references/slack-activity.md` and follow the complete procedure using **yesterday's date** as the target date
+   - If "![[jira-logo.png|18]] JIRA Tickets" empty or missing: offer to backfill from JIRA
+     - "Yesterday's JIRA tickets weren't captured. Want me to pull those?"
+     - If yes: Read `.claude/skills/journal-shared/references/jira-activity.md` and follow the complete procedure using **yesterday's date** as the target date
    - **Extract Notes for carryover**: Read the `## 📝 Notes` section from yesterday's journal
      - Capture all content between `## 📝 Notes` and the next `## ` heading (or end of file)
      - If the section has content (not just whitespace), save it for step 5
@@ -94,6 +97,7 @@ Good morning! Run the morning check-in.
     - Yesterday: Complete/Incomplete
     - Today's highlight: [highlight or "not set"]
     - Open tasks: [count from todo list built in step 3]
+    - Open JIRA tickets: [count by calling jira-activity procedure quietly]
     - Meetings today: [count]
     - Inbox (unprocessed): [count]
     - In-progress ideas: [count]
