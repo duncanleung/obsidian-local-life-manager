@@ -43,9 +43,9 @@ Extract the target folder from the FROM clause:
 **Format**: `FROM "folder-name/"`
 **Examples**:
 - `FROM "03 TaskNotes/"` → "03 TaskNotes/"
-- `FROM "07 Knowledge Base/Capture/"` → "07 Knowledge Base/Capture/"
+- `FROM "01 Inbox/"` → "01 Inbox/"
 
-**Implementation**: Glob pattern `{folder}*.md` to find all markdown files in the folder.
+**Implementation**: Glob pattern `{folder}**/*.md` to find all markdown files in the folder **and all subdirectories**. Dataview's FROM always includes nested subdirectories.
 
 ### 3. WHERE Condition Tokenization
 
@@ -59,6 +59,7 @@ Parse and evaluate WHERE conditions against YAML frontmatter:
 | String inequality | `status != "done"` | Not equal string comparison |
 | Date comparison | `due < date(today)` | Compare date values |
 | Date equality | `due = date(today)` | Equal date comparison |
+| Date arithmetic | `created >= date(today) - dur(7 days)` | Subtract days from date, then compare |
 | Null/exists check | `due AND due < date(today)` | Field exists AND condition |
 | Negation | `!due` | Field is empty/missing/null |
 | Boolean AND | `cond1 AND cond2` | Both conditions true |
@@ -69,6 +70,12 @@ Parse and evaluate WHERE conditions against YAML frontmatter:
 **`date(today)`**: Resolves to the current date in YYYY-MM-DD format
 - For EOD freeze: `date(today)` = journal date = current date
 - Dates in frontmatter can be quoted strings (`"2026-02-12"`) or unquoted
+
+**`date(today) - dur(N days)`**: Subtract N days from today
+- Resolve `date(today)` first, then subtract N days
+- On macOS: `date -v-Nd +%Y-%m-%d` (e.g., `date -v-7d +%Y-%m-%d` for 7 days ago)
+- Example: `created >= date(today) - dur(7 days)` with today = 2026-02-13 → `created >= "2026-02-06"`
+- Only `days` unit is supported (not weeks, months, years)
 
 #### Condition Evaluation Order
 
@@ -96,9 +103,11 @@ Extract sorting instructions:
 
 ### 1. File Discovery
 ```bash
-# Glob files from the FROM folder
-files=$(glob "{folder}*.md")
+# Glob files from the FROM folder (recursive — Dataview includes subdirectories)
+files=$(glob "{folder}**/*.md")
 ```
+
+**IMPORTANT**: Do NOT filter files by creation date. The freeze captures what the Dataview query returns at freeze time (current state), not a historical reconstruction.
 
 ### 2. Frontmatter Reading
 
@@ -188,7 +197,8 @@ SORT due ASC
 - Boolean logic (AND, OR, NOT)
 - Column aliases
 - The `choice()` function for null handling
-- Basic date functions: `date(today)`
+- Date functions: `date(today)`, `date(today) - dur(N days)`
+- Duration subtraction: `dur(N days)` where N is a positive integer
 
 ### What We DON'T Support
 
@@ -196,7 +206,8 @@ SORT due ASC
 - TASK queries (we use TABLE)
 - Inline DQL
 - DataviewJS
-- Complex functions beyond `choice()` and `date()`
-- Advanced date arithmetic
+- Complex functions beyond `choice()`, `date()`, and `dur()`
+- Duration units beyond `days` (no weeks, months, years)
+- Duration addition (`date(today) + dur(...)`)
 
 This subset covers all the queries used in our daily journal templates while keeping the implementation focused and reliable.

@@ -4,11 +4,23 @@
 
 The daily journal template should include sections with Dataview query blocks that will be frozen during the daily review process.
 
+### H1 Heading Format
+
+The H1 heading includes the day of the week:
+
+```markdown
+# {Month} {Day}, {Year} - {DayOfWeek}
+```
+
+Example: `# February 13, 2026 - Friday`
+
+The Obsidian Templater syntax is: `<% tp.date.now("MMMM DD, YYYY - dddd") %>`
+
 ### Common Dataview Sections
 
 The following sections are expected to contain `dataview` code blocks:
 
-**Overdue Tasks**
+**🚨 Overdue Tasks**
 ```dataview
 TABLE status AS "Status", due AS "Due", source_type AS "Source"
 FROM "03 TaskNotes/"
@@ -16,14 +28,14 @@ WHERE status != "done" AND status != "cancelled" AND due < date(today)
 SORT due ASC
 ```
 
-**Due Today**
+**📅 Due Today**
 ```dataview
 TABLE status AS "Status", due AS "Due", source_type AS "Source"
 FROM "03 TaskNotes/"
 WHERE status != "done" AND status != "cancelled" AND due = date(today)
 ```
 
-**Open Tasks**
+**✅ Open Tasks**
 ```dataview
 TABLE status AS "Status", due AS "Due", source_type AS "Source"
 FROM "03 TaskNotes/"
@@ -31,20 +43,42 @@ WHERE status != "done" AND status != "cancelled" AND (due > date(today) OR !due)
 SORT choice(due, due, date("9999-12-31")) ASC
 ```
 
-**Clipped (Unsummarized)**
+**📎 Clipped (Unsummarized)**
 ```dataview
 TABLE class AS "Class", url AS "URL"
-FROM "07 Knowledge Base/Capture/"
+FROM "01 Inbox/"
 WHERE status = "Clipped"
 SORT file.mtime DESC
 ```
+
+### GitHub Activity Section
+
+The `## ![[github-logo.png|18]] GitHub Activity` section is auto-populated by the daily review skill (Step 4). It pulls commits, PRs, reviews, and comments from GitHub for the target date. The section is placed after `## 🔨 What Did I Work On?` and before `## 📚 What Did I Study?`.
+
+```markdown
+## ![[github-logo.png|18]] GitHub Activity
+
+### Commits
+- **{org/repo}**
+  - [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) {commit message title}
+
+### Pull Requests
+- 🟣 Merged — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
+- 🟢 Opened — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) {title}
+
+### Reviews & Comments
+- 💬 Commented on [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
+- 👀 Review requested — [**{org/repo}#{number}**](https://github.com/{org}/{repo}/pull/{number}) — {title}
+```
+
+Subsections with zero items are omitted. If no GitHub activity at all, shows `_No GitHub activity._`.
 
 ### Day Summary Section
 
 The freeze process automatically appends a Day Summary section:
 
 ```markdown
-## Day Summary
+## 📊 Day Summary
 - Tasks completed today: [count]
 - Tasks still open: [count]
 - Knowledge clips saved: [count]
