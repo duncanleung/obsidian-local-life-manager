@@ -272,7 +272,7 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 
 **Morning routine check-in + task dashboard generation**
 
-Checks yesterday's journal completeness, creates today's journal from template if missing, shows learning reviews due, generates task dashboard from open tasks and active projects.
+Checks yesterday's journal completeness, creates today's journal from template if missing, carries over Notes from yesterday, shows learning reviews due, generates task dashboard from open tasks and active projects.
 
 ```bash
 /plan-good-morning  # Morning check-in

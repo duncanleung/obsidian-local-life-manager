@@ -22,6 +22,9 @@ Good morning! Run the morning check-in.
    - If "![[slack-logo.png|18]] Slack Conversations" empty or missing: offer to backfill from Slack
      - "Yesterday's Slack conversations weren't captured. Want me to pull those?"
      - If yes: Read `.claude/skills/plan-shared/references/slack-activity.md` and follow the complete procedure using **yesterday's date** as the target date
+   - **Extract Notes for carryover**: Read the `## 📝 Notes` section from yesterday's journal
+     - Capture all content between `## 📝 Notes` and the next `## ` heading (or end of file)
+     - If the section has content (not just whitespace), save it for step 5
 
 3. **Build Open Tasks todo list**
    - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD.md`
@@ -58,6 +61,10 @@ Good morning! Run the morning check-in.
      - If section has a `dataview` code block (migration): replace the entire code block with the todo list
      - If section already has `- [ ]` todo items: preserve existing items and their order, only append new tasks not already listed
      - If section is empty: write the full todo list
+   - **Carry over Notes from yesterday**: If yesterday's `## 📝 Notes` had content (extracted in step 2):
+     - Write yesterday's notes into today's `## 📝 Notes` section
+     - If today's Notes section already has content, append yesterday's notes below existing content with a blank line separator
+     - Do NOT add any "carried over" labels or attribution — just copy the content as-is
    - Show today's highlight or ask: "What's your main focus today?"
    - **Update DASHBOARD**: Write `![[YYYY-MM-DD]]` (today's date) to `_DASHBOARD.md` in the vault root, replacing the entire file contents. This keeps the dashboard always pointing to the current day's journal.
 
