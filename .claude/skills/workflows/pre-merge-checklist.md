@@ -11,22 +11,22 @@ Ensure code is ready to merge with confidence.
 
 **Run in parallel for speed:**
 ```bash
-/quality
-/security-audit
-/docs
-/validate-spec
+/project-validate-quality
+/project-validate-security-audit
+/ops-docs
+/project-validate-spec
 ```
 
 Then:
 ```bash
-/complete
+/project-complete
 ```
 
 ## Parallel Checks
 
 ### Check 1: Code Quality
 ```bash
-/quality
+/project-validate-quality
 ```
 - Code patterns and best practices
 - Complexity and maintainability
@@ -34,7 +34,7 @@ Then:
 
 ### Check 2: Security Audit
 ```bash
-/security-audit
+/project-validate-security-audit
 ```
 - OWASP Top 10
 - Secrets in code
@@ -45,7 +45,7 @@ Then:
 
 ### Check 3: Documentation Health
 ```bash
-/docs
+/ops-docs
 ```
 - README accuracy
 - API documentation
@@ -54,7 +54,7 @@ Then:
 
 ### Check 4: Spec Compliance
 ```bash
-/validate-spec
+/project-validate-spec
 ```
 - Implementation matches spec
 - Acceptance criteria satisfied
@@ -63,7 +63,7 @@ Then:
 
 ### Complete & Merge
 ```bash
-/complete
+/project-complete
 ```
 1. Re-validates all checks
 2. Updates documentation

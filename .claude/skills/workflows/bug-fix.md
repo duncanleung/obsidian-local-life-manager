@@ -10,61 +10,61 @@ Systematically debug and fix an issue.
 ## Quick Reference
 
 ```bash
-/troubleshoot → /issue → /plan → /implement → /quality → /commit
+/project-validate-troubleshoot → /project-issue → /project-plan → /project-implement → /project-validate-quality → /project-commit
 ```
 
 ## Step-by-Step
 
 ### Step 1: Systematic Debugging
 ```bash
-/troubleshoot
+/project-validate-troubleshoot
 ```
 5-step loop: Reproduce → Hypothesize → Test → Identify → Plan Fix
 
 ### Step 2: Create Bug Work Item
 ```bash
-/issue "Fix [bug description]"
+/project-issue "Fix [bug description]"
 ```
 AI auto-detects BUG type.
 
 ### Step 3: Plan the Fix
 ```bash
-/plan
+/project-plan
 ```
 Phases: Reproduce test → Fix → Verify → Regression check
 
 ### Step 4: Implement the Fix
 ```bash
-/implement
+/project-implement
 ```
-Or use `/advise` to write it yourself with guidance.
+Or use `/project-advise` to write it yourself with guidance.
 
 ### Step 5: Quality Check
 ```bash
-/quality
+/project-validate-quality
 ```
 
 ### Step 6: Commit the Fix
 ```bash
-/commit
+/project-commit
 ```
 
 ## Variations
 
 ### Quick Fix (Known Issue)
 ```bash
-/issue "Fix [bug]" → /implement → /commit
+/project-issue "Fix [bug]" → /project-implement → /project-commit
 ```
 
 ### Critical Bug (Full Process)
 ```bash
-/troubleshoot → /issue → /plan → /implement → /quality → /security-audit → /complete
+/project-validate-troubleshoot → /project-issue → /project-plan → /project-implement → /project-validate-quality → /project-validate-security-audit → /project-complete
 ```
 
-## When to Use /complete Instead of /commit
+## When to Use /project-complete Instead of /project-commit
 
-**Use /commit**: Simple fix, low risk, not merging yet
-**Use /complete**: Complex fix, security-related, ready to merge
+**Use /project-commit**: Simple fix, low risk, not merging yet
+**Use /project-complete**: Complex fix, security-related, ready to merge
 
 ## Testing Best Practices
 
