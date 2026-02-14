@@ -81,37 +81,16 @@ Code repos live at their actual paths (e.g., `/Users/duncanleung/Develop/[projec
 
 ## Skill System
 
-Skills organized by purpose:
+Six skill categories, organized by purpose. Full catalog with every skill: `.claude/skills/README.md`. Detailed usage guide with args and examples: `README.md`.
 
-**Personal/Planning:**
-- Daily: `/plan-daily-review`, `/plan-good-morning`, `/plan-work-log`, `/plan-github-activity`, `/plan-slack-activity`, `/plan-weekly-review`
-- Tasks: `/plan-quick-task`, `/plan-task-done`
-- Capture: `/plan-meeting-notes`
-- Planning: `/plan-whats-next`
-
-**Session Management:**
-- `/session-refresh`, `/session-debrief`, `/session-save-context`, `/session-improve-processes`
-
-**Project Workflow:**
-- Overview: `/project-status`
-- Foundation: `/project-validate`, `/project-brief`, `/project-critique`
-- Planning: `/project-spec`, `/project-adr`, `/research-deep`, `/project-ui-design`, `/project-issue`, `/project-plan`
-- Implementation: `/project-implement`, `/project-advise`, `/project-teach`, `/project-worklog`
-- Quality: `/project-validate-quality`, `/project-validate-security-audit`, `/project-validate-spec`, `/project-validate-space`, `/project-validate-troubleshoot`, `/project-validate-sanity-check`
-- Completion: `/project-commit`, `/project-complete`
-- Scaffolding: `/project-init-space` (initializes 06 Projects/ structure for new projects)
-
-**Learning:**
-- `/learn-start-session`, `/learn-end-session`, `/learn-log-session`, `/learn-review-session`, `/learn-flashcards`, `/learn-study-notes`
-
-**Research & Content:**
-- `/research-deep`, `/research-rss-catchup`, `/research-youtube-catchup`, `/research-synthesize`
-- Capture: `/research-clip` (auto-summarizes YouTube videos), `/research-clip-read`
-
-**Operations & Maintenance:**
-- `/ops-git-sync`, `/ops-docs`, `/ops-process-inbox`
-
-See `.claude/skills/README.md` for full catalog.
+| Prefix | Category | What it covers |
+|--------|----------|----------------|
+| `plan-*` | Personal/Planning | Daily/weekly journal rhythm, task management, activity pulls (GitHub, Slack), meeting capture, prioritization |
+| `session-*` | Session Management | AI context refresh, context handoff, end-of-session debrief, process improvement |
+| `project-*` | Project Workflow | Full pipeline: brief -> critique -> spec -> issue -> plan -> implement -> validate -> commit -> complete |
+| `learn-*` | Learning | Session lifecycle (start -> log -> end), review sessions, study notes, flashcards |
+| `research-*` | Research & Content | Deep research, RSS/YouTube catchup, clip capture, cross-source synthesis |
+| `ops-*` | Operations | Git sync, documentation health, inbox processing |
 
 ---
 
