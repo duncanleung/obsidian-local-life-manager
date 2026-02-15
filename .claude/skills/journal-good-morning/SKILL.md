@@ -40,11 +40,14 @@ Good morning! Run the morning check-in.
      - **Dataview block** (live query): skip — cannot extract items from a code block
    - Scan `03 TaskNotes/*.md` — read each file's YAML frontmatter, collect all tasks where `status != "done" AND status != "cancelled"`
    - Reconcile previous day's list with current TaskNotes:
-     - Items from previous day's list that are still open in TaskNotes → **keep in same order**
+     - **Plain-text items** (no `[[wikilink]]`): always carry forward as-is if unchecked — these are ad-hoc reminders not tracked in TaskNotes
+     - **Wikilinked items**: match against TaskNotes files:
+       - Items still open in TaskNotes → **keep in same order**
+       - Tasks now done/cancelled in TaskNotes → **remove from list**
      - New open tasks in TaskNotes not in previous day's list → **append at bottom**
-     - Tasks now done/cancelled in TaskNotes → **remove from list**
    - Build each todo item as: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if the task has a due date set)
-   - The title comes from the `# H1 heading` in the task file (not the filename)
+   - Plain-text items are kept exactly as they appeared in the previous day's list (no reformatting)
+   - The title for wikilinked items comes from the `# H1 heading` in the task file (not the filename)
 
 4. **Check Dataview plugin** (`.obsidian/plugins/dataview/`)
    - Check if directory exists
