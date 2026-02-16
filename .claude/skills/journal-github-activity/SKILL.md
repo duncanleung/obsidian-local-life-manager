@@ -3,7 +3,7 @@ name: journal-github-activity
 description: Pull GitHub activity (commits, PRs, reviews, comments) into today's journal. Safe to run anytime — does NOT freeze dataviews. Triggers on "github activity", "pull github", "git activity", "what did I push".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
-allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob
+allowed-tools: Bash(gh:*), Bash(git:*), Bash(date:*), Read, Write, Edit, Glob
 ---
 
 Pull GitHub activity into the daily journal. This is safe to run throughout the day — it only touches the `## ![[github-logo.png|18]] GitHub Activity` section and does NOT freeze dataview blocks.

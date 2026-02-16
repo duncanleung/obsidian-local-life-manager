@@ -3,7 +3,7 @@ name: journal-daily-review
 description: Complete daily journal review. Use at end of day or next morning to fill in journal sections, review highlights, and plan tomorrow. Triggers on "daily review", "end of day", "journal review", "what did I do today".
 model: claude-haiku-4-5-20251001
 argument-hint: [YYYY-MM-DD or path to journal file]
-allowed-tools: Bash(gh:*), Bash(date:*), Read, Write, Edit, Glob, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile, mcp__mcp-atlassian__lookupJiraAccountId, mcp__mcp-atlassian__searchJiraIssuesUsingJql, mcp__mcp-atlassian__getJiraIssue, mcp__mcp-atlassian__getAccessibleAtlassianResources
+allowed-tools: Bash(gh:*), Bash(git:*), Bash(date:*), Read, Write, Edit, Glob, mcp__claude_ai_Slack__slack_search_public_and_private, mcp__claude_ai_Slack__slack_read_thread, mcp__claude_ai_Slack__slack_read_user_profile, mcp__mcp-atlassian__lookupJiraAccountId, mcp__mcp-atlassian__searchJiraIssuesUsingJql, mcp__mcp-atlassian__getJiraIssue, mcp__mcp-atlassian__getAccessibleAtlassianResources
 ---
 
 Run the Daily Review Workflow. Keep it conversational - ask one thing at a time.

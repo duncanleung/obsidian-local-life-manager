@@ -9,6 +9,37 @@ Single source of truth for pulling GitHub activity into a daily journal. Referen
 
 ## Queries
 
+### Step 1: Local Git Log Scanning (Private Repos)
+
+Scan local repositories for commits not indexed by GitHub Search API:
+
+```bash
+# For each repo in Projects Index (from CLAUDE.md code: field) + the vault repo itself:
+# (e.g., /Users/duncanleung/Develop/obsidian-local-life-manager, /Users/duncanleung/Develop/[other-project]/)
+
+# Run git log for the target date, extracting: full SHA, commit message
+git -C {repo-path} log \
+  --format="%H|%s" \
+  --since="{target-date}T00:00:00" \
+  --until="{target-date}T23:59:59" \
+  --author="duncanleung"
+
+# For each repo with matches, also attempt to get remote URL for later link construction:
+git -C {repo-path} config --get remote.origin.url
+```
+
+**Output:** List of commits with:
+- Full SHA (40-char hash)
+- Commit message
+- Repo path (to map back to org/repo later)
+- Remote URL (for `https://github.com/` URL construction)
+
+**Deduplication:** Store all local commits by SHA. After GitHub API queries (Step 2), remove any local commits that already appear in GitHub results (same SHA = already captured by API).
+
+---
+
+### Step 2: GitHub Search API Queries
+
 Run ALL of these `gh` queries for the **target date**:
 
 ```bash
@@ -30,11 +61,20 @@ gh api search/issues --method GET -f q="involves:duncanleung type:pr updated:{ta
 
 ## Deduplication
 
-PRs may appear in multiple queries. Deduplicate by `{org/repo}#{number}`.
+**Commits:**
+- Store local commits (Step 1) by full SHA
+- After GitHub API queries (Step 2), remove any local commits that match a GitHub API commit SHA
+- Remaining local commits = new work not yet indexed by GitHub Search API
+- Combine local + GitHub commits into single Commits table
+
+**Pull Requests:**
+- PRs may appear in multiple queries. Deduplicate by `{org/repo}#{number}`
 
 ## URL Construction
 
-- **Commits:** `https://github.com/{org}/{repo}/commit/{full-sha}`
+- **GitHub API Commits:** `https://github.com/{org}/{repo}/commit/{full-sha}`
+- **Local Commits with Remote:** Extract `{org}/{repo}` from git remote URL `git@github.com:{org}/{repo}.git` → `https://github.com/{org}/{repo}/commit/{full-sha}`
+- **Local Commits without Remote (or unpushed):** Use `{repo-name}` from repo path as display name. No hyperlink needed—show as plain text or note as "local-only"
 - **Pull Requests:** `https://github.com/{org}/{repo}/pull/{number}`
 - **Reviews & Comments:** `https://github.com/{org}/{repo}/pull/{number}`
 
@@ -50,6 +90,7 @@ Every entry MUST include a clickable web link. Use tables with H3 headers and su
 | Repo | Commit | Message |
 |------|--------|---------|
 | {org/repo} | [`{short-sha}`](https://github.com/{org}/{repo}/commit/{full-sha}) | {commit message title} |
+| {repo-name} | `{short-sha}` | {commit message title} |
 
 ### Pull Requests — {N} PRs ({X} Merged, {Y} Opened)
 
@@ -68,6 +109,7 @@ Every entry MUST include a clickable web link. Use tables with H3 headers and su
 
 ## Formatting Rules
 
+- **Combine local + GitHub commits in Commits table**: Both sources appear in the same table. GitHub-API commits use full `org/repo` names with hyperlinks. Local commits use repo name with optional hyperlink (if remote URL available).
 - **H3 headers with summary counts**: Each subsection header includes a count summary
   - Commits: `### Commits — {N} commits across {M} repos`
   - Pull Requests: `### Pull Requests — {N} PRs ({X} Merged, {Y} Opened)` (omit zero-count statuses)
