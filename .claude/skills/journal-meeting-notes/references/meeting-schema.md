@@ -7,6 +7,7 @@
 created: "YYYY-MM-DD"          # Date of the meeting (always quoted)
 meeting_type:                   # standup | 1-on-1 | planning | review | brainstorm | other | null
 participants: []                # YAML array: ["Alice", "Bob", "Charlie"]
+summary:                        # 1-2 sentence outcome summary (string or null)
 status: captured                # captured | summarized
 tags: [meeting]                 # Always includes "meeting" tag
 ---
@@ -19,6 +20,7 @@ tags: [meeting]                 # Always includes "meeting" tag
 | `created` | string | Yes | `"YYYY-MM-DD"` |
 | `meeting_type` | string/null | No | `standup`, `1-on-1`, `planning`, `review`, `brainstorm`, `other` |
 | `participants` | array | No | `["Name 1", "Name 2"]` |
+| `summary` | string/null | No | 1-2 sentence outcome summary |
 | `status` | string | Yes | `captured`, `summarized` |
 | `tags` | array | Yes | Always `[meeting]` |
 
@@ -86,10 +88,10 @@ When action items are captured in Detailed mode:
 ## Dataview Query (Daily Journal)
 
 ```dataview
-TABLE meeting_type AS "Type", participants AS "Attendees"
+TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
 FROM "04 Meetings"
 WHERE created >= date(today) - dur(7 days)
 SORT created DESC
 ```
 
-Shows meetings from the past 7 days. Compatible with the EOD freeze algorithm (`dur()` resolves to a concrete date at freeze time).
+Shows meetings from the past 7 days with a concise outcome summary. Compatible with the EOD freeze algorithm (`dur()` resolves to a concrete date at freeze time).

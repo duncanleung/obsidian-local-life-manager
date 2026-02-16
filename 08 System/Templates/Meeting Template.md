@@ -2,6 +2,7 @@
 created: "<% tp.date.now("YYYY-MM-DD") %>"
 meeting_type:
 participants: []
+summary:
 status: captured
 tags: [meeting]
 ---

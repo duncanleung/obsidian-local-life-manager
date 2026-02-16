@@ -23,8 +23,8 @@ SORT created DESC
 
 ## 🤝 Meetings
 ```dataview
-TABLE meeting_type AS "Type", participants AS "Attendees"
-FROM "05 Meetings"
+TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
+FROM "04 Meetings"
 WHERE created >= date(today) - dur(7 days)
 SORT created DESC
 ```

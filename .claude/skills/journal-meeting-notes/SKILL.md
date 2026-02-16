@@ -64,6 +64,7 @@ Fast meeting note creation — no prompts. Use when args are just a short title 
    created: "{meeting-date}"
    meeting_type:
    participants: []
+   summary:
    status: captured
    tags: [meeting]
    ---
@@ -118,6 +119,7 @@ Structured post-meeting capture. Use when:
    created: "{meeting-date}"
    meeting_type: {type}
    participants: [{attendees as YAML array}]
+   summary: "{1-2 sentence summary}"
    status: captured
    tags: [meeting]
    ---
@@ -142,6 +144,12 @@ Structured post-meeting capture. Use when:
    ## Notes
 
    ```
+
+   - **`summary` generation**: From the Key Decisions and Action Items, compose 1-2 sentences capturing the primary outcome. Keep under 80 characters when possible for clean table rendering. Examples:
+     - `"Decided on web platform for Poland resource hub; designs due early March"`
+     - `"Aligned on Q1 priorities; 3 action items assigned"`
+     - If no decisions captured: use a brief topic description, e.g., `"Discussed sprint velocity trends"`
+   - Reuse the same summary text for the work log's "Discussed {brief summary}" in step 7
 
 5. **Create task notes** — for each action item:
    - Filename: `03 TaskNotes/{meeting-date}-{kebab-action-item}.md`
@@ -174,15 +182,15 @@ Structured post-meeting capture. Use when:
        ```markdown
        ## 🤝 Meetings
 
-       | File | Type | Attendees |
-       |------|------|-----------|
-       | [[{meeting-filename-without-ext}]] | {meeting_type} | {comma-separated participants} |
+       | File | Type | Attendees | Summary |
+       |------|------|-----------|---------|
+       | [[{meeting-filename-without-ext}]] | {meeting_type} | {comma-separated participants} | {summary} |
        ```
      - If the journal is **live** (has dataview blocks): insert the Dataview query
        ```markdown
        ## 🤝 Meetings
        ```dataview
-       TABLE meeting_type AS "Type", participants AS "Attendees"
+       TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
        FROM "04 Meetings"
        WHERE created >= date(today) - dur(7 days)
        SORT created DESC
