@@ -37,16 +37,7 @@ Bash: ls .claude/obsidian-memories/2026-01-*.json | tail -10  # Recent memory fi
 
 Read any memory files from the last 3 days (by filename date prefix).
 
-### 3. Read Shared Documentation
-
-```bash
-Glob: SHARED/DOCS/**/*.md
-# Read each found file
-```
-
-Skip silently if not found.
-
-### 4. Get Recent Activity
+### 3. Get Recent Activity
 
 ```bash
 Bash: git log -3 --format="%h - %s"
@@ -69,7 +60,6 @@ Context refreshed
 | Core | CLAUDE.md |
 | Profile | .claude/obsidian-memories/about-me.md |
 | Memories | .claude/obsidian-memories/YYYY-MM-DD-*.json (last 3 days) |
-| Shared | SHARED/DOCS/**/*.md |
 | Git | Last 3 commits |
 
 ## Error Handling

@@ -1,27 +1,16 @@
 # Shared Resources
 
-Cross-project standards, templates, and documentation.
+Cross-project templates.
 
 ## Structure
 
 ```
 SHARED/
-├── DOCS/           # Cross-project standards and guides
 ├── TEMPLATES/
 │   ├── PM/         # Issue templates (TASK, BUG, SPIKE, PLAN, WORKLOG, SPEC)
 │   ├── DOCS/       # Documentation templates (API, architecture, etc.)
 │   └── IDEA-MINIMAL/  # New project scaffolding
 ```
-
-## DOCS/
-
-Standards that apply across all projects:
-
-- **branching-strategy.md** - Git workflow and branch naming
-- **development-loop.md** - How to work on issues
-- **style-guide.md** - Code style standards
-- **tech-stack-decisions.md** - Common technology choices
-- **pricing-philosophy.md** - Pricing approach for products
 
 ## TEMPLATES/
 

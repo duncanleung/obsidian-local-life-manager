@@ -18,7 +18,8 @@ root/
 │   └── docs/                   # Skill system documentation
 ├── 01 Inbox/ … 08 System/     # Obsidian vault directories (gitignored)
 ├── 06 Projects/[project]/      # Project planning, docs, specs, ADRs
-└── SHARED/                     # Cross-project standards and templates
+├── 07 Knowledge Base/          # Cross-project research, knowledge dumps, general reference
+└── SHARED/                     # Cross-project templates
 ```
 
 | Directory | Purpose | Git Status |
@@ -26,7 +27,8 @@ root/
 | `.claude/` | Skills, obsidian-memories, learning sessions | Tracked |
 | `01-08 dirs` | Obsidian vault (Inbox, Calendar, Knowledge Base, etc.) | Gitignored |
 | `06 Projects/` | Project planning, documentation, specs, ADRs | Tracked |
-| `SHARED/` | Cross-project standards | Tracked |
+| `07 Knowledge Base/` | Cross-project research, knowledge dumps, general reference | Gitignored |
+| `SHARED/` | Cross-project templates | Tracked |
 
 Code repositories live at their actual paths (e.g., `/Users/duncanleung/Develop/[project]/`) and are referenced via the Projects Index `code:` field. Skills READ from code repos but NEVER WRITE to them — all documentation goes to `06 Projects/`.
 
@@ -116,9 +118,11 @@ projects:
 ## Core Rules
 
 1. **All project docs in 06 Projects/**: Briefs, issues, plans, specs, ADRs, architecture → `06 Projects/[project]/`.
-2. **Code repos are external**: Referenced via `code:` in Projects Index. Skills READ from code repos but NEVER WRITE to them.
+2. **Knowledge dumps and research go to 07 Knowledge Base/**: Cross-project research, knowledge dumps, general reference material → `07 Knowledge Base/`. NEVER save to `SHARED/DOCS` (deleted).
+3. **Code repos are external**: Referenced via `code:` in Projects Index. Skills READ from code repos but NEVER WRITE to them.
 3. **Precedence**: A project's own `CLAUDE.md` (in its code repo) overrides this file.
 4. **Never commit unless explicitly asked** or it's part of a prescribed workflow.
+5. **Always use absolute file paths** when referencing code in task notes, issues, plans, or any documentation. Use full paths (e.g., `/Users/duncanleung/Develop/airvet/go-airvet/pkg/chat/chat.go:765`) so the next LLM session can jump straight to the files.
 
 ---
 

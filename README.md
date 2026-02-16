@@ -1167,7 +1167,7 @@ Creates comprehensive research documents (20-30+ sources distilled to 3-5 pages)
 /research-deep "WebSocket vs SSE trade-offs"
 ```
 
-**Output:** `06 Projects/[project]/notes/research/`, `SHARED/DOCS/research/`, or `resources/research/`
+**Output:** `06 Projects/[project]/notes/research/` or `07 Knowledge Base/`
 **Use when:** Technology decisions, competitive analysis, complex topics requiring deep investigation.
 
 #### 📕 `/research-rss-catchup`

@@ -43,7 +43,6 @@ Generate HTML UI mockups with optional parallel variant exploration.
 ### 2. Load Context
 ```bash
 Glob: "06 Projects/[project]/docs/ui-designs/*.html"
-Read: SHARED/DOCS/style-guide.md
 Read: "06 Projects/[project]/project-brief.md"
 ```
 

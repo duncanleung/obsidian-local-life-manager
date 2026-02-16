@@ -99,7 +99,7 @@ When orchestrating work:
    - Identify trade-offs
 
 3. Documentation
-   - Create research doc in SHARED/DOCS/research/
+   - Create research doc in 07 Knowledge Base/
    - Update affected project briefs
    - Link to decision rationale
 
@@ -234,7 +234,7 @@ User: "I need to decide on an auth solution that works across
 → ideation-orchestrator coordinates:
   1. Gather requirements from each project
   2. research-specialist → Auth solutions (Better Auth, Auth.js, etc.)
-  3. Create SHARED/DOCS/research/unified-auth-strategy.md
+  3. Create 07 Knowledge Base/unified-auth-strategy.md
   4. Create decision matrix
   5. Document recommendation
   6. Create issues in each project for implementation research

@@ -21,8 +21,7 @@ Research docs are **product docs** (informing WHAT to build) and live in `06 Pro
 
 **Where research lives:**
 - Project-specific: `06 Projects/[project]/notes/research/`
-- Cross-project: `SHARED/DOCS/research/`
-- General reference: `resources/research/`
+- Cross-project / general knowledge: `07 Knowledge Base/`
 
 **Docs and code separation**: All documentation (specs, ADRs, architecture) lives in `06 Projects/[project]/docs/`. Code repos (resolved from Projects Index in CLAUDE.md) are external and skills READ from them but NEVER WRITE to them.
 
@@ -49,7 +48,7 @@ Research docs are **product docs** (informing WHAT to build) and live in `06 Pro
 ## Universal Rules
 
 1. Read and respect the root CLAUDE.md for all actions.
-2. Check existing research first - `06 Projects/*/notes/research/`, `SHARED/DOCS/research/`, `resources/research/`.
+2. Check existing research first - `06 Projects/*/notes/research/`, `07 Knowledge Base/`.
 3. Always save research to appropriate location for future reference.
 4. Include "Must-Read Resources" with explanations of why each matters.
 
@@ -189,7 +188,7 @@ output_format:
 
 ### Layered Approach
 
-1. **Check existing research first**: Look in notes/research/, SHARED/DOCS/research/
+1. **Check existing research first**: Look in notes/research/, 07 Knowledge Base/
 2. **Official documentation**: Context7 for framework/library docs
 3. **Community solutions**: WebSearch → quality filter → WebFetch
 4. **Products in space**: What do competitors/similar products do?
@@ -218,12 +217,8 @@ project_specific:
   when: Research for one specific idea
 
 cross_project:
-  path: SHARED/DOCS/research/{topic}.md
-  when: Research useful across multiple ideas
-
-general_reference:
-  path: resources/research/{topic}.md
-  when: General knowledge not tied to specific ideas
+  path: 07 Knowledge Base/{topic}.md
+  when: Research useful across multiple ideas or general knowledge
 ```
 
 ## Integration Points

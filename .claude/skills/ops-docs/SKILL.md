@@ -61,7 +61,7 @@ Documentation health check, validation, and maintenance.
 - 06 Projects/irl-social/project-brief.md
 
 ### Orphaned Files
-- 06 Projects/SHARED/DOCS/old-research.md (not referenced)
+- 06 Projects/some-project/notes/old-research.md (not referenced)
 
 ### Structure Issues
 - 06 Projects/lorecraft/ missing issues/ directory
