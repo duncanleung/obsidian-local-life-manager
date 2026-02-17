@@ -6,7 +6,6 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 
 | Skill | Description |
 |-------|-------------|
-| `/journal-good-morning` | Morning routine check-in + task dashboard |
 | `/journal-quick-task` | Create a new task note in 03 TaskNotes/ |
 | `/journal-work-log` | Quick work log entry to today's journal |
 | `/journal-task-done` | Mark a task as complete |
@@ -14,7 +13,7 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 | `/journal-github-activity` | Pull GitHub activity (commits, PRs, reviews) into today's journal |
 | `/journal-slack-activity` | Pull Slack work conversations into today's journal |
 | `/journal-meeting-notes` | Capture meeting notes with attendees, decisions, and auto-created tasks |
-| `/journal-daily-review` | Complete daily journal review |
+| `/journal-daily-review` | Unified daily journal — morning setup, activity pulls, freeze, status report |
 | `/journal-weekly-review` | Weekly review and planning session |
 | `/session-refresh` | Silently refresh AI context |
 | `/session-save-context` | Save session context handoff for continuation |
