@@ -84,7 +84,7 @@ $ARGUMENTS
    - If journal exists and has `## ✅ Open Tasks`:
      - Find the section (between `## ✅ Open Tasks` and the next `##` heading)
      - Append a new line: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if due date is set)
-   - If journal doesn't exist: skip (will be populated by `/journal-good-morning`)
+   - If journal doesn't exist: skip (will be populated by `/journal-daily-review`)
 
 6. **Confirm creation**
    ```

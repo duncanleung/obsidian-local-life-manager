@@ -69,7 +69,7 @@ cancelled -> open (reopen)
 Task notes in `03 TaskNotes/` are **personal tasks** -- errands, calls, appointments, chores.
 They are distinct from project issues in `06 Projects/[project]/issues/` which track development work.
 
-The morning dashboard (`/journal-good-morning`) combines both:
+The morning dashboard (`/journal-daily-review`) combines both:
 - Task notes from `03 TaskNotes/` (personal tasks)
 - Active projects from `06 Projects/*/README.md` (project work)
 
