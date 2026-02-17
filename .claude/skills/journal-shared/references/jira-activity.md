@@ -1,6 +1,6 @@
 # JIRA Activity Procedure
 
-Single source of truth for pulling JIRA tickets into a daily journal. Referenced by `journal-jira-activity`, `journal-daily-review`, and `journal-good-morning`.
+Single source of truth for pulling JIRA tickets into a daily journal. Referenced by `journal-jira-activity` and `journal-daily-review`.
 
 ## Configuration
 

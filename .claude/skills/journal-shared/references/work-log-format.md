@@ -1,6 +1,6 @@
 # Work Log Format Procedure
 
-Single source of truth for adding entries to the `## 🔨 What Did I Work On?` section of daily journals. Referenced by `journal-work-log`, `journal-meeting-notes`, `journal-daily-review`, and `journal-good-morning`.
+Single source of truth for adding entries to the `## 🔨 What Did I Work On?` section of daily journals. Referenced by `journal-work-log`, `journal-meeting-notes`, and `journal-daily-review`.
 
 ## Output Format
 

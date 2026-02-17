@@ -1,6 +1,6 @@
 # JIRA WEB Releases Procedure
 
-Single source of truth for pulling WEB board unreleased versions into a daily journal. Referenced by `journal-jira-releases`, `journal-daily-review`, and `journal-good-morning`.
+Single source of truth for pulling WEB board unreleased versions into a daily journal. Referenced by `journal-jira-releases` and `journal-daily-review`.
 
 ## Configuration
 
