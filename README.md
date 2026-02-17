@@ -198,15 +198,15 @@ All skills fit into a daily rhythm. The six groups form parallel tracks wrapped 
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  MORNING                                                    │
-│  /journal-good-morning                                         │
+│  MORNING / EVENING                                          │
+│  /journal-daily-review  (adapts to context)                 │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  WORK (parallel tracks — pick what's needed)                │
 │                                                             │
 │  ┌─ Project ───────── /project-* pipeline ───────────────┐  │
-│  │  └─ Quality ────── /project-validate-* at checkpoints         │  │
+│  │  └─ Quality ────── /project-validate-* at checkpoints │  │
 │  ├─ Learning ──────── /learn-start → work → /learn-end   │  │
 │  ├─ Research ──────── /research-* → /research-synthesize  │  │
 │  ├─ Triage + tasks ── /journal-whats-next, /journal-quick-task  │  │
@@ -214,8 +214,7 @@ All skills fit into a daily rhythm. The six groups form parallel tracks wrapped 
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  EVENING                                                    │
-│  /journal-daily-review                                         │
+│  SESSION END                                                │
 │  /session-debrief                                           │
 │  /session-save-context  (if switching topics)               │
 └─────────────────────────────────────────────────────────────┘
@@ -232,24 +231,19 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  MORNING                                                    │
-│  /journal-good-morning  (creates journal + task dashboard)     │
+│  MORNING / EVENING                                          │
+│  /journal-daily-review  (adapts: setup + activities + freeze)│
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  DURING DAY (any order, use as needed)                      │
 │                                                             │
-│  /journal-whats-next       (triage — what needs attention?)    │
+│  /journal-whats-next       (triage — what needs attention?) │
 │                                                             │
-│  /journal-quick-task      · /journal-task-done                    │
-│  /journal-work-log        · /journal-meeting-notes                │
+│  /journal-quick-task      · /journal-task-done              │
+│  /journal-work-log        · /journal-meeting-notes          │
 │                                                             │
-│  /journal-github-activity · /journal-slack-activity               │
-└──────────────────────────┬──────────────────────────────────┘
-                           ↓
-┌─────────────────────────────────────────────────────────────┐
-│  EVENING                                                    │
-│  /journal-daily-review  (completes journal, captures memories) │
+│  /journal-github-activity · /journal-slack-activity         │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -259,7 +253,6 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 
 | Stage    | Skill                   | Purpose                                               | Args                   |
 | -------- | ----------------------- | ----------------------------------------------------- | ---------------------- |
-| Morning  | `/journal-good-morning`    | Morning routine + task dashboard                      |                        |
 | Triage   | `/journal-whats-next`      | Personal triage (overdue, due today, inbox, journals) |                        |
 |          |                         |                                                       |                        |
 | Tasks    | `/journal-quick-task`      | Create task in 03 TaskNotes/                          | `"title" [--due DATE]` |
@@ -268,22 +261,8 @@ Daily and weekly rhythm skills. Ordered by time of day, not by dependency. "Duri
 |          | `/journal-meeting-notes`   | Capture meeting notes, auto-create tasks              | `[meeting details]`    |
 | Fetch    | `/journal-github-activity` | Pull GitHub activity into journal                     | `[YYYY-MM-DD \| path]` |
 |          | `/journal-slack-activity`  | Pull Slack work conversations into journal            | `[YYYY-MM-DD \| path]` |
-| Evening  | `/journal-daily-review`    | End of day journal completion                         |                        |
+| Review   | `/journal-daily-review`    | Unified: morning setup + activities + freeze          | `[YYYY-MM-DD \| path]` |
 | Weekly   | `/journal-weekly-review`   | Weekly planning                                       |                        |
-
-#### 📕 `/journal-good-morning`
-
-**Morning routine check-in + task dashboard generation**
-
-Checks yesterday's journal completeness, creates today's journal from template if missing, carries over Notes from yesterday, shows learning reviews due, generates task dashboard from open tasks and active projects.
-
-```bash
-/journal-good-morning  # Morning check-in
-```
-
-**Creates:** `02 Calendar/YYYY-MM-DD-dayname.md` (today's journal, e.g., `2026-02-14-saturday.md`).
-**Triggers on:** "good morning", "morning", "start my day"
-
 
 #### 📕 `/journal-quick-task`
 
@@ -337,15 +316,17 @@ Scans overdue tasks, tasks due today, unfrozen past journals, unprocessed inbox 
 
 #### 📕 `/journal-daily-review`
 
-**Complete daily journal review**
+**Unified daily journal — morning setup, activity pulls, freeze**
 
-Fills in journal sections (Work, Personal, Study). Pulls GitHub commits. Reviews highlight. Captures memories. Can set tomorrow's highlight.
+Smart single command that adapts to context. Morning: sets up today's journal (Open Tasks, Notes carryover, dashboard), processes yesterday (activities + freeze). Evening: pulls activities, freezes past journals. Anytime: pass a date to process a specific day.
 
 ```bash
-/journal-daily-review  # Evening review
+/journal-daily-review              # Smart default (morning setup + activities)
+/journal-daily-review 2026-02-15   # Process a specific date
 ```
 
-**Triggers on:** "daily review", "end of day", "journal review"
+**Creates:** `02 Calendar/YYYY-MM-DD-dayname.md` (today's journal, e.g., `2026-02-14-saturday.md`).
+**Triggers on:** "daily review", "end of day", "journal review", "good morning", "morning", "start my day"
 
 #### 📕 `/journal-weekly-review`
 
