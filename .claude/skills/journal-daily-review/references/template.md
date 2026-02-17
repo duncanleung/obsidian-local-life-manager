@@ -20,29 +20,22 @@ The Obsidian Templater syntax is: `<% tp.date.now("MMMM DD, YYYY - dddd") %>`
 
 The following sections are expected to contain `dataview` code blocks:
 
-**🚨 Overdue Tasks**
-```dataview
-TABLE status AS "Status", due AS "Due", source_type AS "Source"
-FROM "03 TaskNotes/"
-WHERE status != "done" AND status != "cancelled" AND due < date(today)
-SORT due ASC
-```
-
-**📅 Due Today**
-```dataview
-TABLE status AS "Status", due AS "Due", source_type AS "Source"
-FROM "03 TaskNotes/"
-WHERE status != "done" AND status != "cancelled" AND due = date(today)
-```
-
 **✅ Open Tasks** — Uses a plain markdown todo list (not Dataview). Items are `- [ ] [[filename]] Title` checkboxes that the user reorders by priority in Obsidian. This section is NOT frozen during daily review — it stays as-is. The Day Summary counts `- [ ]` lines to get "Tasks still open".
 
 **📥 Inbox (Unsummarized)**
 ```dataview
-TABLE class AS "Class", url AS "URL"
-FROM "01 Inbox/"
+TABLE class AS "Type", tags AS "Tags"
+FROM "01 Inbox"
 WHERE status = "Clipped"
-SORT file.mtime DESC
+SORT created DESC
+```
+
+**🤝 Meetings** — Shows only meetings created on the journal's date (not a rolling window). Each day's journal shows only that day's meetings.
+```dataview
+TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
+FROM "04 Meetings"
+WHERE created = date(today)
+SORT file.name ASC
 ```
 
 ### GitHub Activity Section
