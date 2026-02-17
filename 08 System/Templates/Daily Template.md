@@ -25,8 +25,8 @@ SORT created DESC
 ```dataview
 TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
 FROM "04 Meetings"
-WHERE created >= date(today) - dur(7 days)
-SORT created DESC
+WHERE created = date(today)
+SORT file.name ASC
 ```
 
 ## 📋 What Did I Do?

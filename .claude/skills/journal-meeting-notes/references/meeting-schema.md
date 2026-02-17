@@ -90,8 +90,8 @@ When action items are captured in Detailed mode:
 ```dataview
 TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
 FROM "04 Meetings"
-WHERE created >= date(today) - dur(7 days)
-SORT created DESC
+WHERE created = date(today)
+SORT file.name ASC
 ```
 
-Shows meetings from the past 7 days with a concise outcome summary. Compatible with the EOD freeze algorithm (`dur()` resolves to a concrete date at freeze time).
+Shows only meetings from the journal's date. Each day's journal displays only that day's meetings. Compatible with the EOD freeze algorithm (`date(today)` resolves to the journal date at freeze time).

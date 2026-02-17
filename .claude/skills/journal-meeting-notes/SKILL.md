@@ -192,8 +192,8 @@ Structured post-meeting capture. Use when:
        ```dataview
        TABLE meeting_type AS "Type", participants AS "Attendees", summary AS "Summary"
        FROM "04 Meetings"
-       WHERE created >= date(today) - dur(7 days)
-       SORT created DESC
+       WHERE created = date(today)
+       SORT file.name ASC
        ```
        ```
    - If `## 🤝 Meetings` section **already exists** and is a frozen table: append the new meeting row to the existing table
