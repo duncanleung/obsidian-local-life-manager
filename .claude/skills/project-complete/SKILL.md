@@ -12,15 +12,15 @@ Complete a task with full validation, documentation updates, reviews, and automa
 ## Usage
 
 ```bash
-/project-complete careerbrain 002         # Complete specific issue
-/project-complete careerbrain             # Complete current/active issue
+/project-complete careerbrain 2026-02-18-auth        # Complete specific initiative
+/project-complete careerbrain                         # Complete current/active initiative
 ```
 
 ## What It Does
 
 1. Validate PLAN completion and spec compliance
 2. Update all project documentation
-3. Update project README (issue table status, phase summary)
+3. Update project README (Initiatives table status)
 4. Create final commit with doc changes
 5. Run mandatory code review + security audit
 6. Merge to develop branch
@@ -31,8 +31,24 @@ Complete a task with full validation, documentation updates, reviews, and automa
 ## Prerequisites
 
 - All implementation complete (code written)
-- Active issue with completed work
+- Active initiative with completed work
 - PLAN.md exists with phases mostly complete
+
+## Initiative Resolution
+
+Find the initiative folder from the argument:
+
+```bash
+# If full folder name given:
+Read: "06 Projects/[project]/2026-02-18-auth/PLAN.md"
+
+# If partial name given, search:
+Glob: "06 Projects/[project]/*-auth*/PLAN.md"
+
+# If no initiative specified, find in-progress ones:
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/TASK.md"
+# Then check frontmatter for status: in_progress
+```
 
 ## Execution Flow
 
@@ -65,7 +81,7 @@ Complete a task with full validation, documentation updates, reviews, and automa
 If the TASK has an `implements:` field, update inline status markers in the spec:
 
 ```markdown
-# Before (in 06 Projects/[project]/docs/specs/*.md)
+# Before (in initiative dir or project-wide spec)
 - 🚧 User registration with email/password
 
 # After
@@ -76,74 +92,70 @@ This provides public visibility into what's implemented.
 
 ### 4. Update All Documentation
 
-Scan and validate ALL docs in `06 Projects/[project]/docs/`:
-- architecture-overview.md
-- data-model.md
-- api-overview.md
-- README.md
+Scan and validate docs in the initiative folder and project root:
+- Initiative-local docs (ADRs, specs, context)
+- Project README.md
 
-### 5. Update CHANGELOG
-
-**MANDATORY**: Add entries under `[Unreleased]` section.
-
-Categories:
-- `### Added` - New features (TASKs)
-- `### Fixed` - Bug fixes (BUGs)
-- `### Changed` - Modifications
-- `### Security` - Security updates
-
-### 6. Final WORKLOG Entry
+### 5. Final WORKLOG Entry
 
 ```markdown
 ## YYYY-MM-DD HH:MM - COMPLETED
 
-Issue ### complete and ready for merge.
+Initiative 2026-02-18-auth complete and ready for merge.
 
 Summary:
 - [What was implemented]
 - [What was deferred]
 ```
 
-### 7. Update Status
+### 6. Update Status
 
 Set issue frontmatter: `status: complete`
 
-### 8. Update Project README
+### 7. Update Project README
 
-Update `06 Projects/[project]/README.md` to reflect the completed issue:
+Update `06 Projects/[project]/README.md` Initiatives table:
 
-1. **Issue table**: Change the issue's status from `Open` (or `In Progress`) to `✅ Complete`
-2. **Project phase/status line**: Update completion counts (e.g., "3 of 4 MVP features ready (75%)" → "4 of 4 MVP features ready (100%)")
-3. **Next Steps**: Remove any steps related to the completed issue (e.g., plan/implement references)
-4. **Updated date**: Set frontmatter `updated:` to today's date
+```markdown
+## Initiatives
 
-### 9. Create Final Commit
+| Initiative | Date | Status |
+|------------|------|--------|
+| [Auth Implementation](2026-02-17-auth/) | 2026-02-17 | complete |
+| [API Redesign](2026-02-18-api-redesign/) | 2026-02-18 | open (SPIKE) |
+```
+
+Also update:
+- **Recent Activity**: Add completion entry
+- **Updated date**: Set frontmatter `updated:` to today's date
+
+### 8. Create Final Commit
 
 Stage and commit documentation changes.
 
-### 10. Run Final Reviews
+### 9. Run Final Reviews
 
 If not already done:
 1. Launch code-reviewer agent
 2. Launch security-auditor agent
 3. Block if CRITICAL issues
 
-### 11. Merge to Develop
+### 10. Merge to Develop
 
 ```bash
 git checkout develop
 git pull origin develop
-git merge --no-ff feature/###-slug
+git merge --no-ff feature/initiative-slug
 git push origin develop
-git branch -d feature/###-slug
+git branch -d feature/initiative-slug
 ```
 
-### 12. Suggest Next Steps
+### 11. Suggest Next Steps
 
 ```
 Next actions:
-1. Start next task: /project-implement project ### --full
-2. View status: /project-status-all project
+1. Start next initiative: /project-issue --project [project]
+2. View status: /project-status-all [project]
 3. Merge to main (requires PR): gh pr create --base main --head develop
 ```
 
@@ -152,11 +164,9 @@ Next actions:
 Before merge, verify:
 1. **PLAN.md** - All phases checked off
 2. **Linked SPEC** - Updated to reflect what was built
-3. **architecture-overview.md** - Reflects changes
-4. **ADRs** - New decisions documented
-5. **CHANGELOG.md** - User-facing changes
-6. **WORKLOG.md** - Final summary
-7. **Project README.md** - Issue table updated, status/phase line updated
+3. **ADRs** - New decisions documented (in initiative dir)
+4. **WORKLOG** - Final summary
+5. **Project README.md** - Initiatives table updated
 
 ## Workflow
 
@@ -169,7 +179,7 @@ Before merge, verify:
         ↓
 /project-commit → /project-complete
                         ↓
-                Update docs + CHANGELOG
+                Update docs + README Initiatives table
                         ↓
                 Run reviews
                         ↓

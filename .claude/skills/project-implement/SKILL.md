@@ -12,16 +12,16 @@ Execute implementation phases from PLAN.md, writing code in the project's code r
 ## Usage
 
 ```bash
-/project-implement yourbench YB-2 1.1      # Execute phase 1.1 of issue YB-2
-/project-implement yourbench YB-2 --next   # Auto-find next uncompleted phase
-/project-implement yourbench --next        # Auto-detect issue + next phase
-/project-implement coordinatr 003 --full   # Execute all remaining phases
+/project-implement yourbench 2026-02-18-auth 1.1      # Execute phase 1.1
+/project-implement yourbench 2026-02-18-auth --next   # Auto-find next uncompleted phase
+/project-implement yourbench --next                    # Auto-detect initiative + next phase
+/project-implement coordinatr 2026-02-18-api --full   # Execute all remaining phases
 ```
 
 ## The Bridge Pattern
 
 ```
-06 Projects/yourbench/issues/YB-2-auth/   /Users/duncanleung/Develop/yourbench/
+06 Projects/yourbench/2026-02-18-auth/   /Users/duncanleung/Develop/yourbench/
 ├── TASK.md (requirements)            ├── src/
 ├── PLAN.md (phases)          ←→      │   └── auth/  ← CODE WRITTEN HERE
 └── worklog/                          └── tests/
@@ -32,16 +32,33 @@ Execute implementation phases from PLAN.md, writing code in the project's code r
 ## Prerequisites
 
 **REQUIRED:**
-- `issues/###-name/PLAN.md` must exist (under `06 Projects/[project]/`)
-- Active issue context (issue number specified or inferable)
+- `YYYY-MM-DD-name/PLAN.md` must exist (under `06 Projects/[project]/`)
+- Active initiative context (initiative name specified or inferable)
 - Code repo exists at the path specified in Projects Index `code:` field
 
 **If PLAN.md missing:** Run `/project-plan` first to create implementation plan
 
+## Initiative Resolution
+
+Find the initiative folder from the argument:
+
+```bash
+# If full folder name given:
+Read: "06 Projects/[project]/2026-02-18-auth/PLAN.md"
+
+# If partial name given, search:
+Glob: "06 Projects/[project]/*-auth*/PLAN.md"
+
+# If no initiative specified, list available with open status:
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/PLAN.md"
+```
+
+Present available initiatives if multiple match or none specified.
+
 ## Execution Flow
 
 ### 1. Parse & Validate
-- Locate issue in `06 Projects/[project]/issues/###-*/`
+- Locate initiative in `06 Projects/[project]/YYYY-MM-DD-name/`
 - Resolve code repo path from Projects Index in CLAUDE.md
 - Check git branch (warn if on main/develop)
 - Check dependencies (warn if incomplete)
@@ -55,7 +72,7 @@ Read `worklog/_state.json` for:
 
 ### 3. Branch & Status Management
 On first phase:
-- Create feature branch: `feature/###-slug` or `bugfix/###-slug`
+- Create feature branch: `feature/initiative-slug` or `bugfix/initiative-slug`
 - Update issue status to `in_progress`
 - Initialize worklog directory
 
@@ -63,7 +80,7 @@ On first phase:
 1. Load context:
    - PLAN.md (phases and checkboxes)
    - Spec section from `implements:` field in TASK.md
-   - ADRs and research docs
+   - ADRs and research docs from initiative dir
 2. Select agent based on phase domain
 3. Write code to the project's code repo
 4. Run tests and quality gates
@@ -119,17 +136,17 @@ When all phases complete:
 
 ### Specific Phase
 ```bash
-/project-implement yourbench YB-2 1.1  # Execute only phase 1.1
+/project-implement yourbench 2026-02-18-auth 1.1  # Execute only phase 1.1
 ```
 
 ### Next Phase
 ```bash
-/project-implement yourbench YB-2 --next  # Find first uncompleted checkbox
+/project-implement yourbench 2026-02-18-auth --next  # Find first uncompleted checkbox
 ```
 
 ### Full Run
 ```bash
-/project-implement yourbench YB-2 --full  # All remaining phases + final review
+/project-implement yourbench 2026-02-18-auth --full  # All remaining phases + final review
 ```
 
 ## Flags

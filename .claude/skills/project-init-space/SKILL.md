@@ -8,13 +8,13 @@ argument-hint: <project-name> [--type next|python|empty]
 
 # /project-init-space
 
-Initialize a new project's planning structure in `06 Projects/` with docs, specs, and ADR directories. Code repos live externally (e.g., `/Users/duncanleung/Develop/[project]/`) and are referenced via the Projects Index `code:` field in CLAUDE.md.
+Initialize a new project's planning structure in `06 Projects/`. Only creates `README.md` and `project-brief.md` at the project root — initiative folders are created on-demand by `/project-issue`. Code repos live externally (e.g., `/Users/duncanleung/Develop/[project]/`) and are referenced via the Projects Index `code:` field in CLAUDE.md.
 
 ## Usage
 
 ```bash
-/init-space coordinatr              # Initialize existing idea
-/init-space new-project --type next # Initialize new project
+/init-space coordinatr              # Initialize project planning space
+/init-space new-project --type next # Initialize with code repo scaffold
 /init-space myapp --type python     # Python project
 ```
 
@@ -24,27 +24,23 @@ Initialize a new project's planning structure in `06 Projects/` with docs, specs
 |------|---------|---------|
 | `next` | `create-next-app` | Next.js with App Router, TypeScript, Tailwind |
 | `python` | `uv init` or manual | Python with pyproject.toml |
-| `empty` | manual | Just standard structure |
+| `empty` | manual | Just planning structure |
 
-## Standard Structure (All Projects)
+## Standard Structure
 
-Every project in `06 Projects/` MUST have:
+Every project in `06 Projects/` starts minimal — no empty scaffolding dirs:
 
 ```
 06 Projects/[project]/
-├── README.md              # Status overview
-├── project-brief.md       # Vision, problem, audience
-├── issues/                # Work items
-├── critiques/             # Project critiques
-├── notes/                 # Scratchpad
-└── docs/
-    ├── README.md          # Docs index
-    ├── architecture.md    # System overview
-    ├── specs/             # Protocol specifications
-    │   └── README.md      # Spec index
-    └── adrs/
-        └── README.md      # ADR index + template
+├── README.md              # Project index with Initiatives table
+└── project-brief.md       # Vision, problem, audience
 ```
+
+Initiative folders are created just-in-time by other skills:
+- `/project-issue` creates `YYYY-MM-DD-name/TASK.md` (or BUG/SPIKE)
+- `/project-plan` creates `YYYY-MM-DD-name/PLAN.md`
+- `/project-adr` creates `YYYY-MM-DD-name/ADR-###.md`
+- `/project-spec` creates `YYYY-MM-DD-name/spec-*.md`
 
 ## Execution Flow
 
@@ -58,31 +54,76 @@ ls "06 Projects/[project]/"
 ### 2. Create Planning Structure
 
 ```bash
-mkdir -p "06 Projects/[project]/issues"
-mkdir -p "06 Projects/[project]/critiques"
-mkdir -p "06 Projects/[project]/notes"
-mkdir -p "06 Projects/[project]/docs/specs"
-mkdir -p "06 Projects/[project]/docs/adrs"
+mkdir -p "06 Projects/[project]/"
 ```
 
 Create these files:
 
-**CHANGELOG.md:**
+**README.md:**
 ```markdown
-# Changelog
+# [Project Name]
 
-All notable changes to this project will be documented in this file.
+[Brief description]
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## Status
 
-## [Unreleased]
+| Area | Status |
+|------|--------|
+| Project | Active |
+| Code Repo | `/Users/duncanleung/Develop/[project]/` |
+| Remote | `[to be added]` |
+| Branch | `main` |
 
-### Added
-- Initial project setup
+## Initiatives
+
+| Initiative | Date | Status |
+|------------|------|--------|
+| (none yet) | - | - |
+
+## Recent Activity
+
+- YYYY-MM-DD: Project initialized
 ```
 
-**CLAUDE.md:**
+**project-brief.md:**
+```markdown
+---
+status: draft
+created: YYYY-MM-DD
+---
+
+# Project Brief: [Project Name]
+
+## Vision
+
+[What is this project and why does it matter?]
+
+## Problem
+
+[What problem does this solve?]
+
+## Solution
+
+[How does this project solve the problem?]
+
+## Audience
+
+[Who is this for?]
+
+## Scope
+
+### In Scope
+- [Feature 1]
+
+### Out of Scope
+- [Explicitly excluded]
+```
+
+### 3. Initialize Code Repo (if --type specified)
+
+For `--type next|python`, scaffold the code repo at `/Users/duncanleung/Develop/[project]/`.
+
+**CLAUDE.md** (in code repo):
 ```markdown
 # [Project Name]
 
@@ -105,7 +146,6 @@ pnpm build      # Production build
 | File | Purpose |
 |------|---------|
 | `src/app/` | Next.js app routes |
-| `convex/` | Backend functions |
 
 ## Conventions
 
@@ -113,93 +153,10 @@ pnpm build      # Production build
 
 ## Related Documentation
 
-- [Project Brief](../../06 Projects/[project]/project-brief.md)
-- [Specs](../../06 Projects/[project]/specs/)
+- Planning: `06 Projects/[project]/` in obsidian vault
 ```
 
-**docs/README.md:**
-```markdown
-# Documentation
-
-Technical documentation for [project].
-
-## Contents
-
-| File/Directory | Purpose |
-|----------------|---------|
-| `architecture.md` | System overview |
-| `adrs/` | Architecture Decision Records |
-
-## Planning Documentation
-
-Planning docs live in the meta-repo at `06 Projects/[project]/`.
-```
-
-**docs/architecture.md:**
-```markdown
-# Architecture Overview
-
-## System Diagram
-
-[TODO: Add system diagram]
-
-## Components
-
-| Component | Purpose |
-|-----------|---------|
-| `src/app/` | Next.js routes |
-| `convex/` | Backend functions |
-
-## Data Flow
-
-[TODO: Document data flow]
-
-## External Services
-
-| Service | Purpose |
-|---------|---------|
-| Convex | Database + backend |
-| Clerk | Authentication |
-| Vercel | Hosting |
-
-## Related
-
-- [ADRs](adrs/) - Architecture decisions
-- [Project Brief](../../../06 Projects/[project]/project-brief.md) - Vision and requirements
-```
-
-**docs/adrs/README.md:**
-```markdown
-# Architecture Decision Records
-
-ADRs document significant technical decisions made during implementation.
-
-## Index
-
-| ADR | Title | Status |
-|-----|-------|--------|
-| - | (none yet) | - |
-
-## Template
-
-\```markdown
-# ADR-###: Title
-
-**Status**: Proposed | Accepted | Deprecated | Superseded
-**Date**: YYYY-MM-DD
-
-## Context
-Why is this decision needed?
-
-## Decision
-What did we decide?
-
-## Consequences
-What are the trade-offs?
-\```
-```
-
-### 4. Initialize Git (if not exists)
+### 4. Initialize Git (if not exists, code repo only)
 
 ```bash
 git init
@@ -216,14 +173,14 @@ git status
 
 ```
 Files staged and ready. When you're ready to commit, run:
-/commit [project]
+/project-commit [project]
 ```
 
 ## Safety Rules
 
 1. **NEVER commit automatically** - only stage files
 2. **NEVER overwrite existing space** - error if directory exists
-3. **Always create standard structure** - even for framework scaffolds
+3. **No empty scaffolding dirs** - initiative dirs created on-demand by other skills
 
 ## Post-Init Checklist
 
@@ -233,20 +190,17 @@ Display to user after init:
 ## Space Initialized: [project]
 
 ### Created
-- [ ] Project scaffolded
-- [ ] CLAUDE.md created
-- [ ] README.md created
-- [ ] CHANGELOG.md created
-- [ ] docs/architecture.md created
-- [ ] docs/adrs/ structure created
-- [ ] Git initialized
+- [ ] README.md with Initiatives table
+- [ ] project-brief.md (draft)
+- [ ] Code repo scaffolded (if --type specified)
+- [ ] CLAUDE.md in code repo (if --type specified)
+- [ ] Git initialized (if --type specified)
 - [ ] Files staged (not committed)
 
 ### Next Steps
-1. Review staged files: `git status`
-2. Commit when ready: `/commit [project]`
-3. Add to Projects Index in CLAUDE.md (if not already)
-4. Set up remote: `git remote add origin [url]`
+1. Fill in project-brief.md
+2. Add to Projects Index in CLAUDE.md
+3. Create first initiative: `/project-issue --project [project]`
 ```
 
 ## Error Handling
@@ -254,7 +208,6 @@ Display to user after init:
 | Error | Resolution |
 |-------|------------|
 | Project already exists | Error: "Project already exists at 06 Projects/[project]/" |
-| No idea exists | Warning: "No planning docs at 06 Projects/[project]/. Continue anyway?" |
 | Scaffold fails | Clean up partial directory, show error |
 
 ## Integration with Projects Index
