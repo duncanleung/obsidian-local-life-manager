@@ -1,11 +1,17 @@
 ---
 name: project-spec
-description: "Manage protocol/standard specifications that define what a system must do. Use to create, import, or update the contract that TASKs implement against."
+description: "(Deprecated) Manage protocol/standard specifications. Use /project-features for self-authored requirements or /project-import-spec for external PRDs."
 model: claude-opus-4-5-20251101
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 ---
 
 # /project-spec
+
+> **DEPRECATED:** This skill has been superseded by two focused skills:
+> - `/project-features` -- for self-authored requirements (features + user stories + AC)
+> - `/project-import-spec` -- for importing external PRDs/specs
+>
+> `/project-spec` remains available for legacy projects but is no longer part of the default pipeline.
 
 Manage protocol-level specifications - the contract defining *what* a system must do.
 

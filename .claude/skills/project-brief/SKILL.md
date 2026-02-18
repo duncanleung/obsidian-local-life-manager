@@ -114,10 +114,10 @@ Assume the primary reader is a **junior developer**. Requirements should be expl
 - Before creating specifications
 - When vision feels unclear
 
-**Not needed for**: Quick notes (use notes/), technical research (/research), feature details (/project-spec)
+**Not needed for**: Quick notes (use notes/), technical research (/research), feature decomposition (/project-features)
 
 ## Next Steps After Brief
 
 ```
-/project-brief → /project-critique → /research-deep → /project-spec → /project-plan
+/project-brief → /project-features → /project-issue → /project-plan → /project-implement
 ```

@@ -22,7 +22,9 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 | `/project-brief` | Create or update project brief through interactive discovery |
 | `/project-critique` | Challenge idea assumptions with skeptical VC-style evaluation |
 | `/project-init-space` | Initialize project planning structure in 06 Projects/ and optionally docs structure |
-| `/project-spec` | Manage protocol/standard specifications |
+| `/project-features` | Decompose project brief into features with user stories, AC, dependency graph, and MVP scope |
+| `/project-import-spec` | Import external requirements (JIRA, Confluence, GitHub, URL) into the project |
+| `/project-spec` | (Deprecated) Use /project-features or /project-import-spec |
 | `/project-adr` | Create Architecture Decision Records |
 | `/project-ui-design` | Create HTML UI mockups in 06 Projects/[project]/docs/ui-designs/ |
 | `/project-issue` | Create work items (TASK, BUG, SPIKE) with AI-assisted type detection |

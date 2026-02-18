@@ -76,6 +76,15 @@ Branch: feature/dashboard (clean, up to date)
 | YourBench  | Job search priority    |
 | IRL Social | Waiting on API access  |
 
+## Feature Progress (if features/ exists)
+
+| Feature | Priority | Stories | Tasks | Done | Status |
+|---------|----------|---------|-------|------|--------|
+| F-001 Auth | must-have | 3 | 2 | 1/2 | 🚧 50% |
+| F-002 Documents | must-have | 4 | 0 | 0/0 | ⏳ not started |
+
+MVP progress: 1/4 features complete (25%)
+
 ## Needs Attention
 - Coordinatr 2026-02-18-data-model blocked (waiting on auth-research)
 - Coordinatr 2026-02-18-api-design SPIKE past 3-day timebox

@@ -60,10 +60,21 @@ Present available initiatives if multiple match or none specified:
    Glob: resources/research/*.md
    ```
 
-   If the issue has an `implements:` field, locate and load that spec:
+   If the issue has a `feature:` field, load the parent feature card:
    ```bash
-   # Check initiative-local spec first, then project-wide
-   Glob: "06 Projects/[project]/YYYY-MM-DD-name/spec-*.md"
+   Read: "06 Projects/[project]/features/F-###-name.md"
+   ```
+
+   Use the feature card for:
+   - Understanding the broader context of this task within the feature
+   - Feature-level dependencies inform phase ordering
+   - User stories provide acceptance-test inspiration
+
+   If the issue has an `implements:` field, locate and load that spec or feature card:
+   ```bash
+   # Check feature cards first, then specs
+   Glob: "06 Projects/[project]/features/F-*.md"
+   Glob: "06 Projects/[project]/specs/spec-*.md"
    Glob: "06 Projects/[project]/*/spec-*.md"
    ```
 
@@ -241,11 +252,11 @@ Assume the primary reader is a **junior developer**. Phase descriptions, sub-tas
 ## Workflow
 
 ```
-/project-spec → /project-issue → /project-plan {initiative} → (work phases)
-                                      ↓                             ↓
-                            Load spec section             quality gate (parallel)
-                            from implements: field              ↓
-                                              /project-commit → /project-complete {initiative}
+/project-features → /project-issue → /project-plan {initiative} → (work phases)
+                                          ↓                             ↓
+                                Load feature card             quality gate (parallel)
+                                from feature: field                 ↓
+                                                  /project-commit → /project-complete {initiative}
 ```
 
 **Creates:**

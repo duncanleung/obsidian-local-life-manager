@@ -179,5 +179,7 @@ AI: Done. Re-validating...
 ## Integration
 
 ```
-/project-spec → /project-spec-validate --pre → [approval] → /project-plan → /project-implement → /project-spec-validate --post → /project-complete
+/project-features → /project-issue → /project-plan → /project-implement → /project-spec-validate --post → /project-complete
 ```
+
+**Note:** When the `implements:` field points to a feature card (e.g., `features/F-001-auth.md#account-registration`) instead of a spec, validation reads acceptance criteria from the feature card's Given-When-Then format. The validation logic is identical — it just reads from a different source file.

@@ -38,9 +38,9 @@ Output: `06 Projects/[project]/README.md` + `project-brief.md`
 
 ## Phase 3: Planning (1-4 hours)
 
-### Step 5: Define First Feature
+### Step 5: Decompose into Features
 ```bash
-/project-spec "MVP feature set"
+/project-features
 ```
 
 ### Step 6: Document Tech Stack Decision
@@ -99,9 +99,9 @@ Output: `06 Projects/[project]/README.md` + `project-brief.md`
 /project-validate-security-audit
 ```
 
-### Step 14 (Optional): Verify Spec Implemented
+### Step 14 (Optional): Verify Features Implemented
 ```bash
-/project-spec-validate
+/project-validate-spec
 ```
 
 ### Step 15: Complete and Merge
@@ -113,15 +113,15 @@ Output: `06 Projects/[project]/README.md` + `project-brief.md`
 
 ### Lean Startup (Skip Some Steps)
 ```bash
-/project-brief → /project-spec → /project-issue → /project-implement → /project-commit
+/project-brief → /project-features → /project-issue → /project-implement → /project-commit
 ```
 
 ### Research-Heavy (More Analysis)
 ```bash
-/project-brief → /project-critique → /research-deep → /research-deep → /project-spec → /project-adr → /project-implement
+/project-brief → /project-critique → /research-deep → /research-deep → /project-features → /project-adr → /project-implement
 ```
 
 ### Learning-Focused (You Write Code)
 ```bash
-/project-brief → /project-spec → /project-issue → /project-plan → /project-teach → /project-worklog → /project-validate-quality
+/project-brief → /project-features → /project-issue → /project-plan → /project-teach → /project-worklog → /project-validate-quality
 ```

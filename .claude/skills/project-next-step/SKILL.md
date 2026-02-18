@@ -29,8 +29,10 @@ Assess project readiness and recommend the next skill to run.
 
 | File/Directory | When Needed | Purpose |
 |----------------|-------------|---------|
+| **features/README.md** | Before creating issues | Feature map with dependency graph and scope |
+| **features/F-*.md** | Before creating issues | Individual feature cards with stories and AC |
 | **YYYY-MM-DD-*/critique.md** | Before planning | Risk assessment |
-| **YYYY-MM-DD-*/spec-*.md** | Defining features | Technical specifications |
+| **specs/spec-*.md** | Imported external specs | External requirements with compliance checklist |
 | **YYYY-MM-DD-*/ADR-*.md** | Major tech decisions | Architecture Decision Records |
 | **YYYY-MM-DD-*/TASK.md** | In development | Work tracking (initiatives) |
 
@@ -40,12 +42,16 @@ Assess project readiness and recommend the next skill to run.
 - README + project-brief.md sufficient
 - critique.md optional (recommend before planning)
 
+**Features Phase:**
+- Should have `features/` directory with feature cards
+- Walking skeleton and MVP scope defined in `features/README.md`
+- critique.md optional (recommend before significant investment)
+
 **Planning Phase:**
-- Should have a critique (in an initiative folder)
-- Should have specs (in initiative folders)
+- Should have features with stories and acceptance criteria
+- Should have initiative folders with TASK.md files
 
 **Development/Implementation Phase:**
-- Must have at least one spec (in initiative folder)
 - Must have initiative folders with PLAN.md files
 - Should have ADRs in initiative folders if major decisions made
 
@@ -73,11 +79,16 @@ Based on project phase in README.
 
 | Current State | Suggested Next Step |
 |---------------|---------------------|
-| Just README | Run `/brief` |
-| Has brief | Run `/critique` |
-| Has critique | Run `/research` |
-| Has research | Run `/spec` |
-| Has specs | Run `/plan` + `/issue` |
+| Just README | Run `/project-brief` |
+| Has brief | Run `/project-features` |
+| Has features | Run `/project-issue` (for MVP features first) |
+| Has issues | Run `/project-plan` |
+| Has plans | Run `/project-implement` |
+
+**Optional steps (suggest when relevant, not mandatory):**
+- `/project-critique` -- when brief is complete and project is ambitious
+- `/research-deep` -- when domain is unfamiliar
+- `/project-import-spec` -- when implementing external PRD/standard
 
 ## Validation Report
 
@@ -112,15 +123,19 @@ Based on project phase in README.
 
 ## Readiness Criteria
 
-### Ready for /spec
+### Ready for /project-features
 - project-brief.md complete
-- critique.md present
-- Key research done
+- Vision and problem clearly stated
 
-### Ready for /plan + /implement
-- At least one spec complete
-- Acceptance criteria clear
-- Technical decisions made
+### Ready for /project-issue
+- At least one feature card complete (in `features/`)
+- MVP scope defined in `features/README.md`
+- Walking skeleton identified
+
+### Ready for /project-plan
+- At least one initiative with TASK.md
+- Acceptance criteria clear (from feature card)
+- Technical decisions made (ADRs if needed)
 
 ## When to Use
 
@@ -133,5 +148,5 @@ Based on project phase in README.
 ## Integration
 
 ```
-/project-next-step → Fix issues → /project-next-step again → /spec or /plan
+/project-next-step → Fix issues → /project-next-step again → /project-features or /project-issue
 ```

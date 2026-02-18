@@ -78,7 +78,7 @@ Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/TASK.md"
 
 ### 3. Update Spec Status Markers
 
-If the TASK has an `implements:` field, update inline status markers in the spec:
+If the TASK has an `implements:` field pointing to a spec, update inline status markers:
 
 ```markdown
 # Before (in initiative dir or project-wide spec)
@@ -89,6 +89,18 @@ If the TASK has an `implements:` field, update inline status markers in the spec
 ```
 
 This provides public visibility into what's implemented.
+
+### 3.5. Check Feature Completion
+
+If the completed TASK has a `feature:` field:
+1. Find all other tasks with the same `feature:` value:
+   ```bash
+   Grep: "feature: F-001" in "06 Projects/[project]/"
+   ```
+2. Check if all are `status: complete`
+3. If yes: update feature card `status: complete` in frontmatter and update Feature Map README index
+4. If no: report remaining tasks for the feature
+   > "Feature F-001 (Auth): 3/5 tasks complete. Remaining: registration endpoint, password reset"
 
 ### 4. Update All Documentation
 
@@ -167,6 +179,8 @@ Before merge, verify:
 3. **ADRs** - New decisions documented (in initiative dir)
 4. **WORKLOG** - Final summary
 5. **Project README.md** - Initiatives table updated
+6. **Feature Card** - Status updated if all tasks for the feature are complete
+7. **Feature Map README** - Feature Index status column updated
 
 ## Workflow
 

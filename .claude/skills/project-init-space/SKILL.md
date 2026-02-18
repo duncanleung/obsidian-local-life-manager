@@ -36,11 +36,12 @@ Every project in `06 Projects/` starts minimal — no empty scaffolding dirs:
 └── project-brief.md       # Vision, problem, audience
 ```
 
-Initiative folders are created just-in-time by other skills:
+Initiative folders and reference directories are created just-in-time by other skills:
+- `/project-features` creates `features/` directory with feature cards
+- `/project-import-spec` creates `specs/` directory with imported specs
 - `/project-issue` creates `YYYY-MM-DD-name/TASK.md` (or BUG/SPIKE)
 - `/project-plan` creates `YYYY-MM-DD-name/PLAN.md`
 - `/project-adr` creates `YYYY-MM-DD-name/ADR-###.md`
-- `/project-spec` creates `YYYY-MM-DD-name/spec-*.md`
 
 ## Execution Flow
 
@@ -198,9 +199,9 @@ Display to user after init:
 - [ ] Files staged (not committed)
 
 ### Next Steps
-1. Fill in project-brief.md
-2. Add to Projects Index in CLAUDE.md
-3. Create first initiative: `/project-issue --project [project]`
+1. Fill in project-brief.md → `/project-brief`
+2. Decompose into features → `/project-features`
+3. Create first initiative → `/project-issue`
 ```
 
 ## Error Handling

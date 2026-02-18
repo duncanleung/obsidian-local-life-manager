@@ -163,10 +163,10 @@ When all phases complete:
 ## Workflow
 
 ```
-/project-spec → /project-issue → /project-plan → /project-implement
-                    ↓                                    ↓
-             implements:                           Load spec section
-             spec section                          for requirements
+/project-features → /project-issue → /project-plan → /project-implement
+                       ↓                                    ↓
+                feature: F-001                        Load feature card
+                implements: story                     for requirements
                                                          ↓
                                                worklog/ entries created
                                                          ↓
@@ -179,6 +179,6 @@ When all phases complete:
                                         /project-commit → /project-complete
 ```
 
-## Spec Compliance
+## Spec and Feature Compliance
 
-When implementing, the code should fulfill the requirements from the spec section referenced in the issue's `implements:` field. The `/project-complete` command will validate that all spec requirements are met.
+When implementing, the code should fulfill the requirements from the feature story or spec section referenced in the issue's `feature:` and `implements:` fields. The `/project-complete` command will validate that all requirements are met and update feature card status when all tasks for a feature are done.

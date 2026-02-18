@@ -86,15 +86,37 @@ Glob: "06 Projects"/[project]/YYYY-MM-DD-*
 
 If a same-date folder with the same slug exists, append a disambiguator (e.g., `-v2`).
 
-### 4. Ask About Spec Section
+### 3.5. Ask About Feature
 
-Check if project has a spec:
+Check if project has features:
 ```bash
-Glob: "06 Projects"/[project]/*/spec-*.md
-Glob: "06 Projects"/[project]/docs/specs/*.md
+Glob: "06 Projects"/[project]/features/F-*.md
 ```
 
-If spec exists:
+If features exist, load the feature map and present:
+> "Which feature does this belong to?"
+> 1. F-001: User Authentication (must-have, MVP)
+> 2. F-002: Document Management (must-have, MVP)
+> 3. F-003: Sharing (should-have, Phase 2)
+> 4. None (standalone task)
+
+Load the selected feature card as context for writing acceptance criteria.
+If the feature card has user stories, incorporate relevant Given-When-Then AC into the task's acceptance criteria.
+
+### 4. Ask About Spec Section
+
+Check if project has specs (imported external specs or legacy specs):
+```bash
+Glob: "06 Projects"/[project]/specs/spec-*.md      # Imported specs
+Glob: "06 Projects"/[project]/*/spec-*.md           # Legacy initiative-scoped specs
+```
+
+If the task has a feature, the `implements:` field should point to the feature card section:
+```yaml
+implements: features/F-001-auth.md#account-registration
+```
+
+If spec exists and no feature selected:
 > "Which spec section does this implement?"
 > - spec-required-features.md#authentication
 > - spec-required-features.md#documents
@@ -109,7 +131,8 @@ Create the initiative folder and write the issue file inside it.
 ---
 status: open
 created: YYYY-MM-DD
-implements: spec-required-features.md#authentication  # or empty if standalone
+feature: F-001                                              # or empty if standalone
+implements: features/F-001-auth.md#account-registration     # or spec section, or empty
 depends_on: []
 ---
 
@@ -121,16 +144,17 @@ depends_on: []
 
 ## Implements
 
-**Spec Section:** [spec-required-features.md#authentication](spec-required-features.md#authentication)
+**Feature:** [F-001: User Authentication](../features/F-001-auth.md)
+**Story:** Account Registration
 
-**Requirements from spec:**
-- [Requirement 1 from spec]
-- [Requirement 2 from spec]
+**Acceptance Criteria (from feature):**
+- Given a valid email and password, When I submit registration, Then my account is created
+- Given an email already in use, When I submit registration, Then I see "Email already registered"
 
 ## Acceptance Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
+- [ ] Criterion 1 (from feature story AC above)
+- [ ] Criterion 2 (additional task-specific criteria)
 
 ## Non-Goals
 
@@ -255,40 +279,43 @@ Assume the primary reader is a **junior developer**. Descriptions, acceptance cr
 | `blocked` | Waiting on something |
 | `complete` | Done |
 
-## Spec Integration
+## Feature and Spec Integration
 
 ### Task Scoping
 
-**One TASK = One requirement line item**
+**One TASK = One user story (or part of a story if large)**
 
 A TASK should be atomic and shippable:
-- Implements exactly one spec requirement
+- Implements one user story from a feature card (or one requirement from a spec)
 - Can be pushed to main independently
-- Updates one `⏳` → `✅` marker when complete
+- Touches 2-3 files maximum (for AI agent effectiveness)
 
-```markdown
-# Spec line items (each becomes a TASK)
-- ⏳ User registration with email/password    ← TASK
-- ⏳ User login with JWT token                ← TASK
-- ⏳ Password reset flow                      ← TASK
+**Don't create:** "TASK: Implement Authentication" (too broad — that's a feature)
+**Do create:** "TASK: User registration endpoint" (one story)
+
+### feature: Field
+
+```yaml
+# Points to the parent feature
+feature: F-001
 ```
 
-**Don't create:** "TASK: Implement Authentication" (too broad)
-**Do create:** "TASK: User registration endpoint" (one requirement)
+This groups related tasks under a feature for progress tracking.
 
 ### implements: Field
 
 ```yaml
-# Points to the specific requirement
-implements: spec-required-features.md#user-registration-with-email-password
+# Points to the specific story or spec requirement
+implements: features/F-001-auth.md#account-registration
 ```
 
-This creates a direct link between work items and the exact requirement they fulfill.
+This creates a direct link between work items and the exact story/requirement they fulfill.
 
 ## Workflow
 
 ```
-/project-spec → /project-issue → /project-plan → (work) → quality gate → /project-commit → /project-complete
-                  ↓
-            implements: spec section
+/project-features → /project-issue → /project-plan → (work) → quality gate → /project-commit → /project-complete
+                       ↓
+                 feature: F-001
+                 implements: feature story
 ```
