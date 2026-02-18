@@ -54,19 +54,20 @@ Code repositories live at their actual paths (e.g., `/Users/duncanleung/Develop/
 
 ```
 06 Projects/[project]/
-├── README.md                # Status overview
-├── project-brief.md         # Vision, problem, audience
-├── issues/###-name/         # Work items
-│   ├── TASK.md|BUG.md|SPIKE.md
-│   ├── PLAN.md              # Phase breakdown
-│   └── WORKLOG.md           # Progress tracking
-├── docs/                    # Technical documentation
-│   ├── architecture.md      # System overview
-│   ├── specs/               # Protocol specs (source of truth)
-│   └── adrs/                # Architecture decisions
-├── critiques/               # Project critiques
-└── notes/                   # Scratchpad
+├── README.md                              # Project index with Initiatives table
+├── project-brief.md                       # Vision, problem, audience
+├── YYYY-MM-DD-initiative-name/            # Initiative folder (created by /project-issue)
+│   ├── TASK.md|BUG.md|SPIKE.md           # Work item
+│   ├── PLAN.md                            # Phase breakdown
+│   ├── WORKLOG.md                         # Progress tracking
+│   ├── context.md                         # AI session handoff
+│   ├── critique.md                        # Critique (if applicable)
+│   ├── spec-*.md                          # Specs (if applicable)
+│   ├── ADR-###-*.md                       # Architecture decisions
+│   └── ui-*.html                          # UI mockups
 ```
+
+**Convention:** No intermediate directories (`issues/`, `docs/`, `critiques/`). All work is scoped under dated initiative folders created on-demand by `/project-issue`. Only `README.md` and `project-brief.md` live at the project root.
 
 ### Code Repositories (external)
 
