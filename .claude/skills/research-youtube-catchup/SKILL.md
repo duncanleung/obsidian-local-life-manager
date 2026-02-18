@@ -89,7 +89,8 @@ Summarize this YouTube video and create a note.
 VIDEO_ID: {video_id}
 CHANNEL: {channel_name}
 TAGS: {tags}
-OUTPUT_PATH: {output_path}
+TODAY: {YYYY-MM-DD}
+OUTPUT_PATH: {output_path}  (NOTE: filename must start with date prefix, e.g. 01 Inbox/Videos/Channel/YYYY-MM-DD-title.md)
 
 IMPORTANT: Use the OUTPUT_PATH exactly as given with literal spaces (e.g., "01 Inbox/...").
 Do NOT escape spaces with backslashes - this creates directories with literal backslash characters in the name.
@@ -167,8 +168,10 @@ Each channel in `references/channels.json` has a `tags` array specifying default
 
 ## Output Paths
 
-Video notes: `01 Inbox/Videos/{channel_folder}/{title}.md`
-Discovery notes: `01 Inbox/{name}.md`
+Video notes: `01 Inbox/Videos/{channel_folder}/{YYYY-MM-DD}-{title}.md`
+Discovery notes: `01 Inbox/{YYYY-MM-DD}-{name}.md`
+
+**Date prefix**: Use today's date (from `date +%Y-%m-%d`) as a prefix on all filenames created in `01 Inbox/`.
 
 **CRITICAL - Path Handling:**
 - **NEVER escape spaces with backslashes** in paths passed to subagents or the Write tool

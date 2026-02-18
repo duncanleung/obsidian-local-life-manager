@@ -124,8 +124,10 @@ Related: [[Video Title]]
 
 ## Output Paths
 
-- Video notes: `01 Inbox/Videos/{channel_folder}/{title}.md`
-- Discovery notes: `01 Inbox/{name}.md`
+- Video notes: `01 Inbox/Videos/{channel_folder}/{YYYY-MM-DD}-{title}.md`
+- Discovery notes: `01 Inbox/{YYYY-MM-DD}-{name}.md`
+
+**Date prefix**: Always prepend today's date (`YYYY-MM-DD-`) to filenames created in `01 Inbox/`.
 
 ## Path Handling
 

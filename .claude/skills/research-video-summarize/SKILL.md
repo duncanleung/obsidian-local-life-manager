@@ -35,7 +35,7 @@ Summarize a single YouTube video and create a note.
    - Otherwise use channel name from metadata
    - Create folder if it doesn't exist
 
-5. **Create note** at `01 Inbox/Videos/<folder>/<title>.md`
+5. **Create note** at `01 Inbox/Videos/<folder>/{YYYY-MM-DD}-<title>.md` (use today's date as prefix)
 
 6. **Assign tags:**
    - Check `research-youtube-catchup/references/channels.json` for channel's default tags

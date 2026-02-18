@@ -39,6 +39,7 @@ $ARGUMENTS
    - For articles: use the user-provided title
    - Convert to kebab-case: lowercase, spaces to hyphens, remove special characters (`:/?"|<>+`)
    - Limit to ~80 characters
+   - **Prepend today's date**: `YYYY-MM-DD-{kebab-title}.md` (use date from step 1)
    - Check if file already exists at the output path — if so, warn and ask
 
 6A. **YouTube Video — full summarization**
@@ -59,7 +60,7 @@ $ARGUMENTS
    - If channel not in config, use `--tags` if provided, otherwise infer from content
    - Tags must come from canonical list in `08 System/Tag Index.md`
 
-   Write to `01 Inbox/Videos/Unsorted/{filename}.md`:
+   Write to `01 Inbox/Videos/Unsorted/{YYYY-MM-DD}-{filename}.md`:
 
    ```markdown
    ---
@@ -119,7 +120,7 @@ $ARGUMENTS
 
    If fetch fails: fall back to placeholder `*Not yet summarized.*`
 
-   Write to `01 Inbox/Articles/Unsorted/{filename}.md`:
+   Write to `01 Inbox/Articles/Unsorted/{YYYY-MM-DD}-{filename}.md`:
 
    ```markdown
    ---
@@ -151,14 +152,14 @@ $ARGUMENTS
 
    For videos:
    ```
-   Summarized: 01 Inbox/Videos/Unsorted/{filename}.md
+   Summarized: 01 Inbox/Videos/Unsorted/{YYYY-MM-DD}-{filename}.md
    Duration: {duration}
    Tags: {tags}
    ```
 
    For articles:
    ```
-   Clipped: 01 Inbox/Articles/Unsorted/{filename}.md
+   Clipped: 01 Inbox/Articles/Unsorted/{YYYY-MM-DD}-{filename}.md
    URL: {url or "none"}
    Tags: {tags or "none"}
    ```

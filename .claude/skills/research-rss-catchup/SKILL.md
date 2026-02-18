@@ -77,9 +77,9 @@ For discovery notes, choose tags based on what the discovery is (e.g., a Python 
 
 ## Article Note Format
 
-Create in: `01 Inbox/Articles/[Feed Name]/[Title].md`
+Create in: `01 Inbox/Articles/[Feed Name]/{YYYY-MM-DD}-[Title].md`
 
-Sanitize filenames: remove special characters, limit length to ~80 chars.
+Sanitize filenames: remove special characters, limit length to ~80 chars. Always prepend today's date as prefix.
 
 ```markdown
 ---
@@ -140,7 +140,7 @@ Tags should be from the canonical list in `08 System/Tag Index.md`.
 
 ## Discovery Note Format
 
-Create in: `01 Inbox/[Name].md`
+Create in: `01 Inbox/{YYYY-MM-DD}-[Name].md`
 
 ```markdown
 ---
