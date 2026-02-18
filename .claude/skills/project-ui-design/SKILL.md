@@ -20,17 +20,18 @@ Generate HTML UI mockups with optional parallel variant exploration.
 
 ## Where Designs Live
 
+Designs live inside initiative folders:
+
 ```
-06 Projects/yourbench/docs/ui-designs/
-├── login-screen-v1.html
-├── login-screen-v2a.html      # Variant A
-├── login-screen-v2b.html      # Variant B (approved)
-├── dashboard-v1.html
-└── components/
-    └── button-variants.html
+06 Projects/yourbench/2026-02-18-auth/
+├── TASK.md
+├── ui-login-screen-v1.html
+├── ui-login-screen-v2a.html      # Variant A
+├── ui-login-screen-v2b.html      # Variant B (approved)
+└── ui-dashboard-v1.html
 ```
 
-**Why in 06 Projects/?** Designs are planning artifacts, not code.
+**Why in initiative folders?** Designs are planning artifacts scoped to specific work.
 
 ## Execution Flow
 
@@ -42,7 +43,7 @@ Generate HTML UI mockups with optional parallel variant exploration.
 
 ### 2. Load Context
 ```bash
-Glob: "06 Projects/[project]/docs/ui-designs/*.html"
+Glob: "06 Projects/[project]/*/ui-*.html"
 Read: "06 Projects/[project]/project-brief.md"
 ```
 
@@ -50,14 +51,14 @@ Read: "06 Projects/[project]/project-brief.md"
 
 **Single design:**
 ```
-→ 06 Projects/yourbench/docs/ui-designs/login-screen-v1.html
+→ 06 Projects/yourbench/2026-02-18-auth/ui-login-screen-v1.html
 ```
 
 **Multiple variants (parallel ui-ux-designer agents):**
 ```
-→ login-screen-v1a.html
-→ login-screen-v1b.html
-→ login-screen-v1c.html
+→ ui-login-screen-v1a.html
+→ ui-login-screen-v1b.html
+→ ui-login-screen-v1c.html
 ```
 
 ### 4. Present Options
@@ -65,11 +66,11 @@ Read: "06 Projects/[project]/project-brief.md"
 ```
 Created 3 login screen variants:
 
-1. v1a.html - Minimal, centered form
-2. v1b.html - Split screen with illustration
-3. v1c.html - Card-based with social logins
+1. ui-login-screen-v1a.html - Minimal, centered form
+2. ui-login-screen-v1b.html - Split screen with illustration
+3. ui-login-screen-v1c.html - Card-based with social logins
 
-View: open 06 Projects/yourbench/docs/ui-designs/login-screen-v1a.html
+View: open "06 Projects/yourbench/2026-02-18-auth/ui-login-screen-v1a.html"
 
 Which direction? (a/b/c/iterate/combine)
 ```
@@ -85,10 +86,10 @@ User requests changes:
 ```
 User: approve v1b
 
-AI: ✓ Marked login-screen-v1b.html as APPROVED
+AI: ✓ Marked ui-login-screen-v1b.html as APPROVED
 
     Reference in TASK.md:
-    "Implement login per docs/ui-designs/login-screen-v1b.html"
+    "Implement login per ui-login-screen-v1b.html"
 ```
 
 ## Technology Options
@@ -113,24 +114,24 @@ Self-contained with embedded CSS/JS:
 /ui-design yourbench list
 
 UI Designs for yourbench:
-├── login-screen-v1b.html [APPROVED]
-├── dashboard-v1.html [DRAFT]
-└── settings-v1a.html [DRAFT]
+├── 2026-02-18-auth/ui-login-screen-v1b.html [APPROVED]
+├── 2026-02-18-auth/ui-dashboard-v1.html [DRAFT]
+└── 2026-02-19-settings/ui-settings-v1a.html [DRAFT]
 ```
 
 ## Integration with Implementation
 
 ```bash
-/implement yourbench 001 1.3  # "Implement login UI"
+/implement yourbench 2026-02-18-auth 1.3  # "Implement login UI"
 
-AI: Found approved design: login-screen-v1b.html
+AI: Found approved design: ui-login-screen-v1b.html
     Implementing to match design...
 ```
 
 Reference in TASK.md:
 ```markdown
 ## Acceptance Criteria
-- [ ] Matches docs/ui-designs/login-screen-v1b.html
+- [ ] Matches ui-login-screen-v1b.html
 - [ ] Responsive at 320px, 768px, 1280px
 ```
 

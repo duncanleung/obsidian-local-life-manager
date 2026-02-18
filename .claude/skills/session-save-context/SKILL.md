@@ -1,6 +1,6 @@
 ---
 name: session-save-context
-description: "Save AI session context handoff to the obsidian vault's 06 Projects/{project}/context/ for seamless continuation of work. Triggers on 'save context', 'handoff', 'session context'."
+description: "Save AI session context handoff to the obsidian vault's 06 Projects/{project}/ initiative folder for seamless continuation of work. Triggers on 'save context', 'handoff', 'session context'."
 model: claude-haiku-4-5-20251001
 allowed-tools: Read, Write, Glob, Grep, Bash(date:*, mkdir:*, wc:*, grep:*)
 argument-hint: [topic]
@@ -8,7 +8,7 @@ argument-hint: [topic]
 
 # /session-save-context
 
-Save a comprehensive context handoff file to the obsidian vault at `06 Projects/{project}/context/`, optimized for a new AI agent to continue work on a specific topic. The project folder is derived from the current working directory name. Files are always saved to the obsidian vault regardless of which repo this skill is invoked from.
+Save a comprehensive context handoff file to the obsidian vault inside the relevant initiative folder at `06 Projects/{project}/YYYY-MM-DD-name/context.md`, optimized for a new AI agent to continue work on a specific topic. The project folder is derived from the current working directory name. Files are always saved to the obsidian vault regardless of which repo this skill is invoked from.
 
 ## Usage
 
@@ -49,7 +49,7 @@ Search the codebase to find ALL files and context related to "$ARGUMENTS":
 2. **Read key files** that are central to understanding the topic
 
 3. **Check for existing context**:
-   - Previous context files in the obsidian vault's `06 Projects/{project}/context/`
+   - Previous context files in initiative folders: `06 Projects/{project}/*/context.md`
    - Documentation in `.claude/` or `SHARED/`
 
 ### Step 2: Gather User Context
@@ -66,16 +66,24 @@ Ask the user these focused questions about "$ARGUMENTS":
 
 ### Step 3: Generate Context File
 
-Create the handoff file in the obsidian vault's `06 Projects/` directory. The project folder name is derived from the current working directory, but the file is always saved to the obsidian vault:
+Create the handoff file in the relevant initiative folder. If there's an active initiative matching the topic, save there. Otherwise create a new initiative-scoped context:
 
 ```bash
 OBSIDIAN_VAULT="/Users/duncanleung/Develop/obsidian-local-life-manager"
 TIMESTAMP=$(date "+%Y-%m-%d")
 TOPIC_SLUG=$(echo "$ARGUMENTS" | tr ' ' '-' | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]' | head -c 50)
 PROJECT_NAME=$(basename "$(pwd)")
-CONTEXT_DIR="${OBSIDIAN_VAULT}/06 Projects/${PROJECT_NAME}/context"
-CONTEXT_FILE="${CONTEXT_DIR}/${TIMESTAMP}-${TOPIC_SLUG}.md"
-mkdir -p "$CONTEXT_DIR"
+
+# Try to find matching initiative folder
+INITIATIVE_DIR=$(ls -d "${OBSIDIAN_VAULT}/06 Projects/${PROJECT_NAME}/"*-${TOPIC_SLUG}* 2>/dev/null | head -1)
+
+# If no match, create new initiative folder
+if [ -z "$INITIATIVE_DIR" ]; then
+  INITIATIVE_DIR="${OBSIDIAN_VAULT}/06 Projects/${PROJECT_NAME}/${TIMESTAMP}-${TOPIC_SLUG}"
+fi
+
+CONTEXT_FILE="${INITIATIVE_DIR}/context.md"
+mkdir -p "$INITIATIVE_DIR"
 ```
 
 Use this structure for the context file:
@@ -214,7 +222,7 @@ Report to the user:
 - **Minimal Questions**: Only 4 essential questions, infer the rest from code
 - **Structured Output**: Tables and clear sections for easy AI parsing
 - **Actionable**: Clear next steps and priorities for continuation
-- **Vault-Centralized**: Always saves to the obsidian vault at `/Users/duncanleung/Develop/obsidian-local-life-manager/06 Projects/{project}/context/`, with the project name derived from the current working directory (creates dir if needed)
+- **Vault-Centralized**: Always saves to the obsidian vault inside initiative folders at `/Users/duncanleung/Develop/obsidian-local-life-manager/06 Projects/{project}/YYYY-MM-DD-name/context.md`, with the project name derived from the current working directory (creates dir if needed)
 
 ## When to Use
 

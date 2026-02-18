@@ -33,18 +33,12 @@ All documentation lives in `06 Projects/`:
 
 ```
 06 Projects/[project]/
+├── README.md                   # Project index with Initiatives table
 ├── project-brief.md            # Strategy
-├── docs/
-│   ├── specs/                  # The protocol spec (source of truth)
-│   │   ├── README.md           # Spec overview and compliance status
-│   │   ├── api-specification.md # API contract
-│   │   ├── data-models.md      # Data structures
-│   │   ├── required-features.md # Feature requirements
-│   │   └── ...
-│   └── adrs/                   # Architecture decisions
-└── issues/
-    └── 001-auth/
-        └── TASK.md             # implements: docs/specs/required-features.md#authentication
+├── YYYY-MM-DD-auth/            # Initiative folder
+│   ├── TASK.md                 # implements: spec-required-features.md#authentication
+│   ├── spec-required-features.md  # Spec (can live in initiative or project-wide)
+│   └── ADR-001-auth-strategy.md
 ```
 
 **Why specs live in 06 Projects/**: All project documentation is centralized in the vault. Code repos (at their actual paths) are READ-ONLY from skills. The `code:` field in the Projects Index points to the actual repo path for reference.
@@ -72,8 +66,8 @@ For projects implementing a standard (like leaf-nextjs-convex → LEAF spec):
 
 **Process:**
 1. Clone/fetch spec files
-2. Copy to `06 Projects/[project]/docs/specs/`
-3. Create `docs/specs/README.md` with:
+2. Copy to the initiative folder (e.g., `06 Projects/[project]/YYYY-MM-DD-name/spec-*.md`)
+3. Create spec README with:
    - Source URL and version
    - Last synced date
    - Compliance checklist
@@ -153,7 +147,7 @@ When creating a TASK, link to the spec section it implements:
 
 ```yaml
 ---
-implements: docs/specs/required-features.md#authentication
+implements: spec-required-features.md#authentication
 ---
 ```
 

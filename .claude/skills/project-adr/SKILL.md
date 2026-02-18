@@ -18,25 +18,24 @@ Create Architecture Decision Records through interactive conversation.
 
 ## Output Location
 
-ADRs live in `06 Projects/` alongside all project documentation:
+ADRs live inside initiative folders in `06 Projects/`:
 
 ```
-06 Projects/[project]/docs/adrs/
+06 Projects/[project]/YYYY-MM-DD-name/
+├── TASK.md
 ├── ADR-001-database-choice.md
-├── ADR-002-auth-strategy.md
-└── ADR-003-testing-strategy.md
+└── ADR-002-auth-strategy.md
 ```
+
+If the ADR is project-wide (not tied to a specific initiative), prompt user to pick an existing initiative or create one.
 
 ## Execution Flow
 
 ### 1. Gather Context
 
 ```bash
-# Current architecture
-Read: "06 Projects/[project]/docs/architecture.md"
-
-# Existing ADRs
-Glob: "06 Projects/[project]/docs/adrs/ADR-*.md"
+# Existing ADRs across all initiatives
+Glob: "06 Projects/[project]/*/ADR-*.md"
 
 # Project context
 Read: "06 Projects/[project]/project-brief.md"

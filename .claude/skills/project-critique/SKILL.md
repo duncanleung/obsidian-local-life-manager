@@ -21,9 +21,13 @@ Skeptical, VC-style evaluation of a project idea.
 
 ## Output Location
 
+Critiques live inside initiative folders:
+
 ```
-06 Projects/[project]/critiques/YYYY-MM-DD.md
+06 Projects/[project]/YYYY-MM-DD-name/critique.md
 ```
+
+If critiquing the project as a whole (not a specific initiative), save to a new initiative folder: `YYYY-MM-DD-project-critique/critique.md`.
 
 ## Prerequisites
 
