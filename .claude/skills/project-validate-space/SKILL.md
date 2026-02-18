@@ -28,27 +28,17 @@ Validate that a project space has all required structure, boilerplate docs, and 
 | **README.md** | Entry point for developers | Must exist |
 | **package.json** (JS/TS) | Project config | Stack-dependent |
 
-### Required Directory Structure
+### Initiative Structure
 
-| Directory | Purpose | Check |
-|-----------|---------|-------|
-| **docs/** | Documentation root | Must exist |
-| **docs/specs/** | Protocol/feature specs | Must exist |
-| **docs/adrs/** | Architecture Decision Records | Must exist |
+Initiative folders use `YYYY-MM-DD-name/` convention. No intermediate directories (`issues/`, `docs/`, `critiques/`) at project root.
 
-### Required Overview Docs (in docs/)
-
-| File | Purpose |
-|------|---------|
-| **architecture-overview.md** | System architecture |
-| **api-overview.md** | API documentation |
-| **data-model.md** | Data structures |
-| **deployment.md** | Deployment guide |
-| **security.md** | Security considerations |
-| **testing-overview.md** | Testing strategy |
-| **ui-guide.md** | UI patterns and components |
-
-Templates available at `SHARED/TEMPLATES/DOCS/`
+| Check | Description |
+|-------|-------------|
+| **No `issues/` dir** | Should use initiative folders instead |
+| **No `docs/` dir** | Specs/ADRs live inside initiative folders |
+| **No `critiques/` dir** | Critiques live inside initiative folders |
+| **Initiative naming** | All dated dirs match `YYYY-MM-DD-*` pattern |
+| **Work item present** | Each initiative has TASK.md, BUG.md, or SPIKE.md |
 
 ### CLAUDE.md Requirements
 
@@ -72,8 +62,8 @@ Templates available at `SHARED/TEMPLATES/DOCS/`
 | Check | Description |
 |-------|-------------|
 | **README.md** | Stack listed in 06 Projects/ matches actual code repo |
+| **README Initiatives table** | Initiatives table exists and statuses are accurate |
 | **project-brief.md** | Technical decisions match actual implementation |
-| **Issues** | Current phase/status is accurate |
 
 ## Execution Flow
 
@@ -111,26 +101,27 @@ Extract versions from:
 
 Flag any mismatches.
 
-### 5. Verify Directory Structure
+### 5. Verify Initiative Structure
 
-Check required directories exist:
+Check initiative folders follow convention:
 ```bash
-ls -la "06 Projects/[project]/docs/"
-ls -la "06 Projects/[project]/docs/specs/"
-ls -la "06 Projects/[project]/docs/adrs/"
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*"
 ```
 
-Check overview docs present:
+For each initiative, verify work item exists:
 ```bash
-ls "06 Projects/[project]/docs/"*.md
-# Should have: architecture-overview.md, api-overview.md, data-model.md,
-#              deployment.md, security.md, testing-overview.md, ui-guide.md
+Glob: "06 Projects/[project]/YYYY-MM-DD-name/TASK.md"
+Glob: "06 Projects/[project]/YYYY-MM-DD-name/BUG.md"
+Glob: "06 Projects/[project]/YYYY-MM-DD-name/SPIKE.md"
 ```
 
-Compare documented structure in CLAUDE.md against actual:
+Flag legacy directories that should not exist:
 ```bash
-ls -la "06 Projects/[project]/"
-ls -la "06 Projects/[project]/src/" (if documented)
+# These are old convention — should be migrated
+ls "06 Projects/[project]/issues/" 2>/dev/null && echo "⚠️ Legacy issues/ dir found"
+ls "06 Projects/[project]/docs/" 2>/dev/null && echo "⚠️ Legacy docs/ dir found"
+ls "06 Projects/[project]/critiques/" 2>/dev/null && echo "⚠️ Legacy critiques/ dir found"
+ls "06 Projects/[project]/context/" 2>/dev/null && echo "⚠️ Legacy context/ dir found"
 ```
 
 ### 6. Cross-Reference 06 Projects/
@@ -153,22 +144,17 @@ Check stack/version consistency.
 
 ## Required Files
 ✅ CLAUDE.md - Present
-✅ README.md - Present
+✅ README.md - Present (has Initiatives table)
 ✅ package.json - Present
 
-## Required Directories
-✅ docs/ - Present
-✅ docs/specs/ - Present
-✅ docs/adrs/ - Present
-
-## Overview Docs (in docs/)
-✅ architecture-overview.md - Present
-✅ api-overview.md - Present
-✅ data-model.md - Present
-✅ deployment.md - Present
-✅ security.md - Present
-✅ testing-overview.md - Present
-✅ ui-guide.md - Present
+## Initiative Structure
+✅ No legacy issues/ directory
+✅ No legacy docs/ directory
+✅ No legacy critiques/ directory
+✅ 3 initiative folders found
+  - 2026-02-17-auth/ (TASK.md ✅, PLAN.md ✅)
+  - 2026-02-18-api-redesign/ (SPIKE.md ✅)
+  - 2026-02-18-ui-refresh/ (TASK.md ✅)
 
 ## CLAUDE.md Sections
 ✅ Overview/Stack - Complete
@@ -195,13 +181,13 @@ Check stack/version consistency.
 3. Fill in overview doc templates with project-specific content
 ```
 
-## Fixing Missing Structure
+## Fixing Issues
 
-If docs/ structure is missing, create it:
-```bash
-mkdir -p "06 Projects/[project]/docs/specs"
-mkdir -p "06 Projects/[project]/docs/adrs"
-cp SHARED/TEMPLATES/DOCS/*.md "06 Projects/[project]/docs/"
+If legacy directories found, suggest migration:
+```
+⚠️ Legacy issues/ directory found. Migrate to initiative folders:
+   issues/001-auth/ → 2026-02-17-auth/
+   Run /project-issue to create new initiatives.
 ```
 
 ## When to Use

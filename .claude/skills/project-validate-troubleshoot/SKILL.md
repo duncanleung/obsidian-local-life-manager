@@ -13,8 +13,8 @@ Systematic debugging using a 5-step loop: Research → Hypothesize → Implement
 
 ```bash
 /troubleshoot yourbench "tests failing after auth changes"
-/troubleshoot yourbench 001       # Debug in context of issue
-/troubleshoot coordinatr          # General debugging session
+/troubleshoot yourbench 2026-02-18-auth   # Debug in context of initiative
+/troubleshoot coordinatr                   # General debugging session
 ```
 
 ## The 5-Step Loop
@@ -146,12 +146,12 @@ npm run dev
 ### Mode 1: During TASK Implementation
 
 ```bash
-/troubleshoot yourbench 001 "tests failing"
+/troubleshoot yourbench 2026-02-18-auth "tests failing"
 ```
 
-1. Read: TASK.md, PLAN.md, WORKLOG.md for context
+1. Read: TASK.md, PLAN.md, WORKLOG from initiative folder for context
 2. Execute 5-step loop
-3. Document in issue's WORKLOG.md
+3. Document in initiative's worklog
 4. Continue with `/implement` when fixed
 
 ### Mode 2: Standalone Debugging

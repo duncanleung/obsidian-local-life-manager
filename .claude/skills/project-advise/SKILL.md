@@ -12,9 +12,9 @@ Interactive, conversational guidance as you implement a task yourself.
 ## Usage
 
 ```bash
-/project-advise 001              # Guide through issue 001
-/project-advise yourbench 001    # Explicit project
-/project-advise 001 --phase 2.1  # Start at specific phase
+/project-advise 2026-02-18-auth              # Guide through initiative
+/project-advise yourbench 2026-02-18-auth    # Explicit project
+/project-advise 2026-02-18-auth --phase 2.1  # Start at specific phase
 ```
 
 ## Comparison: /project-implement vs /project-advise vs /project-teach
@@ -58,10 +58,10 @@ AI: "Let me check... Looks good. Next, we need to clean up
 ### 1. Load Context
 
 ```bash
-Read: "06 Projects"/[project]/issues/###-*/TASK.md
-Read: "06 Projects"/[project]/issues/###-*/PLAN.md
-Read: "06 Projects"/[project]/specs/SPEC-###.md (if linked)
-Glob: "06 Projects"/[project]/docs/adrs/ADR-*.md
+Read: "06 Projects"/[project]/YYYY-MM-DD-name/TASK.md
+Read: "06 Projects"/[project]/YYYY-MM-DD-name/PLAN.md
+Glob: "06 Projects"/[project]/YYYY-MM-DD-name/spec-*.md
+Glob: "06 Projects"/[project]/*/ADR-*.md
 ```
 
 ### 2. Conversational Guidance

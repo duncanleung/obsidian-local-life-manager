@@ -29,11 +29,10 @@ Assess project readiness and recommend the next skill to run.
 
 | File/Directory | When Needed | Purpose |
 |----------------|-------------|---------|
-| **critique.md** | Before planning | Risk assessment |
-| **competitive-analysis.md** | Before MVP | Market positioning |
-| **specs/** | Defining features | Technical specifications |
-| **docs/adrs/** | Major tech decisions | Architecture Decision Records |
-| **issues/** | In development | Work tracking |
+| **YYYY-MM-DD-*/critique.md** | Before planning | Risk assessment |
+| **YYYY-MM-DD-*/spec-*.md** | Defining features | Technical specifications |
+| **YYYY-MM-DD-*/ADR-*.md** | Major tech decisions | Architecture Decision Records |
+| **YYYY-MM-DD-*/TASK.md** | In development | Work tracking (initiatives) |
 
 ## Phase-Aware Validation
 
@@ -42,13 +41,13 @@ Assess project readiness and recommend the next skill to run.
 - critique.md optional (recommend before planning)
 
 **Planning Phase:**
-- Should have critique.md
-- Should have specs/ OR features/
+- Should have a critique (in an initiative folder)
+- Should have specs (in initiative folders)
 
 **Development/Implementation Phase:**
-- Must have specs/ (at least one)
-- Must have issues/ with PLAN.md files
-- Should have docs/adrs/ if major decisions made
+- Must have at least one spec (in initiative folder)
+- Must have initiative folders with PLAN.md files
+- Should have ADRs in initiative folders if major decisions made
 
 ## Execution Flow
 
@@ -94,8 +93,8 @@ Based on project phase in README.
 ✅ project-brief.md - Complete
 
 ## Recommended Files
-⚠️  critique.md - Missing (run /critique)
-✅ specs/SPEC-001.md - Present
+⚠️  No critique found (run /project-critique)
+✅ 2026-02-18-auth/spec-required-features.md - Present
 
 ## Issues Found
 1. README last updated is stale

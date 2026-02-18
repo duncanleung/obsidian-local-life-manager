@@ -21,7 +21,7 @@ Status dashboard across all projects. Default mode shows a quick scannable table
 
 1. Read `CLAUDE.md` for project index
 2. For each project, read `06 Projects/[project]/README.md`
-3. With `--project` or `--detailed`: also parse specs, issues, git branches
+3. With `--project` or `--detailed`: also parse initiative folders, specs, git branches
 
 ## Example Output (Default)
 
@@ -57,19 +57,17 @@ Status dashboard across all projects. Default mode shows a quick scannable table
 
 ### Coordinatr
 Status: Active planning
-Specs: 2 (1 complete, 1 in progress)
-Issues: 3 open (1 in_progress, 2 pending)
-  - 001-auth-research (TASK, in_progress) ← feature/001-auth
-  - 002-data-model (TASK, pending, blocked by 001)
-  - 003-api-design (SPIKE, pending)
-Branch: feature/001-auth (3 unpushed commits)
+Initiatives: 3 (1 in_progress, 2 open)
+  - 2026-02-17-auth-research (TASK, in_progress) ← feature/auth-research
+  - 2026-02-18-data-model (TASK, open, blocked by auth-research)
+  - 2026-02-18-api-design (SPIKE, open)
+Branch: feature/auth-research (3 unpushed commits)
 
 ### CareerBrain
 Status: MVP in progress (60%)
-Specs: 1 (complete)
-Issues: 1 open (1 in_progress)
-  - YB-2-dashboard (TASK, in_progress)
-Branch: feature/YB-2 (clean, up to date)
+Initiatives: 1 (1 in_progress)
+  - 2026-02-18-dashboard (TASK, in_progress)
+Branch: feature/dashboard (clean, up to date)
 
 ## On Hold
 
@@ -79,19 +77,18 @@ Branch: feature/YB-2 (clean, up to date)
 | IRL Social | Waiting on API access  |
 
 ## Needs Attention
-- Coordinatr TASK-002 blocked (waiting on TASK-001)
-- Coordinatr SPIKE-003 past 3-day timebox
-- CareerBrain feature/YB-2 has 3 unpushed commits
+- Coordinatr 2026-02-18-data-model blocked (waiting on auth-research)
+- Coordinatr 2026-02-18-api-design SPIKE past 3-day timebox
+- CareerBrain feature/dashboard has 3 unpushed commits
 
 ## Quick Stats
 - 4 projects total (2 active, 2 on hold)
-- 3 specs across all projects
-- 4 open issues (2 in_progress, 1 blocked, 1 pending)
+- 4 open initiatives (2 in_progress, 1 blocked, 1 pending)
 
 ## Suggested Next Actions
-1. Complete Coordinatr TASK-001 to unblock TASK-002
-2. Push CareerBrain feature/YB-2
-3. Close or extend Coordinatr SPIKE-003
+1. Complete Coordinatr auth-research to unblock data-model
+2. Push CareerBrain feature/dashboard
+3. Close or extend Coordinatr api-design SPIKE
 ```
 
 ## Execution Steps
@@ -100,7 +97,7 @@ Branch: feature/YB-2 (clean, up to date)
 
 ```bash
 ls "06 Projects"/
-# For each: README.md, specs/, issues/, docs/
+# For each: README.md, YYYY-MM-DD-*/ initiative folders
 ```
 
 ### 2. Parse Project Status
@@ -108,31 +105,31 @@ ls "06 Projects"/
 For each idea folder:
 1. Read README.md for status
 2. Build quick glance table (default mode stops here)
-3. With `--detailed` or `--project`: count specs, analyze issues, check PLAN.md progress
+3. With `--detailed` or `--project`: discover initiative folders (`YYYY-MM-DD-*/`), analyze work items, check PLAN.md progress
 
 ### 3. Parse Dependencies (detailed mode)
 
-Read `depends_on` from issue frontmatter:
+Read `depends_on` from work item frontmatter:
 ```yaml
-depends_on: [001, 002]
+depends_on: [2026-02-17-auth]
 ```
 
-Auto-block detection: If depends on incomplete issues, flag as blocked.
+Auto-block detection: If depends on incomplete initiatives, flag as blocked.
 
 ### 4. Check Branch Status (detailed mode)
 
-For in_progress issues:
+For in_progress initiatives:
 ```bash
 # cd to code repo path from Projects Index
-git branch -a | grep "feature/###"
+git branch -a | grep "feature/"
 git log origin/branch..branch  # Unpushed commits
 ```
 
 ### 5. Identify Attention Items
 
-- Issues with status: blocked
-- Issues blocked by dependencies
-- Stale issues (no activity 14+ days)
+- Initiatives with status: blocked
+- Initiatives blocked by dependencies
+- Stale initiatives (no activity 14+ days)
 - Incomplete spikes past time box
 - Branches with unpushed commits
 

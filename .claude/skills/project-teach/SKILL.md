@@ -12,9 +12,9 @@ Line-by-line, Socratic teaching. Build genuine understanding while completing re
 ## Usage
 
 ```bash
-/project-teach 001              # Learn through issue 001
-/project-teach yourbench 001    # Explicit project
-/project-teach 001 --phase 2.1  # Start at specific phase
+/project-teach 2026-02-18-auth              # Learn through initiative
+/project-teach yourbench 2026-02-18-auth    # Explicit project
+/project-teach 2026-02-18-auth --phase 2.1  # Start at specific phase
 ```
 
 ## Comparison
@@ -69,10 +69,10 @@ AI: "Next line:
 
 ### 1. Load Context
 ```bash
-Read: "06 Projects"/[project]/issues/###-*/TASK.md
-Read: "06 Projects"/[project]/issues/###-*/PLAN.md
-Read: "06 Projects"/[project]/specs/SPEC-###.md
-Glob: "06 Projects"/[project]/docs/adrs/ADR-*.md
+Read: "06 Projects"/[project]/YYYY-MM-DD-name/TASK.md
+Read: "06 Projects"/[project]/YYYY-MM-DD-name/PLAN.md
+Glob: "06 Projects"/[project]/YYYY-MM-DD-name/spec-*.md
+Glob: "06 Projects"/[project]/*/ADR-*.md
 ```
 
 ### 2. Line-by-Line Teaching
