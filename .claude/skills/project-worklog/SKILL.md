@@ -12,18 +12,18 @@ Add structured JSON entries to track work, decisions, and learnings.
 ## Usage
 
 ```bash
-/worklog yourbench YB-2 "Added login button to header"
-/worklog yourbench YB-2 --decision "Using Clerk for auth"
-/worklog yourbench YB-2 --gotcha "Token refresh needs cleanup"
-/worklog coordinatr 003 --handoff code-reviewer "Ready for review"
-/worklog yourbench YB-2 --state              # Show current state
-/worklog yourbench YB-2 --migrate            # Migrate from WORKLOG.md
+/worklog yourbench 2026-02-18-auth "Added login button to header"
+/worklog yourbench 2026-02-18-auth --decision "Using Clerk for auth"
+/worklog yourbench 2026-02-18-auth --gotcha "Token refresh needs cleanup"
+/worklog coordinatr 2026-02-18-api-redesign --handoff code-reviewer "Ready for review"
+/worklog yourbench 2026-02-18-auth --state              # Show current state
+/worklog yourbench 2026-02-18-auth --migrate            # Migrate from WORKLOG.md
 ```
 
 ## Directory Structure
 
 ```
-06 Projects/yourbench/issues/YB-2-auth/
+06 Projects/yourbench/2026-02-18-auth/
 ├── TASK.md
 ├── PLAN.md
 └── worklog/
@@ -31,6 +31,25 @@ Add structured JSON entries to track work, decisions, and learnings.
     ├── 001-phase-init.json      # Entry files
     └── 002-handoff-review.json
 ```
+
+## Initiative Resolution
+
+Find the initiative folder from the argument:
+
+```bash
+# If full folder name given:
+Glob: "06 Projects/[project]/2026-02-18-auth/worklog/"
+
+# If partial name given, search:
+Glob: "06 Projects/[project]/*-auth*/worklog/"
+
+# If no initiative specified, list available:
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/TASK.md"
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/BUG.md"
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/SPIKE.md"
+```
+
+Present available initiatives if multiple match or none specified.
 
 ## Entry Types
 
@@ -49,13 +68,13 @@ Add structured JSON entries to track work, decisions, and learnings.
 ### 1. Parse Arguments
 
 ```
-/worklog PROJECT ISSUE_ID [--type] "message"
+/worklog PROJECT INITIATIVE [--type] "message"
 ```
 
 ### 2. Locate Worklog Directory
 
 ```bash
-"06 Projects"/[project]/issues/[issue_id]-*/worklog/
+"06 Projects"/[project]/YYYY-MM-DD-name/worklog/
 mkdir -p [path] if missing
 ```
 
@@ -72,7 +91,7 @@ Filename: `{sequence:03d}-{type}-{slug}.json`
 
 **Required fields:**
 - `$schema`: "worklog-entry-v1"
-- `id`: "ISSUE-SEQ"
+- `id`: "INITIATIVE-SEQ"
 - `sequence`: number
 - `timestamp`: ISO 8601
 - `type`: entry type
@@ -91,12 +110,12 @@ After every entry:
 ## Viewing State
 
 ```bash
-/worklog yourbench YB-2 --state
+/worklog yourbench 2026-02-18-auth --state
 ```
 
 Outputs:
 ```
-Issue: YB-2 - Initialize Next.js project
+Initiative: 2026-02-18-auth - Initialize Next.js project
 Status: in_progress (Phase 3)
 Progress: 5/5 phases complete
 Key Decisions: ...

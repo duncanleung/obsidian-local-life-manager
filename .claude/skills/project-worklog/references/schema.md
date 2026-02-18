@@ -12,7 +12,7 @@ Worklogs track the history of work on issues for AI context preservation, struct
 ## Directory Structure
 
 ```
-06 Projects/[project]/issues/###-slug/
+06 Projects/[project]/YYYY-MM-DD-name/
 ├── TASK.md              # Issue definition
 ├── PLAN.md              # Phase breakdown
 └── worklog/
@@ -51,14 +51,14 @@ Quick-load file for new AI sessions. Updated after every entry.
 ```json
 {
   "$schema": "worklog-state-v1",
-  "issue_id": "YB-2",
+  "initiative": "2026-02-18-auth",
   "issue_type": "TASK",
   "issue_title": "Initialize Next.js 16 project",
 
   "status": "in_progress",
   "current_phase": "3",
   "current_agent": "code-reviewer",
-  "branch": "feature/YB-2-nextjs-init",
+  "branch": "feature/implement-auth",
 
   "summary": "Next.js 16 + Convex init complete, awaiting code review",
 
@@ -93,7 +93,7 @@ Quick-load file for new AI sessions. Updated after every entry.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `$schema` | string | yes | Schema version for validation |
-| `issue_id` | string | yes | Issue identifier (e.g., "YB-2") |
+| `initiative` | string | yes | Initiative folder name (e.g., "2026-02-18-auth") |
 | `issue_type` | enum | yes | `TASK`, `BUG`, or `SPIKE` |
 | `issue_title` | string | yes | Human-readable title |
 | `status` | enum | yes | `open`, `in_progress`, `blocked`, `review`, `complete` |
@@ -124,7 +124,7 @@ Each entry captures a discrete unit of work.
 ```json
 {
   "$schema": "worklog-entry-v1",
-  "id": "YB-2-003",
+  "id": "2026-02-18-auth-003",
   "sequence": 3,
   "timestamp": "2025-11-03T16:24:00Z",
 
@@ -154,7 +154,7 @@ Each entry captures a discrete unit of work.
     "commits": [
       {
         "sha": "abc1234",
-        "message": "feat(YB-2): initialize Next.js 16 with TypeScript"
+        "message": "feat: initialize Next.js 16 with TypeScript"
       }
     ],
     "tests": {
@@ -377,22 +377,22 @@ Consistent tags enable cross-project queries.
 
 ### Find all gotchas for a technology
 ```bash
-grep -r '"tags":.*"tailwind"' "06 Projects"/*/issues/*/worklog/*.json
+grep -r '"tags":.*"tailwind"' "06 Projects"/*/[0-9][0-9][0-9][0-9]-*/worklog/*.json
 ```
 
 ### Find all handoffs to code-reviewer
 ```bash
-grep -r '"to": "code-reviewer"' "06 Projects"/*/issues/*/worklog/*.json
+grep -r '"to": "code-reviewer"' "06 Projects"/*/[0-9][0-9][0-9][0-9]-*/worklog/*.json
 ```
 
 ### Find all lessons that apply to all projects
 ```bash
-grep -r '"applies_to":.*"all-projects"' "06 Projects"/*/issues/*/worklog/*.json
+grep -r '"applies_to":.*"all-projects"' "06 Projects"/*/[0-9][0-9][0-9][0-9]-*/worklog/*.json
 ```
 
-### Get current state of all in-progress issues
+### Get current state of all in-progress initiatives
 ```bash
-find "06 Projects"/*/issues/*/worklog/_state.json -exec grep -l '"status": "in_progress"' {} \;
+find "06 Projects"/*/[0-9][0-9][0-9][0-9]-*/worklog/_state.json -exec grep -l '"status": "in_progress"' {} \;
 ```
 
 ---
@@ -419,7 +419,7 @@ resources/lessons-learned/
   "id": "lesson-2025-001",
   "source": {
     "project": "yourbench",
-    "issue": "YB-2",
+    "initiative": "2026-02-18-auth",
     "entry": "003-handoff-code-review.json"
   },
   "type": "gotcha",

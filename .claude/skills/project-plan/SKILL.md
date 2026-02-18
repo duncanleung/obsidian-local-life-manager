@@ -12,10 +12,10 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
 ## Usage
 
 ```bash
-/project-plan 001                    # Create plan for issue 001 (auto-detect project)
-/project-plan 001 --project coordinatr  # Explicit project
-/project-plan SPIKE-003              # Plan for a spike (creates exploration plans)
-/project-plan 003 --second-opinion   # Get peer review from Gemini CLI before finalizing
+/project-plan 2026-02-18-implement-auth              # Create plan for initiative (auto-detect project)
+/project-plan 2026-02-18-implement-auth --project coordinatr  # Explicit project
+/project-plan 2026-02-18-compare-graphql-rest         # Plan for a spike
+/project-plan 2026-02-18-implement-auth --second-opinion  # Peer review from Gemini CLI
 ```
 
 ## Issue Type Detection
@@ -28,22 +28,46 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
 
 ## Execution Flow
 
+### 1. Resolve Initiative
+
+Find the initiative folder from the argument:
+
+```bash
+# If full folder name given:
+Read: "06 Projects/[project]/2026-02-18-implement-auth/TASK.md"
+
+# If partial name given, search:
+Glob: "06 Projects/[project]/*-implement-auth*/TASK.md"
+Glob: "06 Projects/[project]/*-implement-auth*/BUG.md"
+Glob: "06 Projects/[project]/*-implement-auth*/SPIKE.md"
+
+# If no initiative specified, list available:
+Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*"
+```
+
+Present available initiatives if multiple match or none specified:
+> "Which initiative?"
+> 1. 2026-02-17-implement-auth (TASK - open)
+> 2. 2026-02-18-api-redesign (SPIKE - open)
+
 ### For Task/Bug
 
-1. **Load Context**:
+2. **Load Context**:
    ```bash
-   Read: "06 Projects/[project]/issues/###-*/TASK.md" (or BUG.md)
-   Read: "06 Projects/[project]/docs/specs/*.md" (if implements: field exists)
-   Glob: "06 Projects/[project]/docs/adrs/ADR-*.md"
+   Read: "06 Projects/[project]/YYYY-MM-DD-name/TASK.md" (or BUG.md)
+   Glob: "06 Projects/[project]/YYYY-MM-DD-name/spec-*.md"
+   Glob: "06 Projects/[project]/*/ADR-*.md"
    Glob: resources/research/*.md
    ```
 
-   If the issue has an `implements:` field, load that specific spec section:
+   If the issue has an `implements:` field, locate and load that spec:
    ```bash
-   Read: "06 Projects/[project]/docs/specs/required-features.md"  # Extract relevant section
+   # Check initiative-local spec first, then project-wide
+   Glob: "06 Projects/[project]/YYYY-MM-DD-name/spec-*.md"
+   Glob: "06 Projects/[project]/*/spec-*.md"
    ```
 
-2. **Cross-Project Pattern Search**:
+3. **Cross-Project Pattern Search**:
    ```bash
    # Search other projects' code repos for similar implementations
    # (Resolve paths from Projects Index in CLAUDE.md)
@@ -59,7 +83,7 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
    - `/Users/duncanleung/Develop/coordinatr/src/lib/session.ts` - Session handling
    ```
 
-3. **Library Documentation** (automatic for integrations):
+4. **Library Documentation** (automatic for integrations):
 
    **MANDATORY when task involves:**
    - Installing/configuring external libraries or SDKs
@@ -88,7 +112,7 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
    - Recommended approach: [based on current docs]
    ```
 
-4. **Confirm Phase Structure (Two-Phase Confirmation)**:
+5. **Confirm Phase Structure (Two-Phase Confirmation)**:
 
    Before generating sub-tasks, present high-level phases to user for approval:
    > "Here are the planned phases:
@@ -101,18 +125,18 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
 
    Wait for user confirmation before generating sub-task breakdowns. This prevents wasted planning effort on wrong approaches.
 
-5. **Generate Sub-Tasks**:
+6. **Generate Sub-Tasks**:
    - Break each confirmed phase into actionable sub-tasks
    - Each phase has clear deliverables
    - Include checkpoints between phases
    - Add "Done When" criteria
 
-6. **Write PLAN.md**:
+7. **Write PLAN.md**:
    - Present phases, estimated effort, dependencies
    - Include "Library Documentation Validation" section (if applicable)
    - Include "Second Opinion Analysis" section (if requested)
 
-6. **Commit Suggestion**:
+8. **Commit Suggestion**:
    - Ask: "Commit PLAN.md to ideas repo? (yes/no)"
 
 ### For Spike (Exploration)
@@ -130,7 +154,7 @@ Create PLAN.md with phase-based breakdown for tasks, spikes, and bugs.
 ## Task Plan Example
 
 ```markdown
-# Implementation Plan: 001 Research Auth Patterns
+# Implementation Plan: Implement Auth
 
 ## Overview
 Research authentication patterns for Coordinatr's multi-tenant architecture.
@@ -150,7 +174,7 @@ Research authentication patterns for Coordinatr's multi-tenant architecture.
 ## Phase 0: Setup
 
 ### 0.1 - Environment
-- [ ] Create feature branch (`feature/001-auth-patterns`)
+- [ ] Create feature branch (`feature/implement-auth`)
 - [ ] Verify dependencies installed
 - [ ] [CHECKPOINT] On correct branch, clean working tree
 
@@ -179,7 +203,7 @@ Research authentication patterns for Coordinatr's multi-tenant architecture.
 
 ## Done When
 - [ ] Auth library recommendation documented
-- [ ] Architecture proposal in 06 Projects/coordinatr/docs/
+- [ ] Architecture proposal in initiative folder
 - [ ] Trade-offs and risks identified
 ```
 
@@ -217,13 +241,13 @@ Assume the primary reader is a **junior developer**. Phase descriptions, sub-tas
 ## Workflow
 
 ```
-/project-spec → /project-issue → /project-plan {ID} → (work phases)
-                                      ↓                       ↓
-                            Load spec section       quality gate (parallel)
-                            from implements: field        ↓
-                                              /project-commit → /project-complete {ID}
+/project-spec → /project-issue → /project-plan {initiative} → (work phases)
+                                      ↓                             ↓
+                            Load spec section             quality gate (parallel)
+                            from implements: field              ↓
+                                              /project-commit → /project-complete {initiative}
 ```
 
 **Creates:**
-- Task/Bug: `06 Projects/{project}/issues/###-*/PLAN.md`
-- Spike: `06 Projects/{project}/issues/###-*/PLAN-1.md`, `PLAN-2.md`, etc.
+- Task/Bug: `06 Projects/{project}/YYYY-MM-DD-name/PLAN.md`
+- Spike: `06 Projects/{project}/YYYY-MM-DD-name/PLAN-1.md`, `PLAN-2.md`, etc.

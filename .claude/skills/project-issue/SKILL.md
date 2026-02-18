@@ -7,7 +7,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 # /project-issue
 
-Create standalone work items through natural conversation with AI-assisted type detection.
+Create standalone work items through natural conversation with AI-assisted type detection. Each issue creates a dated **initiative folder** at the project root.
 
 ## Usage
 
@@ -29,13 +29,19 @@ Create standalone work items through natural conversation with AI-assisted type 
 
 ## File Structure
 
+Each issue creates an **initiative folder** at the project root (no `issues/` intermediate directory):
+
 ```
-06 Projects/[project]/issues/
-└── 001-implement-auth/
-    ├── TASK.md       # or SPIKE.md or BUG.md
-    ├── PLAN.md       # Created by /project-plan
-    └── WORKLOG.md    # Progress tracking
+06 Projects/[project]/
+├── README.md                              # project index (stays at root)
+├── project-brief.md                       # project vision (stays at root)
+├── YYYY-MM-DD-initiative-name/            # ← initiative folder
+│   ├── TASK.md       # or SPIKE.md or BUG.md
+│   ├── PLAN.md       # Created later by /project-plan
+│   └── WORKLOG.md    # Progress tracking
 ```
+
+**Naming convention:** `YYYY-MM-DD-slug` where slug is a kebab-case short name derived from the issue title (e.g., `2026-02-18-implement-auth`).
 
 ## Execution Flow
 
@@ -57,39 +63,57 @@ Only ask questions when the answer isn't reasonably inferable from the user's de
 ### 2. Detect Type
 
 Analyze description keywords, present detection:
-> "This sounds like a **TASK**. Create as issue 002? (yes / spike / bug)"
+> "This sounds like a **TASK**. Create initiative `2026-02-18-implement-auth`? (yes / spike / bug)"
 
-### 3. Determine Next Issue Number
+### 3. Generate Initiative Folder Name
 
-```bash
-ls "06 Projects"/[project]/issues/ | grep -E '^[0-9]{3}-' | sort -n | tail -1
+Build the folder name from today's date and a slug derived from the title:
+
 ```
+YYYY-MM-DD-[kebab-case-slug]
+```
+
+Rules:
+- Date is today's date
+- Slug is 2-5 words, kebab-case, derived from the issue title
+- Keep it short but descriptive (e.g., `implement-auth`, `api-redesign`, `broken-login-redirect`)
+- No sequential numbering — the date provides natural ordering
+
+Check for collisions:
+```bash
+Glob: "06 Projects"/[project]/YYYY-MM-DD-*
+```
+
+If a same-date folder with the same slug exists, append a disambiguator (e.g., `-v2`).
 
 ### 4. Ask About Spec Section
 
 Check if project has a spec:
 ```bash
+Glob: "06 Projects"/[project]/*/spec-*.md
 Glob: "06 Projects"/[project]/docs/specs/*.md
 ```
 
 If spec exists:
 > "Which spec section does this implement?"
-> - docs/specs/required-features.md#authentication
-> - docs/specs/required-features.md#documents
+> - spec-required-features.md#authentication
+> - spec-required-features.md#documents
 > - none (standalone task)
 
-### 5. Create Issue Files
+### 5. Create Initiative Folder and Issue File
+
+Create the initiative folder and write the issue file inside it.
 
 **TASK.md:**
 ```markdown
 ---
 status: open
 created: YYYY-MM-DD
-implements: docs/specs/required-features.md#authentication  # or empty if standalone
+implements: spec-required-features.md#authentication  # or empty if standalone
 depends_on: []
 ---
 
-# TASK-###: [Title]
+# TASK: [Title]
 
 ## Description
 
@@ -97,7 +121,7 @@ depends_on: []
 
 ## Implements
 
-**Spec Section:** [docs/specs/required-features.md#authentication](docs/specs/required-features.md#authentication)
+**Spec Section:** [spec-required-features.md#authentication](spec-required-features.md#authentication)
 
 **Requirements from spec:**
 - [Requirement 1 from spec]
@@ -126,7 +150,7 @@ created: YYYY-MM-DD
 timebox: X hours
 ---
 
-# SPIKE-###: [Title]
+# SPIKE: [Title]
 
 ## Questions
 
@@ -154,7 +178,7 @@ status: open
 created: YYYY-MM-DD
 ---
 
-# BUG-###: [Title]
+# BUG: [Title]
 
 ## What's Broken
 
@@ -188,10 +212,29 @@ If the issue implements a spec section, update the inline status markers in the 
 
 The `/project-complete` command will mark these ✅ when done.
 
-### 7. Next Steps
+### 7. Update Project README.md
 
-- For TASK/BUG: Suggest `/project-plan ###` to create implementation phases
-- For SPIKE: Suggest `/project-plan ###` to create exploration plan
+Add the new initiative to the **Initiatives** table in the project README:
+
+```markdown
+## Initiatives
+
+| Initiative | Date | Status |
+|------------|------|--------|
+| [Auth Implementation](2026-02-17-auth/) | 2026-02-17 | in-progress |
+| [API Redesign](2026-02-18-api-redesign/) | 2026-02-18 | open (SPIKE) |
+```
+
+**Status format in table:**
+- TASK/BUG: `open`
+- SPIKE: `open (SPIKE)`
+
+If the README doesn't have an Initiatives table yet, create one.
+
+### 8. Next Steps
+
+- For TASK/BUG: Suggest `/project-plan 2026-MM-DD-initiative-name` to create implementation phases
+- For SPIKE: Suggest `/project-plan 2026-MM-DD-initiative-name` to create exploration plan
 
 ## Writing Standard
 
@@ -225,9 +268,9 @@ A TASK should be atomic and shippable:
 
 ```markdown
 # Spec line items (each becomes a TASK)
-- ⏳ User registration with email/password    ← TASK-002
-- ⏳ User login with JWT token                ← TASK-003
-- ⏳ Password reset flow                      ← TASK-004
+- ⏳ User registration with email/password    ← TASK
+- ⏳ User login with JWT token                ← TASK
+- ⏳ Password reset flow                      ← TASK
 ```
 
 **Don't create:** "TASK: Implement Authentication" (too broad)
@@ -237,7 +280,7 @@ A TASK should be atomic and shippable:
 
 ```yaml
 # Points to the specific requirement
-implements: docs/specs/required-features.md#user-registration-with-email-password
+implements: spec-required-features.md#user-registration-with-email-password
 ```
 
 This creates a direct link between work items and the exact requirement they fulfill.
