@@ -112,7 +112,7 @@ Next: Phase 2
 ```
 /project-issue → /project-plan → /project-advise → [you implement] → /project-worklog
         ↓
-/project-validate-spec ──────┐
+/project-spec-validate ──────┐
 /project-validate-quality ───┤  (quality gate, parallel)
 /project-validate-security-audit ┘
         ↓

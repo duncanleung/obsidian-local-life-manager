@@ -163,7 +163,7 @@ Before merge, verify:
 ```
 /project-issue → /project-plan → /project-implement
         ↓
-/project-validate-spec ──────┐
+/project-spec-validate ──────┐
 /project-validate-quality ───┤  (quality gate, parallel)
 /project-validate-security-audit ┘
         ↓

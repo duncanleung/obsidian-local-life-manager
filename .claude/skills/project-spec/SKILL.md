@@ -227,7 +227,7 @@ This keeps specs simple while git provides the audit trail.
         ↓
 /project-implement                  # Build against the spec
         ↓
-/project-validate-spec ──────┐
+/project-spec-validate ──────┐
 /project-validate-quality ───┤     # Quality gate (parallel)
 /project-validate-security-audit ┘
         ↓
@@ -240,5 +240,5 @@ This keeps specs simple while git provides the audit trail.
 
 - `/project-issue` - Create TASKs that implement spec sections
 - `/project-plan` - Break down implementation of a TASK
-- `/project-validate-spec` - Check implementation against spec
+- `/project-spec-validate` - Check implementation against spec
 - `/project-status-all` - See spec compliance overview

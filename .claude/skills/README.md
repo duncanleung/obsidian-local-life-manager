@@ -38,7 +38,7 @@ Discovery index for Claude Code skills. For detailed usage, examples, args, and 
 | `/project-validate-space` | Validate project space structure and consistency |
 | `/project-validate-sanity-check` | Step back, reflect, validate direction |
 | `/project-validate-troubleshoot` | Systematic debugging with 5-step loop |
-| `/project-validate-spec` | Validate spec completeness and implementation compliance |
+| `/project-spec-validate` | Validate spec completeness and implementation compliance |
 | `/project-validate-quality` | Comprehensive code quality assessment (multi-agent) |
 | `/project-validate-security-audit` | Security audit using 5 parallel agents |
 | `/learn-start-session` | Start a new learning session on a topic |

@@ -1,20 +1,20 @@
 ---
-name: project-validate-spec
+name: project-spec-validate
 description: "Validate spec completeness and implementation compliance. Use before approval (--pre) or before completion (--post)."
 model: claude-opus-4-5-20251101
 allowed-tools: Read, Glob, Grep
 ---
 
-# /project-validate-spec
+# /project-spec-validate
 
 Validate spec quality (pre-implementation) or implementation compliance (post-implementation).
 
 ## Usage
 
 ```bash
-/project-validate-spec SPEC-001              # Auto-detect mode based on status
-/project-validate-spec SPEC-001 --pre        # Pre-implementation validation
-/project-validate-spec SPEC-001 --post       # Post-implementation compliance
+/project-spec-validate SPEC-001              # Auto-detect mode based on status
+/project-spec-validate SPEC-001 --pre        # Pre-implementation validation
+/project-spec-validate SPEC-001 --post       # Post-implementation compliance
 ```
 
 ## Mode Detection
@@ -179,5 +179,5 @@ AI: Done. Re-validating...
 ## Integration
 
 ```
-/project-spec → /project-validate-spec --pre → [approval] → /project-plan → /project-implement → /project-validate-spec --post → /project-complete
+/project-spec → /project-spec-validate --pre → [approval] → /project-plan → /project-implement → /project-spec-validate --post → /project-complete
 ```

@@ -101,7 +101,7 @@ Output: `06 Projects/[project]/README.md` + `project-brief.md`
 
 ### Step 14 (Optional): Verify Spec Implemented
 ```bash
-/project-validate-spec
+/project-spec-validate
 ```
 
 ### Step 15: Complete and Merge

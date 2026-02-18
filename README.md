@@ -12,7 +12,7 @@ See:
 
 A structured approach to:
 
-- **Project planning** with briefs, specs, and issue tracking
+- **Project planning** with briefs, features, user stories, and issue tracking
 - **Personal knowledge management** with daily journals and learning systems
 - **AI-powered workflows** via 50 custom Claude Code skills
 - **Multi-project coordination** with shared standards and templates
@@ -32,11 +32,11 @@ A structured approach to:
 - Have it help you plan your day each morning.
 - Have it help you reflect on the previous week and set goals for the upcoming week every Sunday.
 
-### Spec Driven Development
+### Feature-Driven Development
 
 - Contains an updated version of the skills and workflows from my [Claude Code SDD Plugin](https://github.com/TaylorHuston/ai-toolkit).
-- Skills to create detailed specs, plans, tasks and then implement those plans in a structured way.
-- Also includes a "/teach" mode where the LLM will walk you through building the spec yourself, great for a truly personalized tutorial.
+- Skills to decompose projects into features with user stories, break those into issues with implementation plans, and execute them in a structured way.
+- Also includes a "/teach" mode where the LLM will walk you through building the feature yourself, great for a truly personalized tutorial.
 
 ### Personal Tutor
 
@@ -68,7 +68,10 @@ local-life-manager/
 │   └── [project]/
 │       ├── README.md
 │       ├── project-brief.md
-│       ├── specs/
+│       ├── docs/
+│       │   ├── features/    # Feature cards with user stories
+│       │   ├── specs/       # Imported external specs (optional)
+│       │   └── adrs/        # Architecture decisions
 │       ├── issues/
 │       └── notes/
 ├── SHARED/
@@ -488,22 +491,27 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 │                                                             │
 │  /project-brief                                             │
 │       ↓                                                     │
-│  /project-critique       ← requires project-brief.md       │
+│  /project-critique       ← optional, before big investment  │
 │       ↓                                                     │
 │  /project-init-space                                        │
-│       └→ /project-validate-space  (verify scaffolding)              │
+│       └→ /project-validate-space  (verify scaffolding)      │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  PLANNING                                                   │
+│  PLANNING (pipeline)                                        │
 │                                                             │
-│  /project-spec ─────┐                                       │
-│  /project-adr ──────┤  (parallel — no dependencies)         │
-│  /project-ui-design ┘                                       │
+│  /project-spec-import    ← optional: import PM's PRD first  │
+│       └→ /project-spec-validate  (verify PRD completeness)  │
 │       ↓                                                     │
-│  /project-issue          ← link to spec via implements:     │
+│  /project-features       ← features + user stories + scope  │
+│       ↓                                                     │
+│  /project-issue          ← link to feature via feature:     │
 │       ↓                                                     │
 │  /project-plan           ← requires TASK/BUG/SPIKE.md      │
+│                                                             │
+│  Support (invoke anytime during planning or build):         │
+│  · /project-adr          (architecture decisions)           │
+│  · /project-ui-design    (UI mockups)                       │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -523,9 +531,8 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 ┌─────────────────────────────────────────────────────────────┐
 │  QUALITY GATE (parallel — before shipping)                  │
 │                                                             │
-│  /project-validate-spec ──────────┐                                 │
-│  /project-validate-quality ───────┤  (run in parallel)              │
-│  /project-validate-security-audit ┘                                 │
+│  /project-validate-quality ───────┐  (run in parallel)     │
+│  /project-validate-security-audit ┘                        │
 └──────────────────────────┬──────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -544,7 +551,9 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 | Foundation | `/project-brief`                   | Create project briefs through discovery           | —                         | `[--project name] [--review] [--force]`                      |
 |            | `/project-critique`                | VC-style skeptical evaluation                     | `project-brief.md`        | `[--project name] [--focus market \| technical \| business]` |
 |            | `/project-init-space`              | Initialize project planning structure in 06 Projects/   | —                         | `<project> [--type next \| python]`                          |
-| Planning   | `/project-spec`                    | Write feature specifications                      | —                         | `[--import url] [--init] [--sync]`                           |
+| Planning   | `/project-spec-import`             | Import external PRD or spec                       | —                         | `<JIRA-ID \| URL>`                                           |
+|            | `/project-spec-validate`           | Validate imported spec completeness               | Imported spec             | `<spec-id> [--pre \| --post]`                                |
+|            | `/project-features`                | Decompose into features + user stories + scope    | `project-brief.md`        | `[--project name] [--review]`                                |
 |            | `/project-adr`                     | Create Architecture Decision Records              | —                         | `["topic"]`                                                  |
 |            | `/project-ui-design`               | Create HTML UI mockups                            | —                         | `<project> "screen" [--variants N]`                          |
 |            | `/project-issue`                   | Create work items (TASK/BUG/SPIKE)                | —                         | `["description"] [--project name]`                           |
@@ -556,7 +565,6 @@ Take an idea from concept to shipped code. Skills form a pipeline — later skil
 | Quality    | `/project-validate-space`          | Validate project space structure                  | —                         | `<project>`                                                  |
 |            | `/project-validate-sanity-check`   | Step back and validate direction                  | —                         | `[--project name]`                                           |
 |            | `/project-validate-troubleshoot`   | Systematic debugging                              | —                         | `<project> ["description"] [issue#]`                         |
-|            | `/project-validate-spec`           | Check spec completeness                           | —                         | `<spec-id> [--pre \| --post]`                                |
 |            | `/project-validate-quality`        | Code quality assessment                           | —                         | `<project> [--focus security \| testing]`                    |
 |            | `/project-validate-security-audit` | Security review                                   | —                         | `<project>`                                                  |
 | Ship       | `/project-commit`                  | Create quality commits                            | —                         | `<project> ["message"] [--amend]`                            |
@@ -663,10 +671,10 @@ Phase-aware validation: checks what files should exist based on current project 
                 ↓
        Suggests next skill based on current state:
        ├─ Just README?       →  /project-brief
-       ├─ Has brief?         →  /project-critique
-       ├─ Has critique?      →  /research-deep
-       ├─ Has research?      →  /project-spec
-       └─ Has specs?         →  /project-issue + /project-plan
+       ├─ Has brief?         →  /project-features
+       ├─ Has features?      →  /project-issue (MVP features first)
+       ├─ Has issues?        →  /project-plan
+       └─ Has plans?         →  /project-implement
 ```
 
 **Use when:** Unsure what to do next on a project, checking if documentation is complete.
@@ -720,22 +728,56 @@ Creates standard planning structure: README.md, project-brief.md, docs/architect
 **Creates:** `06 Projects/[project]/` directory with standard planning + docs structure.
 **Use when:** After creating a brief and before implementation.
 
-#### 📕 `/project-spec`
+#### 📕 `/project-spec-import`
 
-**Manage protocol/standard specifications that define what a system must do**
+**Import an external PRD or specification from JIRA, Confluence, or URL**
 
-Import external specs (LEAF, OAuth, etc.) or create self-authored protocol specs. Specs are the "source of truth" contract — TASKs link to spec sections via the `implements:` field. Tracks compliance with inline status markers: ⏳ pending, 🚧 in progress, ✅ done.
+Pulls in requirements defined by someone else (e.g., a PM's PRD from JIRA, a protocol spec from GitHub). The imported spec lives in `docs/specs/` and feeds into `/project-features` for decomposition. Run it again to get the latest version.
 
 ```bash
-/project-spec                            # Show current project's spec status
-/project-spec --import <url>             # Import external spec (GitHub, raw URL)
-/project-spec --init                     # Create new protocol spec for project
-/project-spec --sync                     # Sync imported spec with upstream
-/project-spec --section <name>           # Show specific section of spec
+/project-spec-import JIRA-123                              # Import from JIRA ticket/epic
+/project-spec-import https://github.com/leafspec/spec      # Import from URL
 ```
 
-**Creates:** `06 Projects/[project]/docs/specs/` with spec files.
-**Use when:** Defining requirements before implementation, importing external standards.
+**Creates:** `06 Projects/[project]/docs/specs/` with imported spec files.
+**Use when:** Work projects where a PM defines the requirements, or implementing an external standard.
+
+#### 📕 `/project-spec-validate`
+
+**Validate an imported spec is complete enough to build from**
+
+Companion to `/project-spec-import`. Run right after importing to check the PRD has clear requirements, acceptance criteria, and no ambiguous gaps — before spending time decomposing into features.
+
+```bash
+/project-spec-validate SPEC-001              # Auto-detect mode
+/project-spec-validate SPEC-001 --pre        # Pre-implementation: structure + completeness
+/project-spec-validate SPEC-001 --post       # Post-implementation: compliance check
+```
+
+**Requires:** Imported spec in `docs/specs/` (from `/project-spec-import`).
+**Use when:** Right after importing a PM's PRD, to verify it's complete enough to work from. Not needed for personal projects.
+
+#### 📕 `/project-features`
+
+**Decompose project into features with user stories, acceptance criteria, and scope**
+
+Takes the project brief (or imported spec) and produces coherent features grouped from related capabilities. Each feature gets user stories (Job Story format by default), Given-When-Then acceptance criteria, and dependency mapping. Also handles prioritization (MoSCoW), walking skeleton definition, and MVP boundary — all in one interactive session (~15-30 minutes).
+
+```bash
+/project-features                           # Interactive feature decomposition
+/project-features --project coordinatr      # Specific project
+/project-features --review                  # Review existing features (no edits)
+```
+
+**Creates:** `06 Projects/[project]/docs/features/` with feature cards + README map.
+**Requires:** `project-brief.md` (or imported spec) must exist.
+**Use when:** After creating a brief (or importing a spec), to define what to build and in what order.
+
+**Key principles embedded:**
+- **Vertical slicing** — every story delivers end-to-end value
+- **INVEST quality** — stories are Independent, Negotiable, Valuable, Estimable, Small, Testable
+- **3-5 AC per story** — more means split the story (using SPIDR technique)
+- **Feature as unit of progress** — "Auth is done" > "TASK-003, TASK-004 are done"
 
 #### 📕 `/project-adr`
 
@@ -912,8 +954,8 @@ PROJECT PHASE                QUALITY CHECKPOINT
        │                     /project-validate-troubleshoot    (when bugs occur)
        ↓
                         ┌──→ /project-validate-quality        ┐
-/project-complete     ←─┤    /project-validate-security-audit  ├ run in parallel
-                        └──→ /project-validate-spec           ┘
+/project-complete     ←─┤                                      ├ run in parallel
+                        └──→ /project-validate-security-audit  ┘
 ```
 
 #### 📕 `/project-validate-space`
@@ -955,20 +997,6 @@ Research → Hypothesize → Implement → Test → Document. One hypothesis at 
 ```
 
 **Use when:** Encountering bugs, test failures, or unexpected behavior.
-
-#### 📕 `/project-validate-spec`
-
-**Validate spec completeness and implementation compliance**
-
-Pre-implementation mode: checks structure, scenarios, metrics. Post-implementation mode: verifies test coverage and spec compliance.
-
-```bash
-/project-validate-spec SPEC-001              # Auto-detect mode
-/project-validate-spec SPEC-001 --pre        # Pre-implementation validation
-/project-validate-spec SPEC-001 --post       # Post-implementation compliance
-```
-
-**Use when:** Before approving a spec or before `/project-complete` to verify compliance.
 
 #### 📕 `/project-validate-quality`
 
@@ -1292,12 +1320,18 @@ Reference workflows combining multiple skills. Located in `.claude/skills/workfl
 | `bug-fix`             | Systematic: troubleshoot → issue → plan → implement → quality → commit   |
 | `pre-merge-checklist` | Parallel quality checks (quality + security + docs + spec) then complete |
 
-### New Project Flow
+### New Project Flow (Personal)
 
 ```
-/project-brief → /project-critique → /research-deep → /project-spec
-→ /project-adr → /project-issue → /project-plan → /project-implement
+/project-brief → /project-features → /project-issue → /project-plan → /project-implement
 → /project-validate-quality → /project-validate-security-audit → /project-complete
+```
+
+### New Project Flow (Work — PM provides PRD)
+
+```
+/project-spec-import JIRA-123 → /project-features → /project-issue → /project-plan
+→ /project-implement → /project-validate-quality → /project-complete
 ```
 
 ### Bug Fix Flow
@@ -1310,13 +1344,13 @@ Reference workflows combining multiple skills. Located in `.claude/skills/workfl
 ### Lean Startup (skip some steps)
 
 ```
-/project-brief → /project-spec → /project-issue → /project-implement → /project-commit
+/project-brief → /project-features → /project-issue → /project-implement → /project-commit
 ```
 
 ### Learning-Focused (you write code)
 
 ```
-/project-brief → /project-spec → /project-issue → /project-plan
+/project-brief → /project-features → /project-issue → /project-plan
 → /project-teach → /project-worklog → /project-validate-quality
 ```
 
@@ -1360,15 +1394,16 @@ Skills invoke specialized agents based on task type:
 ## Best Practices
 
 1. **Start with `/project-brief`** for new projects before diving into implementation
-2. **Run `/project-critique`** before significant time investment to validate ideas
-3. **Use `/project-spec`** to define requirements before creating tasks
-4. **Link issues to specs** via `implements:` field for traceability
-5. **Document as you go** with `/project-worklog` entries
-6. **Run quality checks** (`/project-validate-quality`, `/project-validate-security-audit`) before completion
-7. **Complete properly** with `/project-complete` to update all documentation
-8. **Review regularly** — `/journal-daily-review`, `/journal-weekly-review` for reflection
-9. **Learn actively** — `/learn-start-session` with retrieval warm-ups
-10. **Synthesize knowledge** — use `/research-synthesize` for deep understanding of topics
+2. **Run `/project-features`** to decompose into features with user stories and scope before creating tasks
+3. **Run `/project-critique`** before significant time investment to validate ideas
+4. **Link issues to features** via `feature:` field for traceability and progress rollups
+5. **Slice vertically** — every story and task should deliver end-to-end user value
+6. **Document as you go** with `/project-worklog` entries
+7. **Run quality checks** (`/project-validate-quality`, `/project-validate-security-audit`) before completion
+8. **Complete properly** with `/project-complete` to update all documentation
+9. **Review regularly** — `/journal-daily-review`, `/journal-weekly-review` for reflection
+10. **Learn actively** — `/learn-start-session` with retrieval warm-ups
+11. **Synthesize knowledge** — use `/research-synthesize` for deep understanding of topics
 
 ---
 
@@ -1396,7 +1431,7 @@ Skills read from several configuration files:
 
 ### Planning vs Code
 
-- `06 Projects/` contains all project documentation: briefs, specs, ADRs, issues, architecture
+- `06 Projects/` contains all project documentation: briefs, features, ADRs, issues, architecture
 - Code repos live at their actual paths (e.g., `/Users/duncanleung/Develop/[project]/`), referenced via the Projects Index `code:` field
 - Skills READ from code repos but NEVER WRITE to them
 

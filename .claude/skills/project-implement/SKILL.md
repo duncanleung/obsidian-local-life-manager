@@ -155,7 +155,7 @@ When all phases complete:
                                                          ↓
                                                code written to project repo
                                                          ↓
-                                        /project-validate-spec ──────┐
+                                        /project-spec-validate ──────┐
                                         /project-validate-quality ───┤  (quality gate)
                                         /project-validate-security-audit ┘
                                                          ↓

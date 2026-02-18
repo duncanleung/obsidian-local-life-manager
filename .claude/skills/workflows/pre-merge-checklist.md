@@ -14,7 +14,7 @@ Ensure code is ready to merge with confidence.
 /project-validate-quality
 /project-validate-security-audit
 /ops-docs
-/project-validate-spec
+/project-spec-validate
 ```
 
 Then:
@@ -54,7 +54,7 @@ Then:
 
 ### Check 4: Spec Compliance
 ```bash
-/project-validate-spec
+/project-spec-validate
 ```
 - Implementation matches spec
 - Acceptance criteria satisfied
