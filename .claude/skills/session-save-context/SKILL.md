@@ -51,6 +51,7 @@ Search the codebase to find ALL files and context related to "$ARGUMENTS":
 3. **Check for existing context**:
    - Previous context files in initiative folders: `06 Projects/{project}/*/context.md`
    - Documentation in `.claude/` or `SHARED/`
+   - Active Claude Code plan files in `~/.claude/plans/*.md` — include their content in the context file
 
 ### Step 2: Gather User Context
 
@@ -72,7 +73,10 @@ Create the handoff file in the relevant initiative folder. If there's an active 
 OBSIDIAN_VAULT="/Users/duncanleung/Develop/obsidian-local-life-manager"
 TIMESTAMP=$(date "+%Y-%m-%d")
 TOPIC_SLUG=$(echo "$ARGUMENTS" | tr ' ' '-' | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]' | head -c 50)
-PROJECT_NAME=$(basename "$(pwd)")
+# Derive project name from git repo root (works even in subdirectories)
+# Falls back to current directory name if not a git repo
+# See: project-shared/references/project-discovery.md for canonical procedure
+PROJECT_NAME=$(basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)")
 
 # Try to find matching initiative folder
 INITIATIVE_DIR=$(ls -d "${OBSIDIAN_VAULT}/06 Projects/${PROJECT_NAME}/"*-${TOPIC_SLUG}* 2>/dev/null | head -1)
@@ -222,7 +226,8 @@ Report to the user:
 - **Minimal Questions**: Only 4 essential questions, infer the rest from code
 - **Structured Output**: Tables and clear sections for easy AI parsing
 - **Actionable**: Clear next steps and priorities for continuation
-- **Vault-Centralized**: Always saves to the obsidian vault inside initiative folders at `/Users/duncanleung/Develop/obsidian-local-life-manager/06 Projects/{project}/YYYY-MM-DD-name/context.md`, with the project name derived from the current working directory (creates dir if needed)
+- **Vault-Centralized**: Always saves to the obsidian vault inside initiative folders at `/Users/duncanleung/Develop/obsidian-local-life-manager/06 Projects/{project}/YYYY-MM-DD-name/context.md`, with the project name derived from the git repo root directory name (falls back to `pwd` basename if not a git repo; creates dir if needed)
+- **Plan-Aware**: Checks `~/.claude/plans/*.md` for active Claude Code plan files and incorporates their content into the context handoff
 
 ## When to Use
 
