@@ -45,6 +45,13 @@ Each issue creates an **initiative folder** at the project root (no `issues/` in
 
 ## Execution Flow
 
+### 0. Resolve Project
+
+Resolve `[project]` using the [Project Discovery](../project-shared/references/project-discovery.md) procedure:
+- If `--project` is specified, use that value
+- Otherwise, auto-detect: `basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"`
+- Ensure target directory exists: `mkdir -p` the `06 Projects/[project]/` path in the obsidian vault
+
 ### 1. Gather Context
 
 If no description: "What needs to be done?"

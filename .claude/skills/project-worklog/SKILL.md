@@ -65,6 +65,12 @@ Present available initiatives if multiple match or none specified.
 
 ## Execution Flow
 
+### 0. Resolve Project
+
+If no project argument is provided, resolve it using the [Project Discovery](../project-shared/references/project-discovery.md) procedure:
+- Auto-detect: `basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"`
+- Ensure target directory exists: `mkdir -p` the `06 Projects/[project]/` path in the obsidian vault
+
 ### 1. Parse Arguments
 
 ```

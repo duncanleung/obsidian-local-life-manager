@@ -32,6 +32,13 @@ Features are **project-wide reference artifacts** (like `project-brief.md`), not
 
 ## Execution Flow
 
+### 0. Resolve Project
+
+Resolve `[project]` using the [Project Discovery](../project-shared/references/project-discovery.md) procedure:
+- If `--project` is specified, use that value
+- Otherwise, auto-detect: `basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"`
+- Ensure target directory exists: `mkdir -p` the `06 Projects/[project]/` path in the obsidian vault
+
 ### 1. Determine Mode
 
 - **No `features/` exists** -> Full Discovery Mode (4-phase conversation)

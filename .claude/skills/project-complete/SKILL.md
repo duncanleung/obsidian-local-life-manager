@@ -52,6 +52,12 @@ Glob: "06 Projects/[project]/[0-9][0-9][0-9][0-9]-*/TASK.md"
 
 ## Execution Flow
 
+### 0. Resolve Project
+
+If no project argument is provided, resolve it using the [Project Discovery](../project-shared/references/project-discovery.md) procedure:
+- Auto-detect: `basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"`
+- Ensure target directory exists: `mkdir -p` the `06 Projects/[project]/` path in the obsidian vault
+
 ### 1. Check PLAN.md Completion
 ```
 ✓ All phases complete (5/5)

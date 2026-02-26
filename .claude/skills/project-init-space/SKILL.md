@@ -45,6 +45,12 @@ Initiative folders and reference directories are created just-in-time by other s
 
 ## Execution Flow
 
+### 0. Resolve Project
+
+If no project name argument is provided, resolve it using the [Project Discovery](../project-shared/references/project-discovery.md) procedure:
+- Auto-detect: `basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)"`
+- Do NOT auto-create the directory — this skill handles directory creation itself
+
 ### 1. Validate Project
 
 ```bash
