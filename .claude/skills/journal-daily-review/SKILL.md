@@ -76,29 +76,29 @@ d. **Freeze yesterday's journal**: Execute the full freeze algorithm per `refere
 
 ### 4. Morning setup (CONDITIONAL)
 
-**Run this step ONLY when ALL of:** `explicit_target = false` AND `today_is_target = true` AND (`journal_created = true` OR `## ✅ Open Tasks` section is empty/has only a dataview block)
+**Run this step ONLY when ALL of:** `explicit_target = false` AND `today_is_target = true`
 
 a. **Build Open Tasks todo list**
+   - Read today's existing `## ✅ Open Tasks` section — extract any `- [ ]` lines as "today's existing items" (preserve their exact text and order)
    - Find the most recent previous journal: look back from yesterday up to 7 days in `02 Calendar/YYYY-MM-DD-dayname.md` (compute each date's filename stem with `date -v-Nd +%Y-%m-%d-%A | tr '[:upper:]' '[:lower:]'`)
    - Extract the `## ✅ Open Tasks` section from the previous journal. Handle formats:
      - **Todo list**: extract `- [ ] [[name]]...` lines — keep only unchecked items, drop `- [x]` lines
      - **Frozen table**: extract `[[name]]` wikilinks from table rows
      - **Dataview block** (live query): skip — cannot extract items from a code block
    - Scan `03 TaskNotes/*.md` — read each file's YAML frontmatter, collect all tasks where `status != "done" AND status != "cancelled"`
-   - Reconcile previous day's list with current TaskNotes:
-     - **Plain-text items** (no `[[wikilink]]`): always carry forward as-is if unchecked — these are ad-hoc reminders not tracked in TaskNotes
-     - **Wikilinked items**: match against TaskNotes files:
-       - Items still open in TaskNotes → **keep in same order**
-       - Tasks now done/cancelled in TaskNotes → **remove from list**
-     - New open tasks in TaskNotes not in previous day's list → **append at bottom**
-   - Build each todo item as: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if the task has a due date set)
-   - Plain-text items are kept exactly as they appeared in the previous day's list (no reformatting)
+   - Reconcile all three sources (today's existing items, previous day's list, TaskNotes):
+     1. **Start with today's existing items** — keep their exact order and formatting unchanged
+     2. **Carry over from previous day** — for each item in the previous day's list that is NOT already in today's list:
+        - **Plain-text items** (no `[[wikilink]]`): carry forward as-is if unchecked — these are ad-hoc reminders not tracked in TaskNotes
+        - **Wikilinked items**: add only if still open in TaskNotes (status != done/cancelled)
+     3. **Add new TaskNotes** — open tasks not in today's list AND not in the previous day's list → append at bottom
+   - Build each new todo item as: `- [ ] [[filename]] Title` (add ` 📅 YYYY-MM-DD` suffix if the task has a due date set)
+   - Plain-text items are kept exactly as they appeared (no reformatting)
    - The title for wikilinked items comes from the `# H1 heading` in the task file (not the filename)
 
 b. **Populate `## ✅ Open Tasks`**
-   - If section has a `dataview` code block (migration): replace the entire code block with the todo list
-   - If section already has `- [ ]` todo items: preserve existing items and their order, only append new tasks not already listed
-   - If section is empty: write the full todo list
+   - If section has a `dataview` code block (migration): replace the entire code block with the merged todo list
+   - Otherwise: replace the section content with the merged todo list (today's existing items are already included and ordered first from Step 4a)
 
 c. **Carry over Notes from yesterday**: If yesterday's `## 📝 Notes` had content (from Step 2c, or extract here if Step 2 didn't run):
    - Write yesterday's notes into today's `## 📝 Notes` section
